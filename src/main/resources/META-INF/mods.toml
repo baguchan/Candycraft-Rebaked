@@ -1,0 +1,28 @@
+modLoader="javafml"
+loaderVersion="[35,)"
+license="All rights reserved"
+issueTrackerURL="https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+
+[[mods]]
+    modId="candycraft"
+    version="${file.jarVersion}"
+    displayName="CandyCraft"
+    updateJSONURL="http://myurl.me/"
+    displayURL="http://example.com/"
+    logoFile="missingno.png"
+    credits="Some peeps who like minecraft and sweets"
+    authors="Lord Evo and his dedicated and hardworking diciples"
+    description="We really like sugar."
+
+[[dependencies.candycraft]]
+    modId="forge"
+    mandatory=true
+    versionRange="[35,)"
+    ordering="NONE"
+    side="BOTH"
+[[dependencies.candycraft]]
+    modId="minecraft"
+    mandatory=true
+    versionRange="[1.16.4,1.17)"
+    ordering="NONE"
+    side="BOTH"
