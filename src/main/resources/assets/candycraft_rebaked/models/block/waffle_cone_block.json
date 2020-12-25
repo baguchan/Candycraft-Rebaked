@@ -1,0 +1,6 @@
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "candycraft_rebaked:block/waffle_cone_block"
+  }
+}

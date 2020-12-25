@@ -16,9 +16,15 @@ public class CandyCraftItems {
 
     public static final RegistryObject<Item> WAFFLE_CONE_BLOCK = registerBlockItem(CandyCraftBlocks.WAFFLE_CONE_BLOCK);
 
+    public static final RegistryObject<Item> WAFFLE_CONE_CRUMBLE = registerSimpleItem("waffle_cone_crumble");
+
 
     private static RegistryObject<Item> registerItem(String name, Supplier<Item> itemSupplier) {
         return ITEMS.register(name, itemSupplier);
+    }
+
+    private static RegistryObject<Item> registerSimpleItem(String name) {
+        return registerItem(name, () -> new Item(new Item.Properties().group(CandyCraft.ITEM_GROUP)));
     }
 
     private static RegistryObject<Item> registerBlockItem(RegistryObject<Block> blockSupplier) {

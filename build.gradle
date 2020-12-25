@@ -1,20 +1,28 @@
 buildscript {
     repositories {
         maven { url = 'https://files.minecraftforge.net/maven' }
+        maven { url = 'https://repo.spongepowered.org/maven' }
         jcenter()
         mavenCentral()
     }
     dependencies {
         classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '3.+', changing: true
+        classpath group: 'org.spongepowered', name: 'mixingradle', version: '0.7-SNAPSHOT'
     }
 }
+
+plugins {
+    id "com.wynprice.cursemaven" version "2.1.1"
+}
+
 apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
+apply plugin: 'org.spongepowered.mixin'
 
 version = '1.0'
-group = 'com.evo.candycraft'
-archivesBaseName = 'candycraft'
+group = 'com.evo.candycraft_rebaked'
+archivesBaseName = 'candycraft_rebaked'
 
 sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '1.8' // Need this here so eclipse task generates correctly.
 
@@ -30,9 +38,10 @@ minecraft {
 
             property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
             property 'forge.logging.console.level', 'debug'
+            property "mixin.env.disableRefMap", "true"
 
             mods {
-                examplemod {
+                candycraft_rebaked {
                     source sourceSets.main
                 }
             }
@@ -43,9 +52,10 @@ minecraft {
 
             property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
             property 'forge.logging.console.level', 'debug'
+            property "mixin.env.disableRefMap", "true"
 
             mods {
-                examplemod {
+                candycraft_rebaked {
                     source sourceSets.main
                 }
             }
@@ -57,10 +67,10 @@ minecraft {
             property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
             property 'forge.logging.console.level', 'debug'
 
-            args '--mod', 'examplemod', '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')
+            args '--mod', 'candycraft_rebaked', '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')
 
             mods {
-                examplemod {
+                candycraft_rebaked {
                     source sourceSets.main
                 }
             }
@@ -72,12 +82,14 @@ sourceSets.main.resources { srcDir 'src/generated/resources' }
 
 dependencies {
     minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
+
+    implementation fg.deobf("curse.maven:abnormals-core:${ac_version}")
 }
 
 jar {
     manifest {
         attributes([
-            "Specification-Title": "CandyCraft",
+            "Specification-Title": "Candycraft-Rebaked",
             "Specification-Vendor": "examplemodsareus",
             "Specification-Version": "1",
             "Implementation-Title": project.name,

@@ -4,9 +4,9 @@ license="All rights reserved"
 issueTrackerURL="https://www.youtube.com/watch?v=dQw4w9WgXcQ"
 
 [[mods]]
-    modId="candycraft"
+    modId="candycraft_rebaked"
     version="${file.jarVersion}"
-    displayName="CandyCraft"
+    displayName="Candycraft-Rebaked"
     updateJSONURL="http://myurl.me/"
     displayURL="http://example.com/"
     logoFile="missingno.png"
@@ -14,15 +14,21 @@ issueTrackerURL="https://www.youtube.com/watch?v=dQw4w9WgXcQ"
     authors="Lord Evo and his dedicated and hardworking diciples"
     description="We really like sugar."
 
-[[dependencies.candycraft]]
+[[dependencies.candycraft_rebaked]]
     modId="forge"
     mandatory=true
     versionRange="[35,)"
     ordering="NONE"
     side="BOTH"
-[[dependencies.candycraft]]
+[[dependencies.candycraft_rebaked]]
     modId="minecraft"
     mandatory=true
     versionRange="[1.16.4,1.17)"
     ordering="NONE"
+    side="BOTH"
+[[dependencies.candycraft_rebaked]]
+    modId="abnormals_core"
+    mandatory=true
+    versionRange="[x.x.x,)"
+    ordering="AFTER"
     side="BOTH"
