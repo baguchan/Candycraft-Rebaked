@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "axis=x": {
+      "model": "candycraft_rebaked:block/candy_cane_wood",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y": {
+      "model": "candycraft_rebaked:block/candy_cane_wood"
+    },
+    "axis=z": {
+      "model": "candycraft_rebaked:block/candy_cane_wood",
+      "x": 90
+    }
+  }
+}

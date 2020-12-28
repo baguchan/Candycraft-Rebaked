@@ -39,6 +39,7 @@ public class CandyCraft {
     }
 
     public void commonSetup(FMLCommonSetupEvent event) {
+        CandyCraftBlocks.registerBlockData();
         CandyCraftEntities.registerAttributes();
     }
 
@@ -50,7 +51,7 @@ public class CandyCraft {
         return INSTANCE;
     }
 
-    public static final ItemGroup ITEM_GROUP = new ModGroup(MODID, () -> new ItemStack(Items.SUGAR));
+    public static final ItemGroup ITEM_GROUP = new ModGroup(MODID, () -> new ItemStack(CandyCraftItems.WAFFLE_CONE_CRUMBLE.get()));
 
     public static class ModGroup extends ItemGroup {
 

@@ -9,12 +9,13 @@ import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
 
-public class CookieCrouperRenderer extends MobRenderer<CookieCrouperEntity, CookieCrouperModel<CookieCrouperEntity>> {
+public class CookieCrouperRenderer<T extends CookieCrouperEntity> extends MobRenderer<T, CookieCrouperModel<T>> {
 
-    private static final ResourceLocation TEXTURE = CandyCraft.resourceLoc("textures/entity/cookie_crouper/cookie_crouper.png");
+    private final ResourceLocation TEXTURE;
 
-    public CookieCrouperRenderer(EntityRendererManager renderManagerIn) {
+    public CookieCrouperRenderer(EntityRendererManager renderManagerIn, String textureName) {
         super(renderManagerIn, new CookieCrouperModel<>(), 0.5f);
+        this.TEXTURE = CandyCraft.resourceLoc("textures/entity/cookie_crouper/" + textureName + ".png");
     }
 
     @Override
@@ -24,7 +25,7 @@ public class CookieCrouperRenderer extends MobRenderer<CookieCrouperEntity, Cook
 
     @Override
     protected void preRenderCallback(CookieCrouperEntity cookieCrouperEntity, MatrixStack matrixStackIn, float partialTickTime) {
-        float f = cookieCrouperEntity.getCreeperFlashIntensity(partialTickTime);
+        float f = cookieCrouperEntity.getCrouperFlashIntensity(partialTickTime);
         float f1 = 1.0F + MathHelper.sin(f * 100.0F) * f * 0.01F;
         f = MathHelper.clamp(f, 0.0F, 1.0F);
         f = f * f;
@@ -36,8 +37,7 @@ public class CookieCrouperRenderer extends MobRenderer<CookieCrouperEntity, Cook
 
     @Override
     protected float getOverlayProgress(CookieCrouperEntity cookieCrouperEntity, float partialTicks) {
-        float f = cookieCrouperEntity.getCreeperFlashIntensity(partialTicks);
+        float f = cookieCrouperEntity.getCrouperFlashIntensity(partialTicks);
         return (int)(f * 10.0F) % 2 == 0 ? 0.0F : MathHelper.clamp(f, 0.5F, 1.0F);
     }
-
 }

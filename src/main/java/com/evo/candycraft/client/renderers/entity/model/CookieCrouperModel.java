@@ -5,7 +5,6 @@ package com.evo.candycraft.client.renderers.entity.model;
 
 import com.evo.candycraft.common.entities.CookieCrouperEntity;
 import com.google.common.collect.ImmutableList;
-import net.minecraft.client.renderer.entity.model.CreeperModel;
 import net.minecraft.client.renderer.entity.model.SegmentedModel;
 import net.minecraft.client.renderer.model.ModelRenderer;
 import net.minecraft.util.math.MathHelper;
