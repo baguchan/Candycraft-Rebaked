@@ -1,6 +1,7 @@
 package com.evo.candycraft.common.entities;
 
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.monster.CreeperEntity;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;

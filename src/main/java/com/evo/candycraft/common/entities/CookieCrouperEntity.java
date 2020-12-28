@@ -26,8 +26,8 @@ import java.util.EnumSet;
 
 public class CookieCrouperEntity extends MonsterEntity {
 
-    private static final DataParameter<Integer> STATE = EntityDataManager.createKey(CreeperEntity.class, DataSerializers.VARINT);
-    private static final DataParameter<Boolean> IGNITED = EntityDataManager.createKey(CreeperEntity.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Integer> STATE = EntityDataManager.createKey(CookieCrouperEntity.class, DataSerializers.VARINT);
+    private static final DataParameter<Boolean> IGNITED = EntityDataManager.createKey(CookieCrouperEntity.class, DataSerializers.BOOLEAN);
 
     private int lastActiveTime;
     private int timeSinceIgnited;
