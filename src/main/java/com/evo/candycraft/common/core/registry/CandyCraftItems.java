@@ -2,11 +2,9 @@ package com.evo.candycraft.common.core.registry;
 
 import com.evo.candycraft.common.core.CandyCraft;
 import com.evo.candycraft.common.items.CandyCraftFoods;
+import com.evo.candycraft.common.items.ToolTiers;
 import net.minecraft.block.Block;
-import net.minecraft.item.BlockItem;
-import net.minecraft.item.BlockNamedItem;
-import net.minecraft.item.Item;
-import net.minecraft.item.SpawnEggItem;
+import net.minecraft.item.*;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -23,6 +21,12 @@ public class CandyCraftItems {
 
     public static final RegistryObject<Item> WAFFLE_CONE_CRUMBLE = registerSimpleItem("waffle_cone_crumble");
     public static final RegistryObject<Item> CANDY_CANE = registerItem("candy_cane", () -> new BlockNamedItem(CandyCraftBlocks.CANDY_CANE_SAPLING.get(), new Item.Properties().group(CandyCraft.ITEM_GROUP).food(CandyCraftFoods.CANDY_CANE)));
+
+    public static final RegistryObject<Item> CANDY_CANE_SWORD = registerItem("candy_cane_sword", () -> new SwordItem(ToolTiers.CANDY_CANE, 3, -2.0f, new Item.Properties().group(CandyCraft.ITEM_GROUP)));
+    public static final RegistryObject<Item> CANDY_CANE_SHOVEL = registerItem("candy_cane_shovel", () -> new ShovelItem(ToolTiers.CANDY_CANE, 1.5f, -2.4f, new Item.Properties().group(CandyCraft.ITEM_GROUP)));
+    public static final RegistryObject<Item> CANDY_CANE_PICKAXE = registerItem("candy_cane_pickaxe", () -> new PickaxeItem(ToolTiers.CANDY_CANE, 1, -2.2f, new Item.Properties().group(CandyCraft.ITEM_GROUP)));
+    public static final RegistryObject<Item> CANDY_CANE_AXE = registerItem("candy_cane_axe", () -> new AxeItem(ToolTiers.CANDY_CANE, 6, -2.8f, new Item.Properties().group(CandyCraft.ITEM_GROUP)));
+    public static final RegistryObject<Item> CANDY_CANE_HOE = registerItem("candy_cane_hoe", () -> new HoeItem(ToolTiers.CANDY_CANE, -2, -1.0f, new Item.Properties().group(CandyCraft.ITEM_GROUP)));
 
     public static final RegistryObject<Item> COOKIE_CROUPER_SPAWN_EGG = registerItem("cookie_crouper_spawn_egg", () -> new SpawnEggItem(CandyCraftEntities.COOKIE_CROUPER_TYPE, 0xE9964B, 0x572F1A, new Item.Properties().group(CandyCraft.ITEM_GROUP)));
     public static final RegistryObject<Item> STRAWBERRY_COOKIE_CROUPER_SPAWN_EGG = registerItem("strawberry_cookie_crouper_spawn_egg", () -> new SpawnEggItem(CandyCraftEntities.STRAWBERRY_COOKIE_CROUPER_TYPE, 0xFFD7A1, 0xC52936, new Item.Properties().group(CandyCraft.ITEM_GROUP)));
