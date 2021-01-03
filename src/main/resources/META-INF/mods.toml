@@ -32,3 +32,9 @@ issueTrackerURL="https://www.youtube.com/watch?v=dQw4w9WgXcQ"
     versionRange="[x.x.x,)"
     ordering="AFTER"
     side="BOTH"
+[[dependencies.candycraft_rebaked]]
+    modId="neapolitan"
+    mandatory=true
+    versionRange="[x.x.x,)"
+    ordering="AFTER"
+    side="BOTH"
