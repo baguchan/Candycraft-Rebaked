@@ -1,6 +1,7 @@
 package com.evo.candycraft.client;
 
 import com.evo.candycraft.client.renderers.entity.CookieCrouperRenderer;
+import com.evo.candycraft.client.renderers.entity.SweetberryCookieCrouperRenderer;
 import com.evo.candycraft.common.core.CandyCraft;
 import com.evo.candycraft.common.core.registry.CandyCraftBlocks;
 import com.evo.candycraft.common.core.registry.CandyCraftEntities;
@@ -32,7 +33,7 @@ public class ClientRegister {
     private static void registerEntityRenderers() {
         RenderingRegistry.registerEntityRenderingHandler(CandyCraftEntities.COOKIE_CROUPER.get(), (rendererManager) -> new CookieCrouperRenderer<>(rendererManager, "cookie_crouper"));
         RenderingRegistry.registerEntityRenderingHandler(CandyCraftEntities.STRAWBERRY_COOKIE_CROUPER.get(), (rendererManager) -> new CookieCrouperRenderer<>(rendererManager, "strawberry_cookie_crouper"));
-        RenderingRegistry.registerEntityRenderingHandler(CandyCraftEntities.SWEETBERRY_COOKIE_CROUPER.get(), (rendererManager) -> new CookieCrouperRenderer<>(rendererManager, "sweetberry_cookie_crouper"));
+        RenderingRegistry.registerEntityRenderingHandler(CandyCraftEntities.SWEETBERRY_COOKIE_CROUPER.get(), (rendererManager) -> new SweetberryCookieCrouperRenderer<>(rendererManager, "sweetberry_cookie_crouper"));
         RenderingRegistry.registerEntityRenderingHandler(CandyCraftEntities.OREO_COOKIE_CROUPER.get(), (rendererManager) -> new CookieCrouperRenderer<>(rendererManager, "oreo_cookie_crouper"));
     }
 

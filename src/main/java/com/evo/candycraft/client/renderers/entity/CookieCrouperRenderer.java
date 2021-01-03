@@ -11,7 +11,7 @@ import net.minecraft.util.math.MathHelper;
 
 public class CookieCrouperRenderer<T extends CookieCrouperEntity> extends MobRenderer<T, CookieCrouperModel<T>> {
 
-    private final ResourceLocation TEXTURE;
+    protected final ResourceLocation TEXTURE;
 
     public CookieCrouperRenderer(EntityRendererManager renderManagerIn, String textureName) {
         super(renderManagerIn, new CookieCrouperModel<>(), 0.5f);
