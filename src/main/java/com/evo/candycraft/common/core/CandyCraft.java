@@ -7,24 +7,22 @@ import com.evo.candycraft.common.core.registry.CandyCraftItems;
 import com.evo.candycraft.common.event.EntitySpawnEvents;
 import com.evo.candycraft.common.world.features.ConfiguredFeatures;
 import com.evo.candycraft.datagen.DataGatherer;
-import net.minecraft.entity.item.TNTEntity;
-import net.minecraft.entity.monster.CreeperEntity;
+import com.minecraftabnormals.abnormals_core.core.util.registry.BlockSubRegistryHelper;
+import com.minecraftabnormals.abnormals_core.core.util.registry.ItemSubRegistryHelper;
+import com.minecraftabnormals.abnormals_core.core.util.registry.RegistryHelper;
+import net.minecraft.entity.monster.SpiderEntity;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.fml.ModContainer;
-import net.minecraftforge.fml.ModList;
-import net.minecraftforge.fml.ModLoader;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import net.minecraftforge.fml.javafmlmod.FMLModContainer;
+import net.minecraftforge.registries.ForgeRegistries;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import javax.annotation.Nullable;
 import java.util.function.Supplier;
 
 @Mod(CandyCraft.MODID)
@@ -32,6 +30,11 @@ public class CandyCraft {
 
     public static final String MODID = "candycraft_rebaked";
     public static final Logger LOGGER = LogManager.getLogger(MODID);
+
+    public static final RegistryHelper REGISTRY_HELPER = RegistryHelper.create(MODID, (helper) -> {
+        helper.putSubHelper(ForgeRegistries.ITEMS, new ItemSubRegistryHelper(helper));
+        helper.putSubHelper(ForgeRegistries.BLOCKS, new BlockSubRegistryHelper(helper));
+    });
 
     private static CandyCraft INSTANCE;
 
@@ -48,13 +51,12 @@ public class CandyCraft {
 
         MinecraftForge.EVENT_BUS.register(new EntitySpawnEvents());
 
-        CandyCraftBlocks.BLOCKS.register(eventBus);
-        CandyCraftItems.ITEMS.register(eventBus);
+        REGISTRY_HELPER.register(eventBus);
         CandyCraftEntities.ENTITIES.register(eventBus);
         CandyCraftFeatures.FEATURES.register(eventBus);
     }
 
-    public void commonSetup(FMLCommonSetupEvent event) {
+    public void commonSetup(final FMLCommonSetupEvent event) {
         ConfiguredFeatures.register();
         CandyCraftBlocks.registerBlockData();
         CandyCraftEntities.registerAttributes();
@@ -69,7 +71,7 @@ public class CandyCraft {
         return INSTANCE;
     }
 
-    public static final ItemGroup ITEM_GROUP = new ModGroup(MODID, () -> new ItemStack(CandyCraftItems.WAFFLE_CONE_CRUMBLE.get()));
+    public static final ItemGroup ITEM_GROUP = new ModGroup(MODID, () -> new ItemStack(CandyCraftItems.CANDY_CANE.get()));
 
     public static class ModGroup extends ItemGroup {
 

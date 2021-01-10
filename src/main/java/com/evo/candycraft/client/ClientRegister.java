@@ -28,6 +28,8 @@ public class ClientRegister {
     private static void setupRenderLayers() {
         RenderTypeLookup.setRenderLayer(CandyCraftBlocks.CANDY_CANE_SAPLING.get(), RenderType.getCutout());
         RenderTypeLookup.setRenderLayer(CandyCraftBlocks.POTTED_CANDY_CANE_SAPLING.get(), RenderType.getCutout());
+        RenderTypeLookup.setRenderLayer(CandyCraftBlocks.RED_LICORICE_TREE_SAPLING.get(), RenderType.getCutout());
+        RenderTypeLookup.setRenderLayer(CandyCraftBlocks.POTTED_RED_LICORICE_TREE_SAPLING.get(), RenderType.getCutout());
     }
 
     private static void registerEntityRenderers() {

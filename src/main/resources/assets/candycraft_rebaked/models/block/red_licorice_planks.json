@@ -1,0 +1,6 @@
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "candycraft_rebaked:block/red_licorice_planks"
+  }
+}

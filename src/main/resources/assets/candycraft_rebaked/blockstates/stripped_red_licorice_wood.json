@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "axis=x": {
+      "model": "candycraft_rebaked:block/stripped_red_licorice_wood_horizontal",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y": {
+      "model": "candycraft_rebaked:block/stripped_red_licorice_wood"
+    },
+    "axis=z": {
+      "model": "candycraft_rebaked:block/stripped_red_licorice_wood_horizontal",
+      "x": 90
+    }
+  }
+}

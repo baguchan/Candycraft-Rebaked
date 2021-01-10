@@ -5,14 +5,18 @@ import com.evo.candycraft.common.entities.CookieCrouperEntity;
 import com.evo.candycraft.common.entities.OreoCookieCrouperEntity;
 import com.evo.candycraft.common.entities.StrawberryCookieCrouperEntity;
 import com.evo.candycraft.common.entities.SweetberryCookieCrouperEntity;
+import com.minecraftabnormals.abnormals_core.core.util.registry.EntitySubRegistryHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ai.attributes.GlobalEntityTypeAttributes;
+import net.minecraft.world.World;
 import net.minecraftforge.fml.RegistryObject;
+import net.minecraftforge.fml.network.FMLPlayMessages;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 
+import java.util.function.BiFunction;
 import java.util.function.Supplier;
 
 public class CandyCraftEntities {
@@ -44,8 +48,8 @@ public class CandyCraftEntities {
         OREO_COOKIE_CROUPER_TYPE = EntityType.Builder.create(OreoCookieCrouperEntity::new, EntityClassification.MONSTER).size(0.6F, 1.55F).setTrackingRange(8).build("oreo_cookie_crouper");
     }
 
-    private static <T extends Entity> RegistryObject<EntityType<T>> register(String name, Supplier<EntityType<T>> entityType) {
-        return ENTITIES.register(name, entityType);
+    private static <T extends Entity> RegistryObject<EntityType<T>> register(String name, Supplier<EntityType<T>> entityTypeSupplier) {
+        return ENTITIES.register(name, entityTypeSupplier);
     }
 }
 

@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cross",
+  "textures": {
+    "cross": "candycraft_rebaked:block/red_licorice_tree_sapling"
+  }
+}
