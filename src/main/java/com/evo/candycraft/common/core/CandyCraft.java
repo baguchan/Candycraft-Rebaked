@@ -10,7 +10,6 @@ import com.evo.candycraft.datagen.DataGatherer;
 import com.minecraftabnormals.abnormals_core.core.util.registry.BlockSubRegistryHelper;
 import com.minecraftabnormals.abnormals_core.core.util.registry.ItemSubRegistryHelper;
 import com.minecraftabnormals.abnormals_core.core.util.registry.RegistryHelper;
-import net.minecraft.entity.monster.SpiderEntity;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
