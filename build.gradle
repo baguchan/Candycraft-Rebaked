@@ -85,6 +85,8 @@ dependencies {
 
     implementation fg.deobf("curse.maven:abnormals-core:${ac_version}")
     implementation fg.deobf("curse.maven:neapolitan:${neapolitan_version}")
+
+    runtimeOnly fg.deobf("curse.maven:jei:${jei_version}")
 }
 
 jar {
