@@ -335,7 +335,7 @@ public class GingerBreadLauncherItem extends ShootableItem implements IVanishabl
 	 * returns the action that specifies what animation to play when the items is being used
 	 */
 	public UseAction getUseAction(ItemStack stack) {
-		return UseAction.CROSSBOW;
+		return UseAction.BOW;
 	}
 
 	private static float getCharge(int useTime, ItemStack stack) {
