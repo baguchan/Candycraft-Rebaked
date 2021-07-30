@@ -1,17 +1,16 @@
 modLoader="javafml"
 loaderVersion="[35,)"
 license="All rights reserved"
-issueTrackerURL="https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+issueTrackerURL="https://github.com/Evoslab/Candycraft-Rebaked/issues"
 
 [[mods]]
     modId="candycraft_rebaked"
     version="${file.jarVersion}"
     displayName="Candycraft-Rebaked"
-    updateJSONURL="http://myurl.me/"
-    displayURL="http://example.com/"
-    logoFile="missingno.png"
+    displayURL="https://github.com/Evoslab/Candycraft-Rebaked"
+    logoFile="candy_creeper_head.png"
     credits="Some peeps who like minecraft and sweets"
-    authors="Lord Evo and his dedicated and hardworking diciples"
+    authors="Team Treats"
     description="We really like sugar."
 
 [[dependencies.candycraft_rebaked]]
