@@ -1,0 +1,24 @@
+{
+  "variants": {
+    "": [
+      {
+        "model": "candycraft_rebaked:block/nougat_slate/block/1"
+      },
+      {
+        "model": "candycraft_rebaked:block/nougat_slate/block/2"
+      },
+      {
+        "model": "candycraft_rebaked:block/nougat_slate/block/3"
+      },
+      {
+        "model": "candycraft_rebaked:block/nougat_slate/block/4"
+      },
+      {
+        "model": "candycraft_rebaked:block/nougat_slate/block/5"
+      },
+      {
+        "model": "candycraft_rebaked:block/nougat_slate/block/6"
+      }
+    ]
+  }
+}

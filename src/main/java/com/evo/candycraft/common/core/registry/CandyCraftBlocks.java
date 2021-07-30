@@ -40,6 +40,9 @@ public class CandyCraftBlocks {
     public static final RegistryObject<Block> RED_LICORICE_TREE_SAPLING = registerBlock("red_licorice_tree_sapling", () -> new ModSaplingBlock(ConfiguredFeatures.CANDY_CANE_TREE_FEATURE, AbstractBlock.Properties.create(Material.PLANTS, MaterialColor.WHITE_TERRACOTTA).zeroHardnessAndResistance().doesNotBlockMovement().tickRandomly().sound(SoundType.PLANT)));
     public static final RegistryObject<Block> POTTED_RED_LICORICE_TREE_SAPLING = registerBlockNoItem("potted_red_licorice_tree_sapling", () -> new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, RED_LICORICE_TREE_SAPLING, AbstractBlock.Properties.create(Material.MISCELLANEOUS).hardnessAndResistance(0.0f).notSolid()));
 
+    public static final RegistryObject<Block> NOUGAT_SLATE = registerBlock("nougat_slate", () -> new Block(AbstractBlock.Properties.create(Material.ROCK).hardnessAndResistance(1.5F, 6.0F).harvestTool(ToolType.PICKAXE).setRequiresTool().sound(SoundType.STONE)));
+
+
 
     public static void registerBlockData() {
         registerPottablePlant(CANDY_CANE_SAPLING, POTTED_CANDY_CANE_SAPLING);
