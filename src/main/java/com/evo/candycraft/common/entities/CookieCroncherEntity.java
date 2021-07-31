@@ -23,17 +23,17 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 import java.util.EnumSet;
 
-public class CookieCrouperEntity extends MonsterEntity {
+public class CookieCroncherEntity extends MonsterEntity {
 
-    private static final DataParameter<Integer> STATE = EntityDataManager.createKey(CookieCrouperEntity.class, DataSerializers.VARINT);
-    private static final DataParameter<Boolean> IGNITED = EntityDataManager.createKey(CookieCrouperEntity.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Integer> STATE = EntityDataManager.createKey(CookieCroncherEntity.class, DataSerializers.VARINT);
+    private static final DataParameter<Boolean> IGNITED = EntityDataManager.createKey(CookieCroncherEntity.class, DataSerializers.BOOLEAN);
 
     private int lastActiveTime;
     private int timeSinceIgnited;
     private int fuseTime = 30;
     private int explosionRadius = 1;
 
-    public CookieCrouperEntity(EntityType<? extends CookieCrouperEntity> type, World worldIn) {
+    public CookieCroncherEntity(EntityType<? extends CookieCroncherEntity> type, World worldIn) {
         super(type, worldIn);
     }
 
@@ -169,10 +169,10 @@ public class CookieCrouperEntity extends MonsterEntity {
 
     private static class CrouperSwellGoal extends Goal {
 
-        private final CookieCrouperEntity crouperEntity;
+        private final CookieCroncherEntity crouperEntity;
         private LivingEntity attackTarget;
 
-        public CrouperSwellGoal(CookieCrouperEntity cookieCrouperEntity) {
+        public CrouperSwellGoal(CookieCroncherEntity cookieCrouperEntity) {
             this.crouperEntity = cookieCrouperEntity;
             this.setMutexFlags(EnumSet.of(Goal.Flag.MOVE));
         }
@@ -194,7 +194,7 @@ public class CookieCrouperEntity extends MonsterEntity {
             this.attackTarget = null;
         }
 
-        private boolean canSwell(CookieCrouperEntity crouper, LivingEntity attackTarget) {
+        private boolean canSwell(CookieCroncherEntity crouper, LivingEntity attackTarget) {
             return attackTarget != null && (crouper.getDistanceSq(attackTarget) < 48.0D && crouper.getEntitySenses().canSee(attackTarget));
         }
 

@@ -1,30 +1,30 @@
 package com.evo.candycraft.client.renderers.entity;
 
-import com.evo.candycraft.client.renderers.entity.model.CookieCrouperModel;
+import com.evo.candycraft.client.renderers.entity.model.CookieCroncherModel;
 import com.evo.candycraft.common.core.CandyCraft;
-import com.evo.candycraft.common.entities.CookieCrouperEntity;
+import com.evo.candycraft.common.entities.CookieCroncherEntity;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import net.minecraft.client.renderer.entity.EntityRendererManager;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
 
-public class CookieCrouperRenderer<T extends CookieCrouperEntity> extends MobRenderer<T, CookieCrouperModel<T>> {
+public class CookieCroncherRenderer<T extends CookieCroncherEntity> extends MobRenderer<T, CookieCroncherModel<T>> {
 
     protected final ResourceLocation TEXTURE;
 
-    public CookieCrouperRenderer(EntityRendererManager renderManagerIn, String textureName) {
-        super(renderManagerIn, new CookieCrouperModel<>(), 0.5f);
+    public CookieCroncherRenderer(EntityRendererManager renderManagerIn, String textureName) {
+        super(renderManagerIn, new CookieCroncherModel<>(), 0.5f);
         this.TEXTURE = CandyCraft.resourceLoc("textures/entity/cookie_crouper/" + textureName + ".png");
     }
 
     @Override
-    public ResourceLocation getEntityTexture(CookieCrouperEntity entity) {
+    public ResourceLocation getEntityTexture(CookieCroncherEntity entity) {
         return TEXTURE;
     }
 
     @Override
-    protected void preRenderCallback(CookieCrouperEntity cookieCrouperEntity, MatrixStack matrixStackIn, float partialTickTime) {
+    protected void preRenderCallback(CookieCroncherEntity cookieCrouperEntity, MatrixStack matrixStackIn, float partialTickTime) {
         float f = cookieCrouperEntity.getCrouperFlashIntensity(partialTickTime);
         float f1 = 1.0F + MathHelper.sin(f * 100.0F) * f * 0.01F;
         f = MathHelper.clamp(f, 0.0F, 1.0F);
@@ -36,7 +36,7 @@ public class CookieCrouperRenderer<T extends CookieCrouperEntity> extends MobRen
     }
 
     @Override
-    protected float getOverlayProgress(CookieCrouperEntity cookieCrouperEntity, float partialTicks) {
+    protected float getOverlayProgress(CookieCroncherEntity cookieCrouperEntity, float partialTicks) {
         float f = cookieCrouperEntity.getCrouperFlashIntensity(partialTicks);
         return (int)(f * 10.0F) % 2 == 0 ? 0.0F : MathHelper.clamp(f, 0.5F, 1.0F);
     }

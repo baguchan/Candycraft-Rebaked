@@ -3,13 +3,13 @@
 // Created by Evo
 package com.evo.candycraft.client.renderers.entity.model;
 
-import com.evo.candycraft.common.entities.CookieCrouperEntity;
+import com.evo.candycraft.common.entities.CookieCroncherEntity;
 import com.google.common.collect.ImmutableList;
 import net.minecraft.client.renderer.entity.model.SegmentedModel;
 import net.minecraft.client.renderer.model.ModelRenderer;
 import net.minecraft.util.math.MathHelper;
 
-public class CookieCrouperModel<T extends CookieCrouperEntity> extends SegmentedModel<T> {
+public class CookieCroncherModel<T extends CookieCroncherEntity> extends SegmentedModel<T> {
 
 	private final ModelRenderer head;
 	private final ModelRenderer body;
@@ -18,7 +18,7 @@ public class CookieCrouperModel<T extends CookieCrouperEntity> extends Segmented
 	private final ModelRenderer leg3;
 	private final ModelRenderer leg4;
 
-	public CookieCrouperModel() {
+	public CookieCroncherModel() {
 		textureWidth = 64;
 		textureHeight = 32;
 
@@ -48,7 +48,7 @@ public class CookieCrouperModel<T extends CookieCrouperEntity> extends Segmented
 	}
 
 	@Override
-	public void setRotationAngles(CookieCrouperEntity cookieCrouperEntity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+	public void setRotationAngles(CookieCroncherEntity cookieCrouperEntity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
 		this.head.rotateAngleY = netHeadYaw * ((float)Math.PI / 180F);
 		this.head.rotateAngleX = headPitch * ((float)Math.PI / 180F);
 
