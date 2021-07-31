@@ -1,5 +1,6 @@
 package com.evo.candycraft.common.core;
 
+import com.evo.candycraft.client.ClientRegister;
 import com.evo.candycraft.common.core.registry.CandyCraftBlocks;
 import com.evo.candycraft.common.core.registry.CandyCraftEntities;
 import com.evo.candycraft.common.core.registry.CandyCraftFeatures;

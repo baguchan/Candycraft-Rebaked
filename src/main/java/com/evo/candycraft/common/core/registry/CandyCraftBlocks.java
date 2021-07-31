@@ -23,6 +23,8 @@ public class CandyCraftBlocks {
     public static final BlockSubRegistryHelper HELPER = CandyCraft.REGISTRY_HELPER.getBlockSubHelper();
 
     public static final RegistryObject<Block> WAFFLE_CONE_BLOCK = HELPER.createBlock("waffle_cone_block", () -> new Block(AbstractBlock.Properties.create(Material.ROCK).hardnessAndResistance(1.0f).harvestTool(ToolType.AXE).sound(SoundType.NETHER_GOLD)), CandyCraft.ITEM_GROUP);
+    public static final RegistryObject<Block> WAFFLE_CONE_DOOR = HELPER.createBlock("waffle_cone_door", ()->new DoorBlock(Properties.WAFFLE_CONE_DOOR), CandyCraft.ITEM_GROUP);
+    public static final RegistryObject<Block> WAFFLE_CONE_TRAPDOOR = HELPER.createBlock("waffle_cone_trapdoor", ()->new TrapDoorBlock(Properties.WAFFLE_CONE_TRAPDOOR), CandyCraft.ITEM_GROUP);
 
     public static final RegistryObject<Block> CANDY_CANE_BLOCK = HELPER.createBlock("candy_cane_block", () -> new RotatedPillarBlock(AbstractBlock.Properties.create(Material.WOOD, pillarProp(MaterialColor.WHITE_TERRACOTTA, MaterialColor.WHITE_TERRACOTTA)).hardnessAndResistance(1.0f, 1.0f).harvestTool(ToolType.PICKAXE).sound(SoundType.STONE)), CandyCraft.ITEM_GROUP);
     public static final RegistryObject<Block> CANDY_CANE_WOOD = HELPER.createBlock("candy_cane_wood", () -> new RotatedPillarBlock(AbstractBlock.Properties.from(CANDY_CANE_BLOCK.get())), CandyCraft.ITEM_GROUP);
@@ -55,5 +57,10 @@ public class CandyCraftBlocks {
 
     private static Function<BlockState, MaterialColor> pillarProp(MaterialColor topColor, MaterialColor sideColor) {
         return (blockState) -> blockState.get(RotatedPillarBlock.AXIS) == Direction.Axis.Y ? topColor : sideColor;
+    }
+
+    public static class Properties {
+        public static final AbstractBlock.Properties WAFFLE_CONE_DOOR = AbstractBlock.Properties.from(Blocks.OAK_DOOR).harvestTool(ToolType.AXE);
+        public static final AbstractBlock.Properties WAFFLE_CONE_TRAPDOOR = AbstractBlock.Properties.from(Blocks.OAK_TRAPDOOR).harvestTool(ToolType.AXE);
     }
 }

@@ -1,6 +1,6 @@
 package com.evo.candycraft.common.entities.goals;
 
-import com.evo.candycraft.common.entities.SweetberryCookieCroncherEntity;
+import com.evo.candycraft.common.entities.SweetberryCroncherEntity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.entity.passive.FoxEntity;
@@ -17,7 +17,7 @@ import java.util.List;
 public class FoxStealCrouperBerriesGoal<T extends FoxEntity> extends Goal {
 
     private final FoxEntity foxEntity;
-    private SweetberryCookieCroncherEntity target;
+    private SweetberryCroncherEntity target;
 
     public FoxStealCrouperBerriesGoal(FoxEntity foxEntity) {
         this.foxEntity = foxEntity;
@@ -35,11 +35,11 @@ public class FoxStealCrouperBerriesGoal<T extends FoxEntity> extends Goal {
         if (this.foxEntity.isSleeping())
             return false;
 
-        List<SweetberryCookieCroncherEntity> entities = this.foxEntity.getEntityWorld().getEntitiesWithinAABB(SweetberryCookieCroncherEntity.class, this.foxEntity.getBoundingBox().grow(10, 4.0D, 10));
-        SweetberryCookieCroncherEntity crouper = null;
+        List<SweetberryCroncherEntity> entities = this.foxEntity.getEntityWorld().getEntitiesWithinAABB(SweetberryCroncherEntity.class, this.foxEntity.getBoundingBox().grow(10, 4.0D, 10));
+        SweetberryCroncherEntity crouper = null;
 
         if (!entities.isEmpty()) {
-            for (SweetberryCookieCroncherEntity entity : entities) {
+            for (SweetberryCroncherEntity entity : entities) {
                 double distance = this.foxEntity.getDistanceSq(entity);
 
                 if (distance <= 80 && this.foxEntity.getEntitySenses().canSee(entity)) {
@@ -106,9 +106,9 @@ public class FoxStealCrouperBerriesGoal<T extends FoxEntity> extends Goal {
     }
 
     private static boolean canStealBerries(FoxEntity foxEntity, LivingEntity crouper) {
-        if (!(crouper instanceof SweetberryCookieCroncherEntity))
+        if (!(crouper instanceof SweetberryCroncherEntity))
             throw new IllegalArgumentException("[FoxStealCrouperBerriesGoal] Tried casting the wrong entity! Should be SweetberryCookieCrouperEntity");
 
-        return ((SweetberryCookieCroncherEntity)crouper).hasBerries() && foxEntity.getItemStackFromSlot(EquipmentSlotType.MAINHAND).isEmpty();
+        return ((SweetberryCroncherEntity)crouper).hasBerries() && foxEntity.getItemStackFromSlot(EquipmentSlotType.MAINHAND).isEmpty();
     }
 }

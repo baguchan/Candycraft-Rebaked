@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/template_trapdoor_top",
+  "textures": {
+    "texture": "candycraft_rebaked:block/waffle_cone_trapdoor"
+  }
+}

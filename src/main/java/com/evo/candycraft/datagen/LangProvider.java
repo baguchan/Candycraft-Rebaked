@@ -25,12 +25,14 @@ public class LangProvider extends LanguageProvider {
         this.addItem(CandyCraftItems.CANDY_CANE_AXE, "Candy Cane Axe");
         this.addItem(CandyCraftItems.CANDY_CANE_HOE, "Candy Cane Hoe");
         this.addItem(CandyCraftItems.RED_LICORICE_BOAT, "Red Licorice Boat");
-        this.addItem(CandyCraftItems.COOKIE_CRONCHER_SPAWN_EGG, "Cookie Croncher Spawn Egg");
-        this.addItem(CandyCraftItems.STRAWBERRY_COOKIE_CRONCHER_SPAWN_EGG, "Strawberry Cookie Croncher Spawn Egg");
-        this.addItem(CandyCraftItems.SWEETBERRY_COOKIE_CRONCHER_SPAWN_EGG, "Sweetberry Cookie Croncher Spawn Egg");
-        this.addItem(CandyCraftItems.OREO_COOKIE_CRONCHER_SPAWN_EGG, "Oreo Cookie Croncher Spawn Egg");
+        this.addItem(CandyCraftItems.CRONCHER_SPAWN_EGG, "Croncher Spawn Egg");
+        this.addItem(CandyCraftItems.STRAWBERRY_CRONCHER_SPAWN_EGG, "Strawberry Croncher Spawn Egg");
+        this.addItem(CandyCraftItems.SWEETBERRY_CRONCHER_SPAWN_EGG, "Sweetberry Croncher Spawn Egg");
+        this.addItem(CandyCraftItems.OREO_CRONCHER_SPAWN_EGG, "Oreo Croncher Spawn Egg");
 
         this.addBlock(CandyCraftBlocks.WAFFLE_CONE_BLOCK, "Waffle Cone Block");
+        this.addBlock(CandyCraftBlocks.WAFFLE_CONE_DOOR, "Waffle Door");
+        this.addBlock(CandyCraftBlocks.WAFFLE_CONE_TRAPDOOR, "Waffle Trapdoor");
         this.addBlock(CandyCraftBlocks.CANDY_CANE_BLOCK, "Candy Cane Block");
         this.addBlock(CandyCraftBlocks.CANDY_CANE_WOOD, "Candy Cane Bark");
         this.addBlock(CandyCraftBlocks.CANDY_CANE_SAPLING, "Candy Cane");
@@ -41,9 +43,9 @@ public class LangProvider extends LanguageProvider {
         this.addBlock(CandyCraftBlocks.RED_LICORICE_PLANKS, "Red Licorice Planks");
         this.addBlock(CandyCraftBlocks.RED_LICORICE_TREE_SAPLING, "Red Licorice Tree Sapling");;
 
-        this.addEntityType(CandyCraftEntities.COOKIE_CRONCHER, "Cookie Croncher");
-        this.addEntityType(CandyCraftEntities.STRAWBERRY_COOKIE_CRONCHER, "Strawberry Cookie Croncher");
-        this.addEntityType(CandyCraftEntities.SWEETBERRY_COOKIE_CRONCHER, "Sweetberry Cookie Croncher");
-        this.addEntityType(CandyCraftEntities.OREO_COOKIE_CRONCHER, "Oreo Cookie Croncher");
+        this.addEntityType(CandyCraftEntities.CRONCHER, "Croncher");
+        this.addEntityType(CandyCraftEntities.STRAWBERRY_CRONCHER, "Strawberry Croncher");
+        this.addEntityType(CandyCraftEntities.SWEETBERRY_CRONCHER, "Sweetberry Croncher");
+        this.addEntityType(CandyCraftEntities.OREO_CRONCHER, "Oreo Croncher");
     }
 }

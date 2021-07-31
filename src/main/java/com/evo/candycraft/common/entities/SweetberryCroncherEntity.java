@@ -6,11 +6,11 @@ import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.world.World;
 
-public class SweetberryCookieCroncherEntity extends CookieCroncherEntity {
+public class SweetberryCroncherEntity extends CroncherEntity {
 
-    private static final DataParameter<Boolean> HAS_BERRIES = EntityDataManager.createKey(SweetberryCookieCroncherEntity.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> HAS_BERRIES = EntityDataManager.createKey(SweetberryCroncherEntity.class, DataSerializers.BOOLEAN);
 
-    public SweetberryCookieCroncherEntity(EntityType<? extends SweetberryCookieCroncherEntity> type, World world) {
+    public SweetberryCroncherEntity(EntityType<? extends SweetberryCroncherEntity> type, World world) {
         super(type, world);
     }
 

@@ -32,10 +32,10 @@ public class CandyCraftItems {
     public static final RegistryObject<Item> GINGER_BREAD_AMMO = HELPER.createItem("ginger_bread_ammo", () -> new Item(properties()));
 
 
-    public static final RegistryObject<Item> COOKIE_CRONCHER_SPAWN_EGG = HELPER.createItem("cookie_croncher_spawn_egg", () -> new SpawnEggItem(CandyCraftEntities.COOKIE_CRONCHER_TYPE, 0xE9964B, 0x572F1A, properties()));
-    public static final RegistryObject<Item> STRAWBERRY_COOKIE_CRONCHER_SPAWN_EGG = HELPER.createItem("strawberry_cookie_croncher_spawn_egg", () -> new SpawnEggItem(CandyCraftEntities.STRAWBERRY_COOKIE_CRONCHER_TYPE, 0xFFD7A1, 0xC52936, properties()));
-    public static final RegistryObject<Item> SWEETBERRY_COOKIE_CRONCHER_SPAWN_EGG = HELPER.createItem("sweetberry_cookie_croncher_spawn_egg", () -> new SpawnEggItem(CandyCraftEntities.SWEETBERRY_COOKIE_CRONCHER_TYPE, 0xFBAD66, 0xC2263E, properties()));
-    public static final RegistryObject<Item> OREO_COOKIE_CRONCHER_SPAWN_EGG = HELPER.createItem("oreo_cookie_croncher_spawn_egg", () -> new SpawnEggItem(CandyCraftEntities.OREO_COOKIE_CRONCHER_TYPE, 0x362A26, 0xFFFFFF, properties()));
+    public static final RegistryObject<Item> CRONCHER_SPAWN_EGG = HELPER.createItem("croncher_spawn_egg", () -> new SpawnEggItem(CandyCraftEntities.CRONCHER_TYPE, 0xE9964B, 0x572F1A, properties()));
+    public static final RegistryObject<Item> STRAWBERRY_CRONCHER_SPAWN_EGG = HELPER.createItem("strawberry_croncher_spawn_egg", () -> new SpawnEggItem(CandyCraftEntities.STRAWBERRY_CRONCHER_TYPE, 0xFFD7A1, 0xC52936, properties()));
+    public static final RegistryObject<Item> SWEETBERRY_CRONCHER_SPAWN_EGG = HELPER.createItem("sweetberry_croncher_spawn_egg", () -> new SpawnEggItem(CandyCraftEntities.SWEETBERRY_CRONCHER_TYPE, 0xFBAD66, 0xC2263E, properties()));
+    public static final RegistryObject<Item> OREO_CRONCHER_SPAWN_EGG = HELPER.createItem("oreo_croncher_spawn_egg", () -> new SpawnEggItem(CandyCraftEntities.OREO_CRONCHER_TYPE, 0x362A26, 0xFFFFFF, properties()));
 
     private static RegistryObject<Item> registerSimpleItem(String name) {
         return HELPER.createItem(name, () -> new Item(new Item.Properties().group(CandyCraft.ITEM_GROUP)));

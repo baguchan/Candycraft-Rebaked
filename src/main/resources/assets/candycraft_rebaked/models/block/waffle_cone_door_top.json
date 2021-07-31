@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/door_top",
+  "textures": {
+    "top": "candycraft_rebaked:block/waffle_cone_door_top",
+    "bottom": "candycraft_rebaked:block/waffle_cone_door_bottom"
+  }
+}

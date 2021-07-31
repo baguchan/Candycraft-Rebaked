@@ -12,12 +12,12 @@
   "item.candycraft_rebaked.candy_cane_pickaxe": "Candy Cane Pickaxe",
   "item.candycraft_rebaked.candy_cane_axe": "Candy Cane Axe",
   "item.candycraft_rebaked.candy_cane_hoe": "Candy Cane Hoe",
-  "item.candycraft_rebaked.cookie_croncher_spawn_egg": "Cookie Croncher Spawn Egg",
-  "item.candycraft_rebaked.strawberry_cookie_croncher_spawn_egg": "Strawberry Cookie Croncher Spawn Egg",
-  "item.candycraft_rebaked.sweetberry_cookie_croncher_spawn_egg": "Sweetberry Cookie Croncher Spawn Egg",
-  "item.candycraft_rebaked.oreo_cookie_croncher_spawn_egg": "Oreo Cookie Croncher Spawn Egg",
-  "entity.candycraft_rebaked.cookie_croncher": "Cookie croncher",
-  "entity.candycraft_rebaked.strawberry_cookie_croncher": "Strawberry Cookie Croncher",
-  "entity.candycraft_rebaked.sweetberry_cookie_croncher": "Sweetberry Cookie Croncher",
-  "entity.candycraft_rebaked.oreo_cookie_croncher": "Oreo Cookie Croncher"
+  "item.candycraft_rebaked.croncher_spawn_egg": "Croncher Spawn Egg",
+  "item.candycraft_rebaked.strawberry_croncher_spawn_egg": "Strawberry Croncher Spawn Egg",
+  "item.candycraft_rebaked.sweetberry_croncher_spawn_egg": "Sweetberry Croncher Spawn Egg",
+  "item.candycraft_rebaked.oreo_croncher_spawn_egg": "Oreo Croncher Spawn Egg",
+  "entity.candycraft_rebaked.croncher": "Croncher",
+  "entity.candycraft_rebaked.strawberry_croncher": "Strawberry Croncher",
+  "entity.candycraft_rebaked.sweetberry_croncher": "Sweetberry Croncher",
+  "entity.candycraft_rebaked.oreo_croncher": "Oreo Croncher"
 }
