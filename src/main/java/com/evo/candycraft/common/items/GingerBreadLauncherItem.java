@@ -195,15 +195,8 @@ public class GingerBreadLauncherItem extends ShootableItem implements IVanishabl
 	private static void fireProjectile(World worldIn, LivingEntity shooter, Hand handIn, ItemStack crossbow, ItemStack projectile, float soundPitch, boolean isCreativeMode, float velocity, float inaccuracy, float projectileAngle) {
 		if (!worldIn.isRemote) {
 			boolean flag = projectile.getItem() == CandyCraftItems.GINGER_BREAD_AMMO.get();
-			ProjectileEntity projectileentity;
-			if (flag) {
-				projectileentity = new GingerBreadAmmoEntity(shooter, worldIn);
-			} else {
-				projectileentity = createArrow(worldIn, shooter, crossbow, projectile);
-				if (isCreativeMode || projectileAngle != 0.0F) {
-					((AbstractArrowEntity) projectileentity).pickupStatus = AbstractArrowEntity.PickupStatus.CREATIVE_ONLY;
-				}
-			}
+			ProjectileEntity projectileentity = new GingerBreadAmmoEntity(shooter, worldIn);
+
 
 			if (shooter instanceof ICrossbowUser) {
 				ICrossbowUser icrossbowuser = (ICrossbowUser) shooter;
@@ -223,23 +216,6 @@ public class GingerBreadLauncherItem extends ShootableItem implements IVanishabl
 			worldIn.addEntity(projectileentity);
 			worldIn.playSound((PlayerEntity) null, shooter.getPosX(), shooter.getPosY(), shooter.getPosZ(), SoundEvents.ENTITY_FIREWORK_ROCKET_SHOOT, SoundCategory.PLAYERS, 1.0F, soundPitch);
 		}
-	}
-
-	private static AbstractArrowEntity createArrow(World worldIn, LivingEntity shooter, ItemStack crossbow, ItemStack ammo) {
-		ArrowItem arrowitem = (ArrowItem) (ammo.getItem() instanceof ArrowItem ? ammo.getItem() : Items.ARROW);
-		AbstractArrowEntity abstractarrowentity = arrowitem.createArrow(worldIn, ammo, shooter);
-		if (shooter instanceof PlayerEntity) {
-			abstractarrowentity.setIsCritical(true);
-		}
-
-		abstractarrowentity.setHitSound(SoundEvents.ITEM_CROSSBOW_HIT);
-		abstractarrowentity.setShotFromCrossbow(true);
-		int i = EnchantmentHelper.getEnchantmentLevel(Enchantments.PIERCING, crossbow);
-		if (i > 0) {
-			abstractarrowentity.setPierceLevel((byte) i);
-		}
-
-		return abstractarrowentity;
 	}
 
 	public static void fireProjectiles(World worldIn, LivingEntity shooter, Hand handIn, ItemStack stack, float velocityIn, float inaccuracyIn) {
