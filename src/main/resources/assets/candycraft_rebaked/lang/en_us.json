@@ -2,10 +2,21 @@
   "itemGroup.candycraft_rebaked": "CandyCraft",
 
   "block.candycraft_rebaked.waffle_cone_block": "Waffle Cone Block",
+  "block.candycraft_rebaked.waffle_cone_door": "Waffle Cone Door",
+  "block.candycraft_rebaked.waffle_cone_trapdoor": "Waffle Cone Trapdoor",
   "block.candycraft_rebaked.candy_cane_block": "Candy Cane Block",
   "block.candycraft_rebaked.candy_cane_wood": "Candy Cane Bark",
   "block.candycraft_rebaked.candy_cane_sapling": "Candy Cane Sapling",
   "block.candycraft_rebaked.potted_candy_cane_sapling": "Candy Cane Sapling",
+  "block.candycraft_rebaked.red_licorice_log": "Red Licorice Log",
+  "block.candycraft_rebaked.stripped_red_licorice_log": "Stripped Red Licorice Log",
+  "block.candycraft_rebaked.red_licorice_wood": "Red Licorice Wood",
+  "block.candycraft_rebaked.stripped_red_licorice_wood": "Stripped Red Licorice Wood",
+  "block.candycraft_rebaked.red_licorice_planks": "Red Licorice Planks",
+  "block.candycraft_rebaked.red_licorice_stairs": "Red Licorice Stairs",
+  "block.candycraft_rebaked.red_licorice_slab": "Red Licorice Slab",
+  "block.candycraft_rebaked.red_licorice_tree_sapling": "Red Licorice Tree Sapling",
+  "block.candycraft_rebaked.nougat_slate": "Nougat Slate",
 
   "item.candycraft_rebaked.waffle_cone_crumble": "Waffle Cone Crumble",
   "item.candycraft_rebaked.candy_cane": "Candy Cane",
@@ -14,6 +25,8 @@
   "item.candycraft_rebaked.candy_cane_pickaxe": "Candy Cane Pickaxe",
   "item.candycraft_rebaked.candy_cane_axe": "Candy Cane Axe",
   "item.candycraft_rebaked.candy_cane_hoe": "Candy Cane Hoe",
+  "item.candycraft_rebaked.ginger_bread_launcher": "Ginger Bread Launcher",
+  "item.candycraft_rebaked.ginger_bread_ammo": "Ginger Bread Ammo",
   "item.candycraft_rebaked.croncher_spawn_egg": "Croncher Spawn Egg",
   "item.candycraft_rebaked.strawberry_croncher_spawn_egg": "Strawberry Croncher Spawn Egg",
   "item.candycraft_rebaked.sweetberry_croncher_spawn_egg": "Sweetberry Croncher Spawn Egg",
@@ -22,5 +35,6 @@
   "entity.candycraft_rebaked.croncher": "Croncher",
   "entity.candycraft_rebaked.strawberry_croncher": "Strawberry Croncher",
   "entity.candycraft_rebaked.sweetberry_croncher": "Sweetberry Croncher",
-  "entity.candycraft_rebaked.oreo_croncher": "Oreo Croncher"
+  "entity.candycraft_rebaked.oreo_croncher": "Oreo Croncher",
+  "entity.candycraft_rebaked.ginger_bread_ammo": "Ginger Bread Ammo"
 }
