@@ -1,10 +1,12 @@
 {
   "itemGroup.candycraft_rebaked": "CandyCraft",
+
   "block.candycraft_rebaked.waffle_cone_block": "Waffle Cone Block",
   "block.candycraft_rebaked.candy_cane_block": "Candy Cane Block",
   "block.candycraft_rebaked.candy_cane_wood": "Candy Cane Bark",
   "block.candycraft_rebaked.candy_cane_sapling": "Candy Cane Sapling",
   "block.candycraft_rebaked.potted_candy_cane_sapling": "Candy Cane Sapling",
+
   "item.candycraft_rebaked.waffle_cone_crumble": "Waffle Cone Crumble",
   "item.candycraft_rebaked.candy_cane": "Candy Cane",
   "item.candycraft_rebaked.candy_cane_sword": "Candy Cane Sword",
@@ -16,6 +18,7 @@
   "item.candycraft_rebaked.strawberry_croncher_spawn_egg": "Strawberry Croncher Spawn Egg",
   "item.candycraft_rebaked.sweetberry_croncher_spawn_egg": "Sweetberry Croncher Spawn Egg",
   "item.candycraft_rebaked.oreo_croncher_spawn_egg": "Oreo Croncher Spawn Egg",
+
   "entity.candycraft_rebaked.croncher": "Croncher",
   "entity.candycraft_rebaked.strawberry_croncher": "Strawberry Croncher",
   "entity.candycraft_rebaked.sweetberry_croncher": "Sweetberry Croncher",
