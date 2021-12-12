@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "candycraft_rebaked:block/red_licorice_slab"
+    },
+    "type=double": {
+      "model": "candycraft_rebaked:block/red_licorice_planks"
+    },
+    "type=top": {
+      "model": "candycraft_rebaked:block/red_licorice_slab_top"
+    }
+  }
+}
