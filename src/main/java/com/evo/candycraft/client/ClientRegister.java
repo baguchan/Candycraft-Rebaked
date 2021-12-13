@@ -41,7 +41,7 @@ public class ClientRegister {
         RenderingRegistry.registerEntityRenderingHandler(CandyCraftEntities.STRAWBERRY_CRONCHER.get(), (rendererManager) -> new CroncherRenderer<>(rendererManager, "strawberry_croncher"));
         RenderingRegistry.registerEntityRenderingHandler(CandyCraftEntities.SWEETBERRY_CRONCHER.get(), (rendererManager) -> new SweetberryCroncherRenderer<>(rendererManager, "sweetberry_croncher"));
         RenderingRegistry.registerEntityRenderingHandler(CandyCraftEntities.OREO_CRONCHER.get(), (rendererManager) -> new CroncherRenderer<>(rendererManager, "oreo_croncher"));
-        RenderingRegistry.registerEntityRenderingHandler(CandyCraftEntities.GINGER_BREAD_AMMO.get(), (rendererManager) -> new GingerBreadAmmoRenderer<>(rendererManager));
+        RenderingRegistry.registerEntityRenderingHandler(CandyCraftEntities.GINGER_BREAD_AMMO.get(), GingerBreadAmmoRenderer::new);
     }
 
     @SubscribeEvent
