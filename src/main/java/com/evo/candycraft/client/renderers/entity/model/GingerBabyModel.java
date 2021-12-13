@@ -3,13 +3,15 @@ package com.evo.candycraft.client.renderers.entity.model;// Made with Blockbench
 // Paste this class into your mod and generate all required imports
 
 
+import com.google.common.collect.ImmutableList;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
 import net.minecraft.client.renderer.entity.model.EntityModel;
+import net.minecraft.client.renderer.entity.model.SegmentedModel;
 import net.minecraft.client.renderer.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 
-public class GingerBabyModel extends EntityModel<Entity> {
+public class GingerBabyModel extends SegmentedModel<Entity> {
 	private final ModelRenderer head;
 	private final ModelRenderer body;
 	private final ModelRenderer leftarm;
@@ -52,13 +54,8 @@ public class GingerBabyModel extends EntityModel<Entity> {
 	}
 
 	@Override
-	public void render(MatrixStack matrixStack, IVertexBuilder buffer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
-		head.render(matrixStack, buffer, packedLight, packedOverlay);
-		body.render(matrixStack, buffer, packedLight, packedOverlay);
-		leftarm.render(matrixStack, buffer, packedLight, packedOverlay);
-		rightarm.render(matrixStack, buffer, packedLight, packedOverlay);
-		leftleg.render(matrixStack, buffer, packedLight, packedOverlay);
-		rightleg.render(matrixStack, buffer, packedLight, packedOverlay);
+	public Iterable<ModelRenderer> getParts() {
+		return ImmutableList.of(this.head, this.body, this.leftarm, this.rightarm, this.leftleg, this.rightleg);
 	}
 
 	public void setRotationAngle(ModelRenderer modelRenderer, float x, float y, float z) {
