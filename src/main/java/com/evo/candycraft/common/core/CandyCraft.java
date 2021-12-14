@@ -6,6 +6,7 @@ import com.evo.candycraft.common.core.registry.CandyCraftEntities;
 import com.evo.candycraft.common.core.registry.CandyCraftFeatures;
 import com.evo.candycraft.common.core.registry.CandyCraftItems;
 import com.evo.candycraft.common.event.EntitySpawnEvents;
+import com.evo.candycraft.common.tag.CCBlockTags;
 import com.evo.candycraft.common.world.features.ConfiguredFeatures;
 import com.evo.candycraft.datagen.DataGatherer;
 import com.minecraftabnormals.abnormals_core.core.util.registry.RegistryHelper;
@@ -30,11 +31,13 @@ public class CandyCraft {
 
     private static CandyCraft INSTANCE;
 
+
     public CandyCraft() {
         INSTANCE = this;
 
         // Spawn egg item has the big stupid
         CandyCraftEntities.initEntityTypes();
+        CCBlockTags.init();
 
         IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
 

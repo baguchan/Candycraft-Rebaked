@@ -4,6 +4,7 @@ import com.evo.candycraft.common.blocks.ModSaplingBlock;
 import com.evo.candycraft.common.core.CandyCraft;
 import com.evo.candycraft.common.world.features.ConfiguredFeatures;
 import com.minecraftabnormals.abnormals_core.common.blocks.VerticalSlabBlock;
+import com.minecraftabnormals.abnormals_core.common.blocks.wood.AbnormalsLeavesBlock;
 import com.minecraftabnormals.abnormals_core.core.util.registry.BlockSubRegistryHelper;
 import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
@@ -40,6 +41,7 @@ public class CandyCraftBlocks {
     public static final RegistryObject<Block> RED_LICORICE_STAIRS = HELPER.createBlock("red_licorice_stairs", () -> new StairsBlock(RED_LICORICE_PLANKS.get()::getDefaultState, AbstractBlock.Properties.from(RED_LICORICE_PLANKS.get())), CandyCraft.ITEM_GROUP);
     public static final RegistryObject<Block> RED_LICORICE_SLAB = HELPER.createBlock("red_licorice_slab", () -> new SlabBlock(AbstractBlock.Properties.from(RED_LICORICE_PLANKS.get())), CandyCraft.ITEM_GROUP);
     public static final RegistryObject<Block> RED_LICORICE_VERTICAL_SLAB = HELPER.createCompatBlock("quark", "red_licorice_vertical_slab", () -> new VerticalSlabBlock(AbstractBlock.Properties.from(RED_LICORICE_PLANKS.get())), CandyCraft.ITEM_GROUP);
+    public static final RegistryObject<Block> RED_LICORICE_LEAVES = HELPER.createBlock("red_licorice_leaves", () -> new LeavesBlock(AbstractBlock.Properties.from(Blocks.OAK_LEAVES)), CandyCraft.ITEM_GROUP);
     public static final RegistryObject<Block> RED_LICORICE_TREE_SAPLING = HELPER.createBlock("red_licorice_tree_sapling", () -> new ModSaplingBlock(() -> ConfiguredFeatures.RED_LICORICE_TREE_FEATURE, AbstractBlock.Properties.create(Material.PLANTS, MaterialColor.WHITE_TERRACOTTA).zeroHardnessAndResistance().doesNotBlockMovement().tickRandomly().sound(SoundType.PLANT)), CandyCraft.ITEM_GROUP);
     public static final RegistryObject<Block> POTTED_RED_LICORICE_TREE_SAPLING = HELPER.createBlockNoItem("potted_red_licorice_tree_sapling", () -> new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, RED_LICORICE_TREE_SAPLING, AbstractBlock.Properties.create(Material.MISCELLANEOUS).hardnessAndResistance(0.0f).notSolid()));
 

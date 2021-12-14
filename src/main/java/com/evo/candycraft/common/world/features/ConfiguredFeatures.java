@@ -23,7 +23,7 @@ public class ConfiguredFeatures {
                         .build()));
 
         RED_LICORICE_TREE_FEATURE = register("red_licorice_tree", Feature.TREE
-                .withConfiguration(new BaseTreeFeatureConfig.Builder(new SimpleBlockStateProvider(CandyCraftBlocks.RED_LICORICE_LOG.get().getDefaultState()), new SimpleBlockStateProvider(CandyCraftBlocks.RED_LICORICE_WOOD.get().getDefaultState()), new BlobFoliagePlacer(FeatureSpread.func_242252_a(2), FeatureSpread.func_242252_a(0), 3), new StraightTrunkPlacer(4, 2, 0), new TwoLayerFeature(1, 0, 1))
+                .withConfiguration(new BaseTreeFeatureConfig.Builder(new SimpleBlockStateProvider(CandyCraftBlocks.RED_LICORICE_LOG.get().getDefaultState()), new SimpleBlockStateProvider(CandyCraftBlocks.RED_LICORICE_LEAVES.get().getDefaultState()), new BlobFoliagePlacer(FeatureSpread.func_242252_a(2), FeatureSpread.func_242252_a(0), 3), new StraightTrunkPlacer(4, 2, 0), new TwoLayerFeature(1, 0, 1))
                         .setIgnoreVines()
                         .build()));
     }

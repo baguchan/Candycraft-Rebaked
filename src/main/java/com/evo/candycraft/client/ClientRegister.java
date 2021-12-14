@@ -31,6 +31,7 @@ public class ClientRegister {
         RenderTypeLookup.setRenderLayer(CandyCraftBlocks.POTTED_CANDY_CANE_SAPLING.get(), RenderType.getCutout());
         RenderTypeLookup.setRenderLayer(CandyCraftBlocks.RED_LICORICE_TREE_SAPLING.get(), RenderType.getCutout());
         RenderTypeLookup.setRenderLayer(CandyCraftBlocks.POTTED_RED_LICORICE_TREE_SAPLING.get(), RenderType.getCutout());
+        RenderTypeLookup.setRenderLayer(CandyCraftBlocks.RED_LICORICE_LEAVES.get(), RenderType.getCutoutMipped());
 
         RenderTypeLookup.setRenderLayer(CandyCraftBlocks.WAFFLE_CONE_DOOR.get(), RenderType.getCutout());
         RenderTypeLookup.setRenderLayer(CandyCraftBlocks.WAFFLE_CONE_TRAPDOOR.get(), RenderType.getCutout());
