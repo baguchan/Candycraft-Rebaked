@@ -1,5 +1,5 @@
 modLoader="javafml"
-loaderVersion="[35,)"
+loaderVersion="[39,)"
 license="All rights reserved"
 issueTrackerURL="https://github.com/Evoslab/Candycraft-Rebaked/issues"
 
@@ -19,21 +19,18 @@ issueTrackerURL="https://github.com/Evoslab/Candycraft-Rebaked/issues"
     versionRange="[35,)"
     ordering="NONE"
     side="BOTH"
+
 [[dependencies.candycraft_rebaked]]
     modId="minecraft"
     mandatory=true
-    versionRange="[1.16.4,1.17)"
+    versionRange="[1.18.1,)"
     ordering="NONE"
     side="BOTH"
+
 [[dependencies.candycraft_rebaked]]
     modId="abnormals_core"
     mandatory=true
     versionRange="[x.x.x,)"
     ordering="AFTER"
     side="BOTH"
-[[dependencies.candycraft_rebaked]]
-    modId="neapolitan"
-    mandatory=true
-    versionRange="[x.x.x,)"
-    ordering="AFTER"
-    side="BOTH"
+

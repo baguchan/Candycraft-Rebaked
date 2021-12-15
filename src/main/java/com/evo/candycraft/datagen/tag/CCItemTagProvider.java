@@ -3,9 +3,9 @@ package com.evo.candycraft.datagen.tag;
 import com.evo.candycraft.common.core.CandyCraft;
 import com.evo.candycraft.common.tag.CCBlockTags;
 import com.evo.candycraft.common.tag.CCItemTags;
-import net.minecraft.data.BlockTagsProvider;
 import net.minecraft.data.DataGenerator;
-import net.minecraft.data.ItemTagsProvider;
+import net.minecraft.data.tags.BlockTagsProvider;
+import net.minecraft.data.tags.ItemTagsProvider;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraftforge.common.data.ExistingFileHelper;
@@ -19,7 +19,7 @@ public class CCItemTagProvider extends ItemTagsProvider {
     }
 
     @Override
-    protected void registerTags() {
+    protected void addTags() {
         // Tag copying is very cool
         this.copy(CCBlockTags.RED_LICORICE_LOGS, CCItemTags.RED_LICORICE_LOGS);
         this.copy(BlockTags.LOGS_THAT_BURN, ItemTags.LOGS_THAT_BURN);

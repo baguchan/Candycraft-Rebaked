@@ -5,55 +5,53 @@ import com.evo.candycraft.common.entities.GingerBreadAmmoEntity;
 import com.google.common.collect.Lists;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
-import net.minecraft.enchantment.IVanishable;
 import net.minecraft.entity.ICrossbowUser;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.entity.projectile.AbstractArrowEntity;
 import net.minecraft.entity.projectile.ProjectileEntity;
 import net.minecraft.item.*;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.ListNBT;
 import net.minecraft.stats.Stats;
-import net.minecraft.util.*;
 import net.minecraft.util.math.vector.Quaternion;
 import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.util.math.vector.Vector3f;
 import net.minecraft.world.World;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ProjectileWeaponItem;
+import net.minecraft.world.item.Vanishable;
 
 import java.util.List;
 import java.util.Random;
 import java.util.function.Predicate;
 
-public class GingerBreadLauncherItem extends ShootableItem implements IVanishable {
+public class GingerBreadLauncherItem extends ProjectileWeaponItem implements Vanishable {
 	private boolean isLoadingStart = false;
 	/**
 	 * Set to {@code true} when the crossbow is 50% charged.
 	 */
 	private boolean isLoadingMiddle = false;
 
-	public static final Predicate<ItemStack> GINGER_BREAD_AMMO = (stack) -> {
-		return stack.getItem() == CandyCraftItems.GINGER_BREAD_AMMO.get();
-	};
+	public static final Predicate<ItemStack> GINGER_BREAD_AMMO = (stack) -> stack.getItem() == CandyCraftItems.GINGER_BREAD_AMMO.get();
 
-	public GingerBreadLauncherItem(Properties properties) {
+
+	public GingerBreadLauncherItem(Item.Properties properties) {
 		super(properties);
 	}
 
-	public Predicate<ItemStack> getAmmoPredicate() {
-		return GINGER_BREAD_AMMO;
+	public Predicate<ItemStack> getSupportedHeldProjectiles() {
+		return this.getAllSupportedProjectiles();
 	}
 
-	/**
-	 * Get the predicate to match ammunition when searching the player's inventory, not their main/offhand
-	 */
-	public Predicate<ItemStack> getInventoryAmmoPredicate() {
+	@Override
+	public Predicate<ItemStack> getAllSupportedProjectiles() {
 		return GINGER_BREAD_AMMO;
 	}
 
 	@Override
-	public int func_230305_d_() {
+	public int getDefaultProjectileRange() {
 		return 8;
 	}
 
@@ -323,7 +321,7 @@ public class GingerBreadLauncherItem extends ShootableItem implements IVanishabl
 		return f;
 	}
 
-	private static float func_220013_l(ItemStack p_220013_0_) {
-		return p_220013_0_.getItem() == CandyCraftItems.GINGER_BREAD_LAUNCHER.get() && hasChargedProjectile(p_220013_0_, CandyCraftItems.GINGER_BREAD_AMMO.get()) ? 1.6F : 3.15F;
+	private static float func_220013_l(ItemStack itemStack) {
+		return itemStack.getItem() == CandyCraftItems.GINGER_BREAD_LAUNCHER.get() && hasChargedProjectile(itemStack, CandyCraftItems.GINGER_BREAD_AMMO.get()) ? 1.6F : 3.15F;
 	}
 }

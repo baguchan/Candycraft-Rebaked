@@ -2,25 +2,31 @@ package com.evo.candycraft.common.world.features;
 
 import com.evo.candycraft.common.core.registry.CandyCraftBlocks;
 import com.mojang.serialization.Codec;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.RotatedPillarBlock;
-import net.minecraft.util.Direction;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.ISeedReader;
-import net.minecraft.world.gen.ChunkGenerator;
-import net.minecraft.world.gen.feature.BaseTreeFeatureConfig;
-import net.minecraft.world.gen.feature.Feature;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.world.level.WorldGenLevel;
+import net.minecraft.world.level.block.RotatedPillarBlock;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.chunk.ChunkGenerator;
+import net.minecraft.world.level.levelgen.feature.Feature;
+import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
+import net.minecraft.world.level.levelgen.feature.TreeFeature;
+import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
 
 import java.util.Random;
 
-public class CandyCaneTreeFeature extends Feature<BaseTreeFeatureConfig> {
+public class CandyCaneTreeFeature extends Feature<TreeConfiguration> {
 
-    public CandyCaneTreeFeature(Codec<BaseTreeFeatureConfig> codec) {
+    public CandyCaneTreeFeature(Codec<TreeConfiguration> codec) {
         super(codec);
     }
 
-    @Override                                                                                     // Config doesn't matter for this feature
-    public boolean generate(ISeedReader reader, ChunkGenerator generator, Random rand, BlockPos pos, BaseTreeFeatureConfig config) {
+    @Override
+    public boolean place(FeaturePlaceContext<TreeConfiguration> placeContext) {
+        return this.place(placeContext.level(), placeContext.chunkGenerator(), placeContext.random(), placeContext.origin(), placeContext.config());
+    }
+
+    public boolean place(WorldGenLevel worldGenLevel, ChunkGenerator generator, Random rand, BlockPos pos, TreeConfiguration config) {
         int size = 4;
         if (rand.nextInt(3) == 0)
             ++size;
@@ -30,9 +36,8 @@ public class CandyCaneTreeFeature extends Feature<BaseTreeFeatureConfig> {
         if (pos.getY() + size <= 256) {
             boolean flag = true;
 
-            for (BlockPos blockPos : BlockPos.getAllInBoxMutable(pos.add(-2, 1, -2), pos.add(2, size, 2))) {
-                BlockState blockState = reader.getBlockState(blockPos);
-                if (!blockState.canBeReplacedByLogs(reader, blockPos)) {
+            for (BlockPos blockPos : BlockPos.betweenClosed(pos.offset(-2, 1, -2), pos.offset(2, size, 2))) {
+                if (!TreeFeature.validTreePos(worldGenLevel, blockPos)) {
                     flag = false;
                     break;
                 }
@@ -40,49 +45,48 @@ public class CandyCaneTreeFeature extends Feature<BaseTreeFeatureConfig> {
             if (!flag)
                 return false;
             else {
-                Direction direction = Direction.byHorizontalIndex(rand.nextInt(4) + 1);
-                this.generateCane(reader, pos, direction, size);
+                Direction direction = Direction.Plane.HORIZONTAL.getRandomDirection(rand);
+                this.generateCane(worldGenLevel, pos, direction, size);
                 return true;
             }
         }
         return false;
     }
 
-    private void generateCane(ISeedReader reader, BlockPos origin, Direction direction, int size) {
-        BlockState CANDY_CANE = CandyCraftBlocks.CANDY_CANE_BLOCK.get().getDefaultState();
-        BlockState CANDY_CANE_BARK = CandyCraftBlocks.CANDY_CANE_WOOD.get().getDefaultState().with(RotatedPillarBlock.AXIS, Direction.DOWN.getAxis());
+    private void generateCane(WorldGenLevel worldGenLevel, BlockPos origin, Direction direction, int size) {
+        BlockState CANDY_CANE = CandyCraftBlocks.CANDY_CANE_BLOCK.get().defaultBlockState();
+        BlockState CANDY_CANE_BARK = CandyCraftBlocks.CANDY_CANE_WOOD.get().defaultBlockState().setValue(RotatedPillarBlock.AXIS, Direction.DOWN.getAxis());
 
         for (int i = 0; i < size; i++) {
-            reader.setBlockState(origin.up(i), CANDY_CANE, 2);
+            worldGenLevel.setBlock(origin.above(i), CANDY_CANE, 2);
         }
-        BlockPos pos = origin.up(size).toImmutable();
+        BlockPos pos = origin.above(size).immutable();
 
         switch (direction) {
-            case NORTH:
-                reader.setBlockState(pos, CANDY_CANE_BARK, 2);
-                reader.setBlockState(pos.north(), CANDY_CANE_BARK, 2);
-                reader.setBlockState(pos.north(2), CANDY_CANE_BARK, 2);
-                reader.setBlockState(pos.north(2).down(1), CANDY_CANE_BARK, 2);
-                break;
-            case WEST:
-                reader.setBlockState(pos, CANDY_CANE_BARK, 2);
-                reader.setBlockState(pos.west(), CANDY_CANE_BARK, 2);
-                reader.setBlockState(pos.west(2), CANDY_CANE_BARK, 2);
-                reader.setBlockState(pos.west(2).down(1), CANDY_CANE_BARK, 2);
-                break;
-            case EAST:
-                reader.setBlockState(pos, CANDY_CANE_BARK, 2);
-                reader.setBlockState(pos.east(), CANDY_CANE_BARK, 2);
-                reader.setBlockState(pos.east(2), CANDY_CANE_BARK, 2);
-                reader.setBlockState(pos.east(2).down(1), CANDY_CANE_BARK, 2);
-                break;
-            default:
-            case SOUTH:
-                reader.setBlockState(pos, CANDY_CANE_BARK, 2);
-                reader.setBlockState(pos.south(), CANDY_CANE_BARK, 2);
-                reader.setBlockState(pos.south(2), CANDY_CANE_BARK, 2);
-                reader.setBlockState(pos.south(2).down(1), CANDY_CANE_BARK, 2);
-                break;
+            case NORTH -> {
+                worldGenLevel.setBlock(pos, CANDY_CANE_BARK, 2);
+                worldGenLevel.setBlock(pos.north(), CANDY_CANE_BARK, 2);
+                worldGenLevel.setBlock(pos.north(2), CANDY_CANE_BARK, 2);
+                worldGenLevel.setBlock(pos.north(2).below(), CANDY_CANE_BARK, 2);
+            }
+            case WEST -> {
+                worldGenLevel.setBlock(pos, CANDY_CANE_BARK, 2);
+                worldGenLevel.setBlock(pos.west(), CANDY_CANE_BARK, 2);
+                worldGenLevel.setBlock(pos.west(2), CANDY_CANE_BARK, 2);
+                worldGenLevel.setBlock(pos.west(2).below(), CANDY_CANE_BARK, 2);
+            }
+            case EAST -> {
+                worldGenLevel.setBlock(pos, CANDY_CANE_BARK, 2);
+                worldGenLevel.setBlock(pos.east(), CANDY_CANE_BARK, 2);
+                worldGenLevel.setBlock(pos.east(2), CANDY_CANE_BARK, 2);
+                worldGenLevel.setBlock(pos.east(2).below(), CANDY_CANE_BARK, 2);
+            }
+            case SOUTH -> {
+                worldGenLevel.setBlock(pos, CANDY_CANE_BARK, 2);
+                worldGenLevel.setBlock(pos.south(), CANDY_CANE_BARK, 2);
+                worldGenLevel.setBlock(pos.south(2), CANDY_CANE_BARK, 2);
+                worldGenLevel.setBlock(pos.south(2).below(), CANDY_CANE_BARK, 2);
+            }
         }
     }
 }

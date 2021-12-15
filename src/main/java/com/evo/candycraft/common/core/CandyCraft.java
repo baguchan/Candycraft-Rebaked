@@ -1,6 +1,5 @@
 package com.evo.candycraft.common.core;
 
-import com.evo.candycraft.client.ClientRegister;
 import com.evo.candycraft.common.core.registry.CandyCraftBlocks;
 import com.evo.candycraft.common.core.registry.CandyCraftEntities;
 import com.evo.candycraft.common.core.registry.CandyCraftFeatures;
@@ -9,10 +8,10 @@ import com.evo.candycraft.common.event.EntitySpawnEvents;
 import com.evo.candycraft.common.tag.CCBlockTags;
 import com.evo.candycraft.common.world.features.ConfiguredFeatures;
 import com.evo.candycraft.datagen.DataGatherer;
-import com.minecraftabnormals.abnormals_core.core.util.registry.RegistryHelper;
-import net.minecraft.item.ItemGroup;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
+import com.teamabnormals.blueprint.core.util.registry.RegistryHelper;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
@@ -52,9 +51,9 @@ public class CandyCraft {
         CandyCraftFeatures.FEATURES.register(eventBus);
     }
 
-    public final static ItemGroup ITEM_GROUP = new ItemGroup("candycraft_rebaked") {
+    public final static CreativeModeTab ITEM_GROUP = new CreativeModeTab("candycraft_rebaked") {
         @Override
-        public ItemStack createIcon() {
+        public ItemStack makeIcon() {
             return new ItemStack(CandyCraftItems.CANDY_CANE.get());
         }
     };

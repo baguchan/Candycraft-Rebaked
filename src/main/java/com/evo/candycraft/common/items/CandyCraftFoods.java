@@ -1,8 +1,8 @@
 package com.evo.candycraft.common.items;
 
-import net.minecraft.item.Food;
+import net.minecraft.world.food.FoodProperties;
 
 public class CandyCraftFoods {
 
-    public static final Food CANDY_CANE = new Food.Builder().hunger(1).saturation(1.0f).build();
+    public static final FoodProperties CANDY_CANE = new FoodProperties.Builder().nutrition(1).saturationMod(1.0f).build();
 }

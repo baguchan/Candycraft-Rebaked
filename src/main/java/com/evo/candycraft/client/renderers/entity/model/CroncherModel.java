@@ -5,18 +5,25 @@ package com.evo.candycraft.client.renderers.entity.model;
 
 import com.evo.candycraft.common.entities.CroncherEntity;
 import com.google.common.collect.ImmutableList;
+import net.minecraft.client.model.CreeperModel;
+import net.minecraft.client.model.HierarchicalModel;
+import net.minecraft.client.model.SpiderModel;
+import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.renderer.entity.model.SegmentedModel;
 import net.minecraft.client.renderer.model.ModelRenderer;
+import net.minecraft.util.Mth;
 import net.minecraft.util.math.MathHelper;
 
-public class CroncherModel<T extends CroncherEntity> extends SegmentedModel<T> {
+public class CroncherModel<T extends CroncherEntity> extends HierarchicalModel<T> {
 
-	private final ModelRenderer head;
-	private final ModelRenderer body;
-	private final ModelRenderer leg1;
-	private final ModelRenderer leg2;
-	private final ModelRenderer leg3;
-	private final ModelRenderer leg4;
+	CreeperModel
+
+	private final ModelPart root;
+	private final ModelPart head;
+	private final ModelPart leg1;
+	private final ModelPart leg2;
+	private final ModelPart leg3;
+	private final ModelPart leg4;
 
 	public CroncherModel() {
 		textureWidth = 64;
@@ -48,15 +55,21 @@ public class CroncherModel<T extends CroncherEntity> extends SegmentedModel<T> {
 	}
 
 	@Override
-	public void setRotationAngles(CroncherEntity cookieCroncherEntity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-		this.head.rotateAngleY = netHeadYaw * ((float)Math.PI / 180F);
-		this.head.rotateAngleX = headPitch * ((float)Math.PI / 180F);
+	public void setupAnim(T croncher, float limbSwing, float limbSwingAmount, float ageInTicks, float headYaw, float headPitch) {
+		this.head.yRot = headYaw * ((float)Math.PI / 180F);
+		this.head.xRot = headPitch * ((float)Math.PI / 180F);
 
-		this.leg1.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F) * 1.4F * limbSwingAmount;
-		this.leg2.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F + (float)Math.PI) * 1.4F * limbSwingAmount;
-		this.leg3.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F + (float)Math.PI) * 1.4F * limbSwingAmount;
-		this.leg4.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F) * 1.4F * limbSwingAmount;
+		this.leg1.xRot = Mth.cos(limbSwing * 0.6662F) * 1.4F * limbSwingAmount;
+		this.leg2.xRot = Mth.cos(limbSwing * 0.6662F + (float)Math.PI) * 1.4F * limbSwingAmount;
+		this.leg3.xRot = Mth.cos(limbSwing * 0.6662F + (float)Math.PI) * 1.4F * limbSwingAmount;
+		this.leg4.xRot = Mth.cos(limbSwing * 0.6662F) * 1.4F * limbSwingAmount;
 	}
+
+	@Override
+	public ModelPart root() {
+		return this.root;
+	}
+
 
 	@Override
 	public Iterable<ModelRenderer> getParts() {

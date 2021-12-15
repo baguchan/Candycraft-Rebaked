@@ -1,18 +1,17 @@
 package com.evo.candycraft.common.tag;
 
 import com.evo.candycraft.common.core.CandyCraft;
-import net.minecraft.block.Block;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
-import net.minecraft.tags.ITag;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.tags.Tag;
+import net.minecraft.world.level.block.Block;
 
 public class CCBlockTags {
 
-    public static final ITag.INamedTag<Block> RED_LICORICE_LOGS = modTag("red_licorice_logs");
+    public static final Tag.Named<Block> RED_LICORICE_LOGS = modTag("red_licorice_logs");
 
-
-    private static ITag.INamedTag<Block> modTag(String tagName) {
-        return BlockTags.makeWrapperTag(new ResourceLocation(CandyCraft.MODID, tagName).toString());
+    private static Tag.Named<Block> modTag(String tagName) {
+        return BlockTags.bind(new ResourceLocation(CandyCraft.MODID, tagName).toString());
     }
 
     public static void init() {

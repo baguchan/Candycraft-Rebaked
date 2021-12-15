@@ -1,72 +1,70 @@
 package com.evo.candycraft.common.entities;
 
 import com.evo.candycraft.common.core.registry.CandyCraftEntities;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.projectile.FireballEntity;
-import net.minecraft.entity.projectile.ThrowableEntity;
-import net.minecraft.network.IPacket;
-import net.minecraft.util.DamageSource;
-import net.minecraft.util.math.BlockRayTraceResult;
-import net.minecraft.util.math.EntityRayTraceResult;
-import net.minecraft.util.math.RayTraceResult;
-import net.minecraft.world.Explosion;
-import net.minecraft.world.World;
+import net.minecraft.network.protocol.Packet;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.projectile.ThrowableProjectile;
+import net.minecraft.world.level.Explosion;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.EntityHitResult;
+import net.minecraft.world.phys.HitResult;
 import net.minecraftforge.event.ForgeEventFactory;
-import net.minecraftforge.fml.network.NetworkHooks;
+import net.minecraftforge.network.NetworkHooks;
 
-public class GingerBreadAmmoEntity extends ThrowableEntity {
+public class GingerBreadAmmoEntity extends ThrowableProjectile {
 
-	public GingerBreadAmmoEntity(EntityType<? extends GingerBreadAmmoEntity> type, World worldIn) {
-		super(type, worldIn);
+	public GingerBreadAmmoEntity(EntityType<? extends GingerBreadAmmoEntity> type, Level level) {
+		super(type, level);
 	}
 
-	public GingerBreadAmmoEntity(PlayerEntity player, double x, double y, double z, World worldIn) {
-		super(CandyCraftEntities.GINGER_BREAD_AMMO_TYPE, x, y, z, worldIn);
-		this.setShooter(player);
+	public GingerBreadAmmoEntity(Player player, double x, double y, double z, Level level) {
+		super(CandyCraftEntities.GINGER_BREAD_AMMO_TYPE, x, y, z, level);
+		this.setOwner(player);
 	}
 
-	public GingerBreadAmmoEntity(LivingEntity livingEntityIn, World worldIn) {
-		super(CandyCraftEntities.GINGER_BREAD_AMMO_TYPE, livingEntityIn, worldIn);
-	}
-
-	@Override
-	protected void registerData() {
-
+	public GingerBreadAmmoEntity(LivingEntity livingEntity, Level level) {
+		super(CandyCraftEntities.GINGER_BREAD_AMMO_TYPE, livingEntity, level);
 	}
 
 	@Override
-	protected void onEntityHit(EntityRayTraceResult result) {
-		super.onEntityHit(result);
+	protected void defineSynchedData() {
 
-		if (!this.world.isRemote) {
+	}
+
+	@Override
+	protected void onHitEntity(EntityHitResult result) {
+		super.onHitEntity(result);
+
+		if (!this.level.isClientSide) {
 			Entity target = result.getEntity();
-			Entity shooter = this.func_234616_v_();
+			Entity shooter = this.getOwner();
 
-			target.attackEntityFrom(DamageSource.causeThrownDamage(this, shooter), 1.0F);
+			target.hurt(DamageSource.thrown(this, shooter), 1.0F);
 
 			if (shooter instanceof LivingEntity) {
-				this.applyEnchantments((LivingEntity) shooter, target);
+				this.doEnchantDamageEffects((LivingEntity) shooter, target);
 			}
 		}
-		this.remove();
+		this.discard();
 	}
 
 	@Override
-	protected void onImpact(RayTraceResult result) {
-		super.onImpact(result);
+	protected void onHit(HitResult result) {
+		super.onHit(result);
 
-		if (!this.world.isRemote) {
-			boolean flag = ForgeEventFactory.getMobGriefingEvent(this.world, this.func_234616_v_());
-			this.world.createExplosion(this, this.getPosX(), this.getPosY(), this.getPosZ(), 3.0F, flag ? Explosion.Mode.BREAK : Explosion.Mode.NONE);
+		if (!this.level.isClientSide) {
+			boolean flag = ForgeEventFactory.getMobGriefingEvent(this.level, this.getOwner());
+			this.level.explode(this, this.getX(), this.getY(), this.getZ(), 3.0F, flag ? Explosion.BlockInteraction.BREAK : Explosion.BlockInteraction.NONE);
 		}
-		this.remove();
+		this.discard();
 	}
 
 	@Override
-	public IPacket<?> createSpawnPacket() {
+	public Packet<?> getAddEntityPacket() {
 		return NetworkHooks.getEntitySpawningPacket(this);
 	}
 }

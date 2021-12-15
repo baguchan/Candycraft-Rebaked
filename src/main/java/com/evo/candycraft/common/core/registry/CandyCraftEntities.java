@@ -2,13 +2,13 @@ package com.evo.candycraft.common.core.registry;
 
 import com.evo.candycraft.common.core.CandyCraft;
 import com.evo.candycraft.common.entities.*;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityClassification;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.ai.attributes.GlobalEntityTypeAttributes;
-import net.minecraftforge.fml.RegistryObject;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.MobCategory;
+import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.RegistryObject;
 
 import java.util.function.Supplier;
 
@@ -28,19 +28,19 @@ public class CandyCraftEntities {
     public static final RegistryObject<EntityType<OreoCroncherEntity>> OREO_CRONCHER = register("oreo_croncher", () -> OREO_CRONCHER_TYPE);
     public static final RegistryObject<EntityType<GingerBreadAmmoEntity>> GINGER_BREAD_AMMO = register("ginger_bread_ammo", () -> GINGER_BREAD_AMMO_TYPE);
 
-    public static void registerAttributes() {
-        GlobalEntityTypeAttributes.put(CRONCHER.get(), CroncherEntity.registerAttributes().create());
-        GlobalEntityTypeAttributes.put(STRAWBERRY_CRONCHER.get(), CroncherEntity.registerAttributes().create());
-        GlobalEntityTypeAttributes.put(SWEETBERRY_CRONCHER.get(), CroncherEntity.registerAttributes().create());
-        GlobalEntityTypeAttributes.put(OREO_CRONCHER.get(), CroncherEntity.registerAttributes().create());
+    public static void registerAttributes(EntityAttributeCreationEvent event) {
+        event.put(CRONCHER.get(), CroncherEntity.registerAttributes().build());
+        event.put(STRAWBERRY_CRONCHER.get(), CroncherEntity.registerAttributes().build());
+        event.put(SWEETBERRY_CRONCHER.get(), CroncherEntity.registerAttributes().build());
+        event.put(OREO_CRONCHER.get(), CroncherEntity.registerAttributes().build());
     }
 
     public static void initEntityTypes() {
-        CRONCHER_TYPE = EntityType.Builder.create(CroncherEntity::new, EntityClassification.MONSTER).size(0.6F, 1.55F).setTrackingRange(8).build("croncher");
-        STRAWBERRY_CRONCHER_TYPE = EntityType.Builder.create(StrawberryCroncherEntity::new, EntityClassification.MONSTER).size(0.6F, 1.55F).setTrackingRange(8).build("strawberry_croncher");
-        SWEETBERRY_CRONCHER_TYPE = EntityType.Builder.create(SweetberryCroncherEntity::new, EntityClassification.MONSTER).size(0.6F, 1.55F).setTrackingRange(8).build("sweetberry_croncher");
-        OREO_CRONCHER_TYPE = EntityType.Builder.create(OreoCroncherEntity::new, EntityClassification.MONSTER).size(0.6F, 1.55F).setTrackingRange(8).build("oreo_croncher");
-        GINGER_BREAD_AMMO_TYPE = EntityType.Builder.<GingerBreadAmmoEntity>create(GingerBreadAmmoEntity::new, EntityClassification.MISC).size(0.5F, 0.5F).setTrackingRange(12).build("ginger_bread_ammo");
+        CRONCHER_TYPE = EntityType.Builder.of(CroncherEntity::new, MobCategory.MONSTER).sized(0.6F, 1.55F).setTrackingRange(8).build("croncher");
+        STRAWBERRY_CRONCHER_TYPE = EntityType.Builder.of(StrawberryCroncherEntity::new, MobCategory.MONSTER).sized(0.6F, 1.55F).setTrackingRange(8).build("strawberry_croncher");
+        SWEETBERRY_CRONCHER_TYPE = EntityType.Builder.of(SweetberryCroncherEntity::new, MobCategory.MONSTER).sized(0.6F, 1.55F).setTrackingRange(8).build("sweetberry_croncher");
+        OREO_CRONCHER_TYPE = EntityType.Builder.of(OreoCroncherEntity::new, MobCategory.MONSTER).sized(0.6F, 1.55F).setTrackingRange(8).build("oreo_croncher");
+        GINGER_BREAD_AMMO_TYPE = EntityType.Builder.<GingerBreadAmmoEntity>of(GingerBreadAmmoEntity::new, MobCategory.MISC).sized(0.5F, 0.5F).setTrackingRange(12).build("ginger_bread_ammo");
     }
 
     private static <T extends Entity> RegistryObject<EntityType<T>> register(String name, Supplier<EntityType<T>> entityTypeSupplier) {

@@ -3,21 +3,21 @@ package com.evo.candycraft.client.renderers.entity.model;// Made with Blockbench
 // Paste this class into your mod and generate all required imports
 
 
+import com.evo.candycraft.common.entities.GingerBreadAmmoEntity;
 import com.google.common.collect.ImmutableList;
-import com.mojang.blaze3d.matrix.MatrixStack;
-import com.mojang.blaze3d.vertex.IVertexBuilder;
-import net.minecraft.client.renderer.entity.model.EntityModel;
-import net.minecraft.client.renderer.entity.model.SegmentedModel;
+import net.minecraft.client.model.HierarchicalModel;
+import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.renderer.model.ModelRenderer;
-import net.minecraft.entity.Entity;
+import net.minecraft.world.entity.Entity;
 
-public class GingerBabyModel extends SegmentedModel<Entity> {
-	private final ModelRenderer head;
-	private final ModelRenderer body;
-	private final ModelRenderer leftarm;
-	private final ModelRenderer rightarm;
-	private final ModelRenderer leftleg;
-	private final ModelRenderer rightleg;
+public class GingerBabyModel<T extends GingerBreadAmmoEntity> extends HierarchicalModel<T> {
+
+	private final ModelPart head;
+	private final ModelPart body;
+	private final ModelPart leftarm;
+	private final ModelPart rightarm;
+	private final ModelPart leftleg;
+	private final ModelPart rightleg;
 
 	public GingerBabyModel() {
 		textureWidth = 16;
