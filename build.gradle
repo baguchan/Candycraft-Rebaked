@@ -80,11 +80,19 @@ minecraft {
 
 sourceSets.main.resources { srcDir 'src/generated/resources' }
 
+repositories {
+    maven {
+        name = "abnormals"
+        url = "https://maven.jaackson.me"
+    }
+}
+
 dependencies {
     minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
 
-    implementation fg.deobf("curse.maven:abnormals-core:${ac_version}")
-    implementation fg.deobf("curse.maven:neapolitan:${neapolitan_version}")
+    implementation fg.deobf("com.teamabnormals:blueprint:${ac_version}")
+    // Waiting for update
+    //implementation fg.deobf("com.teamabnormals:neapolitan:${neapolitan_version}")
 
     runtimeOnly fg.deobf("curse.maven:jei:${jei_version}")
 }
