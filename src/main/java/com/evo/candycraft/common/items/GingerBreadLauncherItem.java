@@ -7,6 +7,7 @@ import com.mojang.math.Quaternion;
 import com.mojang.math.Vector3f;
 import net.minecraft.ChatFormatting;
 import net.minecraft.advancements.CriteriaTriggers;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.network.chat.Component;
@@ -22,7 +23,6 @@ import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.monster.CrossbowAttackMob;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
@@ -214,18 +214,7 @@ public class GingerBreadLauncherItem extends ProjectileWeaponItem implements Van
 
 	private static void shootProjectile(Level level, LivingEntity livingEntity, InteractionHand hand, ItemStack itemStack, ItemStack projectileStack, float shotPitch, boolean creativeMode, float shootingPower, float speedMult, float spread) {
 		if (!level.isClientSide) {
-			boolean flag = projectileStack.is(CandyCraftItems.GINGER_BREAD_AMMO.get());
-			Projectile projectile;
-
-			if (flag) {
-				projectile = new GingerBreadAmmoEntity(livingEntity, level);
-			}
-			else {
-				projectile = getArrow(level, livingEntity, itemStack, projectileStack);
-				if (creativeMode || spread != 0.0F) {
-					((AbstractArrow) projectile).pickup = AbstractArrow.Pickup.CREATIVE_ONLY;
-				}
-			}
+			Projectile projectile = new GingerBreadAmmoEntity(livingEntity, level);
 
 			if (livingEntity instanceof CrossbowAttackMob crossbowMob) {
 				crossbowMob.shootCrossbowProjectile(crossbowMob.getTarget(), itemStack, projectile, spread);
@@ -243,26 +232,9 @@ public class GingerBreadLauncherItem extends ProjectileWeaponItem implements Van
 				entity.broadcastBreakEvent(hand);
 			});
 			level.addFreshEntity(projectile);
-			level.playSound(null, livingEntity.getX(), livingEntity.getY(), livingEntity.getZ(), SoundEvents.CROSSBOW_SHOOT, SoundSource.PLAYERS, 1.0F, shotPitch);
+			level.playSound(null, livingEntity.getX(), livingEntity.getY(), livingEntity.getZ(), SoundEvents.GENERIC_EXPLODE, SoundSource.PLAYERS, 1.0F, shotPitch);
 		}
-	}
-
-	// We can always look over this class later and clear out unused things like this
-	private static AbstractArrow getArrow(Level level, LivingEntity livingEntity, ItemStack itemStack, ItemStack projectileStack) {
-		ArrowItem arrowItem = (ArrowItem)(projectileStack.getItem() instanceof ArrowItem ? projectileStack.getItem() : Items.ARROW);
-		AbstractArrow abstractArrow = arrowItem.createArrow(level, projectileStack, livingEntity);
-
-		if (livingEntity instanceof Player) {
-			abstractArrow.setCritArrow(true);
-		}
-		abstractArrow.setSoundEvent(SoundEvents.CROSSBOW_HIT);
-		abstractArrow.setShotFromCrossbow(true);
-		int i = EnchantmentHelper.getItemEnchantmentLevel(Enchantments.PIERCING, itemStack);
-
-		if (i > 0) {
-			abstractArrow.setPierceLevel((byte)i);
-		}
-		return abstractArrow;
+		level.addParticle(ParticleTypes.EXPLOSION, livingEntity.getX(), livingEntity.getEyeY(), livingEntity.getZ(), 0.0D, 0.0D, 0.0D);
 	}
 
 	public static void performShooting(Level level, LivingEntity livingEntity, InteractionHand hand, ItemStack itemStack, float shootingPower, float speedMult) {
@@ -347,7 +319,7 @@ public class GingerBreadLauncherItem extends ProjectileWeaponItem implements Van
 
 	@Override
 	public UseAnim getUseAnimation(ItemStack itemStack) {
-		return UseAnim.CROSSBOW;
+		return UseAnim.BOW;
 	}
 
 	private SoundEvent getStartSound(int quickChargeLevel) {
