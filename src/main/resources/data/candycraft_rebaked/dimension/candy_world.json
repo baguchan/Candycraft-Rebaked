@@ -1,0 +1,25 @@
+{
+  "type": "candycraft_rebaked:candy_world",
+  "generator": {
+    "type": "minecraft:noise",
+    "seed": 918391577,
+    "settings": "candycraft_rebaked:candy_world",
+    "biome_source": {
+      "type": "minecraft:multi_noise",
+      "biomes": [
+        {
+          "biome": "candycraft_rebaked:icecream_plains",
+          "parameters": {
+            "temperature": 0,
+            "humidity": 0,
+            "continentalness": 0,
+            "erosion": 0,
+            "weirdness": 0,
+            "depth": 0,
+            "offset": 0
+          }
+        }
+      ]
+    }
+  }
+}
