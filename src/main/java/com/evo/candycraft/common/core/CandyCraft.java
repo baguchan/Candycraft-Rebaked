@@ -1,9 +1,6 @@
 package com.evo.candycraft.common.core;
 
-import com.evo.candycraft.common.core.registry.CandyCraftBlocks;
-import com.evo.candycraft.common.core.registry.CandyCraftEntities;
-import com.evo.candycraft.common.core.registry.CandyCraftFeatures;
-import com.evo.candycraft.common.core.registry.CandyCraftItems;
+import com.evo.candycraft.common.core.registry.*;
 import com.evo.candycraft.common.event.EntitySpawnEvents;
 import com.evo.candycraft.common.tag.CCBlockTags;
 import com.evo.candycraft.common.world.features.ConfiguredFeatures;
@@ -61,6 +58,7 @@ public class CandyCraft {
     public void commonSetup(final FMLCommonSetupEvent event) {
         ConfiguredFeatures.register();
         CandyCraftBlocks.registerBlockData();
+        CandyCraftNoiseGeneratorSettings.init();
     }
 
     public static ResourceLocation resourceLoc(String path) {
