@@ -30,15 +30,15 @@ public class CroncherModel<T extends CroncherEntity> extends HierarchicalModel<T
 	public static LayerDefinition createBodyLayer(CubeDeformation cubeDeformation) {
 		MeshDefinition meshDefinition = new MeshDefinition();
 		PartDefinition partDefinition = meshDefinition.getRoot();
-		partDefinition.addOrReplaceChild("head", CubeListBuilder.create().texOffs(0, 0).addBox(-4.0F, -8.0F, -4.0F, 8.0F, 8.0F, 8.0F, cubeDeformation), PartPose.offset(0.0F, 7.0F, 0.0F));
-		partDefinition.addOrReplaceChild("body", CubeListBuilder.create().texOffs(16, 16).addBox(-4.0F, 0.0F, -2.0F, 8.0F, 11.0F, 4.0F, cubeDeformation), PartPose.offset(0.0F, 7.0F, 0.0F));
+		partDefinition.addOrReplaceChild("head", CubeListBuilder.create().texOffs(0, 0).addBox(-4.0F, -8.0F, -4.0F, 8.0F, 8.0F, 8.0F, cubeDeformation), PartPose.offset(0.0F, 8.0F, 0.0F));
+		partDefinition.addOrReplaceChild("body", CubeListBuilder.create().texOffs(16, 16).addBox(-4.0F, 0.0F, -2.0F, 8.0F, 11.0F, 4.0F, cubeDeformation), PartPose.offset(0.0F, 8.0F, 0.0F));
 
-		CubeListBuilder cubeListBuilder = CubeListBuilder.create().texOffs(0, 16).addBox(-2.0F, 0.0F, -2.0F, 4.0F, 6.0F, 4.0F, cubeDeformation);
+		CubeListBuilder cubeListBuilder = CubeListBuilder.create().texOffs(0, 16).addBox(-2.0F, 0.0F, -2.0F, 4.0F, 5.0F, 4.0F, cubeDeformation);
 
-		partDefinition.addOrReplaceChild("right_hind_leg", cubeListBuilder, PartPose.offset(-2.0F, 18.0F, 4.0F));
-		partDefinition.addOrReplaceChild("left_hind_leg", cubeListBuilder, PartPose.offset(2.0F, 18.0F, 4.0F));
-		partDefinition.addOrReplaceChild("right_front_leg", cubeListBuilder, PartPose.offset(-2.0F, 18.0F, -4.0F));
-		partDefinition.addOrReplaceChild("left_front_leg", cubeListBuilder, PartPose.offset(2.0F, 18.0F, -4.0F));
+		partDefinition.addOrReplaceChild("right_hind_leg", cubeListBuilder, PartPose.offset(-2.0F, 19.0F, 4.0F));
+		partDefinition.addOrReplaceChild("left_hind_leg", cubeListBuilder, PartPose.offset(2.0F, 19.0F, 4.0F));
+		partDefinition.addOrReplaceChild("right_front_leg", cubeListBuilder, PartPose.offset(-2.0F, 19.0F, -4.0F));
+		partDefinition.addOrReplaceChild("left_front_leg", cubeListBuilder, PartPose.offset(2.0F, 19.0F, -4.0F));
 
 		return LayerDefinition.create(meshDefinition, 64, 32);
 	}
