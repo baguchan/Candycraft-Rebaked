@@ -12,23 +12,20 @@ public class CandyWorldSurfaceRuleData {
 	private static final SurfaceRules.RuleSource BEDROCK = makeStateRule(Blocks.BEDROCK);
 	private static final SurfaceRules.RuleSource TOFUSLATE = makeStateRule(CandyCraftBlocks.NOUGAT_SLATE.get());
 
-	private static SurfaceRules.RuleSource makeStateRule(Block p_194811_) {
-		return SurfaceRules.state(p_194811_.defaultBlockState());
+	private static SurfaceRules.RuleSource makeStateRule(Block block) {
+		return SurfaceRules.state(block.defaultBlockState());
 	}
 
 	public static SurfaceRules.RuleSource candyWorld() {
-		return candyWorldLike(true, false, true);
+		return candyWorldLike();
 	}
 
-	public static SurfaceRules.RuleSource candyWorldLike(boolean p_198381_, boolean p_198382_, boolean p_198383_) {
+	public static SurfaceRules.RuleSource candyWorldLike() {
 		ImmutableList.Builder<SurfaceRules.RuleSource> builder = ImmutableList.builder();
-		if (p_198382_) {
-			builder.add(SurfaceRules.ifTrue(SurfaceRules.not(SurfaceRules.verticalGradient("bedrock_roof", VerticalAnchor.belowTop(5), VerticalAnchor.top())), BEDROCK));
-		}
 
-		if (p_198383_) {
-			builder.add(SurfaceRules.ifTrue(SurfaceRules.verticalGradient("bedrock_floor", VerticalAnchor.bottom(), VerticalAnchor.aboveBottom(5)), BEDROCK));
-		}
+
+		builder.add(SurfaceRules.ifTrue(SurfaceRules.verticalGradient("bedrock_floor", VerticalAnchor.bottom(), VerticalAnchor.aboveBottom(5)), BEDROCK));
+
 
 		builder.add(SurfaceRules.ifTrue(SurfaceRules.verticalGradient("deepslate", VerticalAnchor.absolute(0), VerticalAnchor.absolute(8)), TOFUSLATE));
 		return SurfaceRules.sequence(builder.build().toArray((p_198379_) -> {

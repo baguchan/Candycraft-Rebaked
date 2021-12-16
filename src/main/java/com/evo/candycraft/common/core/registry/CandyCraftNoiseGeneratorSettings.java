@@ -25,8 +25,8 @@ public class CandyCraftNoiseGeneratorSettings {
 		return new NoiseGeneratorSettings(new StructureSettings(Optional.empty(), map), NoiseSettings.create(-64, 384, new NoiseSamplingSettings(1.0D, 1.0D, 80.0D, 160.0D), new NoiseSlider(-0.078125D, 2, 8), new NoiseSlider(0.1171875D, 3, 0), 1, 2, false, false, false, TerrainProvider.overworld(false)), CandyCraftBlocks.WAFFLE_CONE_BLOCK.get().defaultBlockState(), Blocks.WATER.defaultBlockState(), CandyWorldSurfaceRuleData.candyWorld(), 63, false, true, true, true, true, false);
 	}
 
-	public static void register(ResourceKey<NoiseGeneratorSettings> p_198263_, NoiseGeneratorSettings p_198264_) {
-		BuiltinRegistries.register(BuiltinRegistries.NOISE_GENERATOR_SETTINGS, p_198263_.location(), p_198264_);
+	public static void register(ResourceKey<NoiseGeneratorSettings> resourceKey, NoiseGeneratorSettings noiseGeneratorSetting) {
+		BuiltinRegistries.register(BuiltinRegistries.NOISE_GENERATOR_SETTINGS, resourceKey.location(), noiseGeneratorSetting);
 	}
 
 	public static void init() {
