@@ -3,7 +3,7 @@ package com.evo.candycraft.client.renderers.entity;
 import com.evo.candycraft.client.ModModelLayers;
 import com.evo.candycraft.client.renderers.entity.model.GingerBabyModel;
 import com.evo.candycraft.common.core.CandyCraft;
-import com.evo.candycraft.common.entities.GingerBreadAmmoEntity;
+import com.evo.candycraft.common.entity.GingerBreadAmmoEntity;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Vector3f;

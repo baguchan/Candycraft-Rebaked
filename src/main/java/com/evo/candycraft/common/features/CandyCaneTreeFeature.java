@@ -1,4 +1,4 @@
-package com.evo.candycraft.common.world.features;
+package com.evo.candycraft.common.features;
 
 import com.evo.candycraft.common.core.registry.CandyCraftBlocks;
 import com.mojang.serialization.Codec;

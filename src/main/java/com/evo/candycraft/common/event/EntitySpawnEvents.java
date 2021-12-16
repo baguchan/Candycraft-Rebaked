@@ -1,6 +1,6 @@
 package com.evo.candycraft.common.event;
 
-import com.evo.candycraft.common.entities.goals.FoxStealCrouperBerriesGoal;
+import com.evo.candycraft.common.entity.goals.FoxStealCrouperBerriesGoal;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.animal.Fox;
 import net.minecraftforge.event.entity.living.LivingSpawnEvent;

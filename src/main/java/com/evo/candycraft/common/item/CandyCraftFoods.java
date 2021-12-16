@@ -1,4 +1,4 @@
-package com.evo.candycraft.common.items;
+package com.evo.candycraft.common.item;
 
 import net.minecraft.world.food.FoodProperties;
 

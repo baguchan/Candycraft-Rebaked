@@ -1,11 +1,10 @@
 package com.evo.candycraft.common.core.registry;
 
 import com.evo.candycraft.common.core.CandyCraft;
-import com.evo.candycraft.common.entities.*;
+import com.evo.candycraft.common.entity.*;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
-import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;

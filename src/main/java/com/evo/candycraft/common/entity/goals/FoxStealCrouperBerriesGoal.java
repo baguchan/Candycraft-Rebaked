@@ -1,6 +1,6 @@
-package com.evo.candycraft.common.entities.goals;
+package com.evo.candycraft.common.entity.goals;
 
-import com.evo.candycraft.common.entities.SweetberryCroncherEntity;
+import com.evo.candycraft.common.entity.SweetberryCroncherEntity;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.damagesource.DamageSource;

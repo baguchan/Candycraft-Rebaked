@@ -1,7 +1,7 @@
 package com.evo.candycraft.client.renderers.entity;
 
 import com.evo.candycraft.common.core.CandyCraft;
-import com.evo.candycraft.common.entities.SweetberryCroncherEntity;
+import com.evo.candycraft.common.entity.SweetberryCroncherEntity;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.resources.ResourceLocation;
 

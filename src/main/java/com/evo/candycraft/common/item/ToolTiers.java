@@ -1,4 +1,4 @@
-package com.evo.candycraft.common.items;
+package com.evo.candycraft.common.item;
 
 import com.evo.candycraft.common.core.registry.CandyCraftItems;
 import net.minecraft.tags.Tag;

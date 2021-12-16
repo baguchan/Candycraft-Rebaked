@@ -1,13 +1,11 @@
 package com.evo.candycraft.common.core.registry;
 
-import com.evo.candycraft.common.blocks.ModSaplingBlock;
+import com.evo.candycraft.common.block.ModSaplingBlock;
 import com.evo.candycraft.common.core.CandyCraft;
-import com.evo.candycraft.common.world.features.ConfiguredFeatures;
+import com.evo.candycraft.common.features.ConfiguredFeatures;
 import com.teamabnormals.blueprint.common.block.VerticalSlabBlock;
-import com.teamabnormals.blueprint.common.block.wood.BlueprintLeavesBlock;
 import com.teamabnormals.blueprint.core.util.registry.BlockSubRegistryHelper;
 import net.minecraft.core.Direction;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;

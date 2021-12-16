@@ -1,7 +1,7 @@
 package com.evo.candycraft.common.core.registry;
 
 import com.evo.candycraft.common.core.CandyCraft;
-import com.evo.candycraft.common.world.features.CandyCaneTreeFeature;
+import com.evo.candycraft.common.features.CandyCaneTreeFeature;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
 import net.minecraftforge.registries.DeferredRegister;

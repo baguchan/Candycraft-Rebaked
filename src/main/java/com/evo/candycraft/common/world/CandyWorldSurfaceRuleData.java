@@ -8,6 +8,7 @@ import net.minecraft.world.level.levelgen.SurfaceRules;
 import net.minecraft.world.level.levelgen.VerticalAnchor;
 
 public class CandyWorldSurfaceRuleData {
+
 	private static final SurfaceRules.RuleSource AIR = makeStateRule(Blocks.AIR);
 	private static final SurfaceRules.RuleSource BEDROCK = makeStateRule(Blocks.BEDROCK);
 	private static final SurfaceRules.RuleSource TOFUSLATE = makeStateRule(CandyCraftBlocks.NOUGAT_SLATE.get());
@@ -28,8 +29,7 @@ public class CandyWorldSurfaceRuleData {
 
 
 		builder.add(SurfaceRules.ifTrue(SurfaceRules.verticalGradient("deepslate", VerticalAnchor.absolute(0), VerticalAnchor.absolute(8)), TOFUSLATE));
-		return SurfaceRules.sequence(builder.build().toArray((p_198379_) -> {
-			return new SurfaceRules.RuleSource[p_198379_];
-		}));
+
+		return SurfaceRules.sequence(builder.build().toArray(new SurfaceRules.RuleSource[0]));
 	}
 }

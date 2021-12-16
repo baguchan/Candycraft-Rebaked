@@ -1,4 +1,4 @@
-package com.evo.candycraft.common.entities;
+package com.evo.candycraft.common.entity;
 
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;

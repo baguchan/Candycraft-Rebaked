@@ -1,9 +1,9 @@
 package com.evo.candycraft.common.core.registry;
 
 import com.evo.candycraft.common.core.CandyCraft;
-import com.evo.candycraft.common.items.CandyCraftFoods;
-import com.evo.candycraft.common.items.GingerBreadLauncherItem;
-import com.evo.candycraft.common.items.ToolTiers;
+import com.evo.candycraft.common.item.CandyCraftFoods;
+import com.evo.candycraft.common.item.GingerBreadLauncherItem;
+import com.evo.candycraft.common.item.ToolTiers;
 import com.teamabnormals.blueprint.core.util.registry.ItemSubRegistryHelper;
 import net.minecraft.world.item.*;
 import net.minecraftforge.fml.common.Mod;

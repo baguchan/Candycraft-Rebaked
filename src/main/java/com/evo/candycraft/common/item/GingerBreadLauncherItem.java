@@ -1,7 +1,7 @@
-package com.evo.candycraft.common.items;
+package com.evo.candycraft.common.item;
 
 import com.evo.candycraft.common.core.registry.CandyCraftItems;
-import com.evo.candycraft.common.entities.GingerBreadAmmoEntity;
+import com.evo.candycraft.common.entity.GingerBreadAmmoEntity;
 import com.google.common.collect.Lists;
 import com.mojang.math.Quaternion;
 import com.mojang.math.Vector3f;

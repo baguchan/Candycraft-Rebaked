@@ -1,4 +1,4 @@
-package com.evo.candycraft.common.entities;
+package com.evo.candycraft.common.entity;
 
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.level.Level;

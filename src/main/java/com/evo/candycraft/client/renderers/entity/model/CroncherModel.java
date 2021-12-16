@@ -3,7 +3,7 @@
 // Created by Evo
 package com.evo.candycraft.client.renderers.entity.model;
 
-import com.evo.candycraft.common.entities.CroncherEntity;
+import com.evo.candycraft.common.entity.CroncherEntity;
 import net.minecraft.client.model.HierarchicalModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;

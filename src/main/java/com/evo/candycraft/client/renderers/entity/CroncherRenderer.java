@@ -3,7 +3,7 @@ package com.evo.candycraft.client.renderers.entity;
 import com.evo.candycraft.client.ModModelLayers;
 import com.evo.candycraft.client.renderers.entity.model.CroncherModel;
 import com.evo.candycraft.common.core.CandyCraft;
-import com.evo.candycraft.common.entities.CroncherEntity;
+import com.evo.candycraft.common.entity.CroncherEntity;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;

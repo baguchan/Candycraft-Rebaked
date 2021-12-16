@@ -1,4 +1,4 @@
-package com.evo.candycraft.common.entities;
+package com.evo.candycraft.common.entity;
 
 import com.evo.candycraft.common.core.registry.CandyCraftEntities;
 import net.minecraft.network.protocol.Packet;

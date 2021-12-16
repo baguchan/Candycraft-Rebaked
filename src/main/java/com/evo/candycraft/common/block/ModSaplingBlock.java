@@ -1,4 +1,4 @@
-package com.evo.candycraft.common.blocks;
+package com.evo.candycraft.common.block;
 
 import com.evo.candycraft.common.core.CandyCraft;
 import net.minecraft.core.BlockPos;
