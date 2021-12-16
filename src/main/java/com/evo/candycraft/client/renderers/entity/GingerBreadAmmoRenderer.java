@@ -18,13 +18,10 @@ import net.minecraft.util.Mth;
 public class GingerBreadAmmoRenderer<T extends GingerBreadAmmoEntity> extends EntityRenderer<T> {
 
 	public static final ResourceLocation TEXTURE = new ResourceLocation(CandyCraft.MODID, "textures/entity/baby.png");
-
-	private GingerBabyModel<T> model;
-
+	private final GingerBabyModel<T> model;
 
 	public GingerBreadAmmoRenderer(EntityRendererProvider.Context context) {
 		super(context);
-
 		model = new GingerBabyModel<>(context.bakeLayer(ModModelLayers.GINGER_BREAD_MAN));
 	}
 

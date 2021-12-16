@@ -16,33 +16,33 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
 
 public class GingerBabyModel<T extends GingerBreadAmmoEntity> extends EntityModel<T> {
-	private final ModelPart bb_main;
+	private final ModelPart body;
 
 	public GingerBabyModel(ModelPart root) {
-		this.bb_main = root.getChild("bb_main");
+		this.body = root.getChild("body");
 	}
 
 	public static LayerDefinition createBodyLayer() {
-		MeshDefinition meshdefinition = new MeshDefinition();
-		PartDefinition partdefinition = meshdefinition.getRoot();
+		MeshDefinition meshDefinition = new MeshDefinition();
+		PartDefinition partDefinition = meshDefinition.getRoot();
 
-		PartDefinition bb_main = partdefinition.addOrReplaceChild("bb_main", CubeListBuilder.create().texOffs(3, 3).addBox(-4.0F, -18.0F, -2.0F, 8.0F, 8.0F, 5.0F, new CubeDeformation(0.0F))
+		PartDefinition body = partDefinition.addOrReplaceChild("body", CubeListBuilder.create().texOffs(3, 3).addBox(-4.0F, -18.0F, -2.0F, 8.0F, 8.0F, 5.0F, new CubeDeformation(0.0F))
 				.texOffs(0, 16).addBox(-3.0F, -10.0F, -1.0F, 6.0F, 6.0F, 3.0F, new CubeDeformation(0.0F))
 				.texOffs(10, 25).addBox(-3.0F, -4.0F, -1.0F, 3.0F, 4.0F, 3.0F, new CubeDeformation(0.0F))
 				.texOffs(24, 0).mirror().addBox(0.0F, -4.0F, -1.0F, 3.0F, 4.0F, 3.0F, new CubeDeformation(0.0F)).mirror(false)
 				.texOffs(0, 25).addBox(-5.0F, -10.0F, -1.0F, 2.0F, 6.0F, 3.0F, new CubeDeformation(0.0F))
 				.texOffs(18, 16).addBox(3.0F, -10.0F, -1.0F, 2.0F, 6.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 24.0F, 0.0F));
 
-		return LayerDefinition.create(meshdefinition, 64, 64);
+		return LayerDefinition.create(meshDefinition, 64, 64);
 	}
 
 	@Override
-	public void setupAnim(T p_102618_, float p_102619_, float p_102620_, float p_102621_, float p_102622_, float p_102623_) {
+	public void setupAnim(T gingerBreadAmmo, float limbSwing, float limbSwingAmount, float ageInTicks, float headYaw, float headPitch) {
 
 	}
 
 	@Override
 	public void renderToBuffer(PoseStack poseStack, VertexConsumer buffer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
-		bb_main.render(poseStack, buffer, packedLight, packedOverlay);
+		body.render(poseStack, buffer, packedLight, packedOverlay);
 	}
 }
