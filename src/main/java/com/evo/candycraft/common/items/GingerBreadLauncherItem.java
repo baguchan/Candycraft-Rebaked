@@ -116,7 +116,7 @@ public class GingerBreadLauncherItem extends ProjectileWeaponItem implements Van
 			}
 
 			if (itemstack.isEmpty() && flag) {
-				itemstack = new ItemStack(Items.ARROW);
+				itemstack = new ItemStack(CandyCraftItems.GINGER_BREAD_AMMO.get());
 				itemstack1 = itemstack.copy();
 			}
 
