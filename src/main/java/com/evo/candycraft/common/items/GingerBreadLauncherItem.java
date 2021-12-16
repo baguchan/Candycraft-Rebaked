@@ -29,6 +29,8 @@ import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -43,268 +45,276 @@ public class GingerBreadLauncherItem extends ProjectileWeaponItem implements Van
 	* If you have any dissatisfaction, feel free to rewrite it.
 	*
 	*/
-	public static final Predicate<ItemStack> GINGER_BREAD_AMMO_ONLY = (p_43017_) -> {
-		return p_43017_.is(CandyCraftItems.GINGER_BREAD_AMMO.get());
-	};
+	public static final Predicate<ItemStack> GINGER_BREAD_AMMO_ONLY = (stack) -> stack.is(CandyCraftItems.GINGER_BREAD_AMMO.get());
+
 	private static final String TAG_CHARGED = "Charged";
 	private static final String TAG_CHARGED_PROJECTILES = "ChargedProjectiles";
-	private static final int MAX_CHARGE_DURATION = 25;
-	public static final int DEFAULT_RANGE = 8;
+
 	private boolean startSoundPlayed = false;
 	private boolean midLoadSoundPlayed = false;
-	private static final float START_SOUND_PERCENT = 0.2F;
-	private static final float MID_SOUND_PERCENT = 0.5F;
-	private static final float ARROW_POWER = 3.15F;
-	private static final float FIREWORK_POWER = 1.6F;
 
-	public GingerBreadLauncherItem(Item.Properties p_40850_) {
-		super(p_40850_);
+	public GingerBreadLauncherItem(Item.Properties properties) {
+		super(properties);
 	}
 
+	@Override
 	public Predicate<ItemStack> getSupportedHeldProjectiles() {
 		return GINGER_BREAD_AMMO_ONLY;
 	}
 
+	@Override
 	public Predicate<ItemStack> getAllSupportedProjectiles() {
 		return GINGER_BREAD_AMMO_ONLY;
 	}
 
-	public InteractionResultHolder<ItemStack> use(Level p_40920_, Player p_40921_, InteractionHand p_40922_) {
-		ItemStack itemstack = p_40921_.getItemInHand(p_40922_);
-		if (isCharged(itemstack)) {
-			performShooting(p_40920_, p_40921_, p_40922_, itemstack, getShootingPower(itemstack), 1.0F);
-			setCharged(itemstack, false);
-			return InteractionResultHolder.consume(itemstack);
-		} else if (!p_40921_.getProjectile(itemstack).isEmpty()) {
-			if (!isCharged(itemstack)) {
+	@Override
+	public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
+		ItemStack itemStack = player.getItemInHand(hand);
+
+		if (isCharged(itemStack)) {
+			performShooting(level, player, hand, itemStack, getShootingPower(itemStack), 1.0F);
+			setCharged(itemStack, false);
+			return InteractionResultHolder.consume(itemStack);
+		}
+		else if (!player.getProjectile(itemStack).isEmpty()) {
+			if (!isCharged(itemStack)) {
 				this.startSoundPlayed = false;
 				this.midLoadSoundPlayed = false;
-				p_40921_.startUsingItem(p_40922_);
+				player.startUsingItem(hand);
 			}
-
-			return InteractionResultHolder.consume(itemstack);
-		} else {
-			return InteractionResultHolder.fail(itemstack);
+			return InteractionResultHolder.consume(itemStack);
+		}
+		else {
+			return InteractionResultHolder.fail(itemStack);
 		}
 	}
 
-	private static float getShootingPower(ItemStack p_40946_) {
+	private static float getShootingPower(ItemStack itemStack) {
 		return 3.15F;
 	}
 
-	public void releaseUsing(ItemStack p_40875_, Level p_40876_, LivingEntity p_40877_, int p_40878_) {
-		int i = this.getUseDuration(p_40875_) - p_40878_;
-		float f = getPowerForTime(i, p_40875_);
-		if (f >= 1.0F && !isCharged(p_40875_) && tryLoadProjectiles(p_40877_, p_40875_)) {
-			setCharged(p_40875_, true);
-			SoundSource soundsource = p_40877_ instanceof Player ? SoundSource.PLAYERS : SoundSource.HOSTILE;
-			p_40876_.playSound((Player)null, p_40877_.getX(), p_40877_.getY(), p_40877_.getZ(), SoundEvents.CROSSBOW_LOADING_END, soundsource, 1.0F, 1.0F / (p_40876_.getRandom().nextFloat() * 0.5F + 1.0F) + 0.2F);
-		}
+	@Override
+	public void releaseUsing(ItemStack itemStack, Level level, LivingEntity livingEntity, int remainingTicks) {
+		int useDuration = this.getUseDuration(itemStack) - remainingTicks;
+		float power = getPowerForTime(useDuration, itemStack);
 
+		if (power >= 1.0F && !isCharged(itemStack) && tryLoadProjectiles(livingEntity, itemStack)) {
+			setCharged(itemStack, true);
+			SoundSource soundsource = livingEntity instanceof Player ? SoundSource.PLAYERS : SoundSource.HOSTILE;
+			level.playSound(null, livingEntity.getX(), livingEntity.getY(), livingEntity.getZ(), SoundEvents.CROSSBOW_LOADING_END, soundsource, 1.0F, 1.0F / (level.getRandom().nextFloat() * 0.5F + 1.0F) + 0.2F);
+		}
 	}
 
-	private static boolean tryLoadProjectiles(LivingEntity p_40860_, ItemStack p_40861_) {
-		int i = EnchantmentHelper.getItemEnchantmentLevel(Enchantments.MULTISHOT, p_40861_);
-		int j = i == 0 ? 1 : 3;
-		boolean flag = p_40860_ instanceof Player && ((Player)p_40860_).getAbilities().instabuild;
-		ItemStack itemstack = p_40860_.getProjectile(p_40861_);
-		ItemStack itemstack1 = itemstack.copy();
+	private static boolean tryLoadProjectiles(LivingEntity livingEntity, ItemStack itemStack) {
+		int multishotLevel = EnchantmentHelper.getItemEnchantmentLevel(Enchantments.MULTISHOT, itemStack);
+		int projectileCount = multishotLevel == 0 ? 1 : 3;
+		boolean creativeMode = livingEntity instanceof Player && ((Player) livingEntity).getAbilities().instabuild;
 
-		for(int k = 0; k < j; ++k) {
-			if (k > 0) {
-				itemstack = itemstack1.copy();
+		ItemStack ammoStack = livingEntity.getProjectile(itemStack);
+		ItemStack ammoStackCopy = ammoStack.copy();
+
+		for(int i = 0; i < projectileCount; ++i) {
+			if (i > 0) {
+				ammoStack = ammoStackCopy.copy();
 			}
 
-			if (itemstack.isEmpty() && flag) {
-				itemstack = new ItemStack(CandyCraftItems.GINGER_BREAD_AMMO.get());
-				itemstack1 = itemstack.copy();
+			if (ammoStack.isEmpty() && creativeMode) {
+				ammoStack = new ItemStack(CandyCraftItems.GINGER_BREAD_AMMO.get());
+				ammoStackCopy = ammoStack.copy();
 			}
 
-			if (!loadProjectile(p_40860_, p_40861_, itemstack, k > 0, flag)) {
+			if (!loadProjectile(livingEntity, itemStack, ammoStack, i > 0, creativeMode)) {
 				return false;
 			}
 		}
-
 		return true;
 	}
 
-	private static boolean loadProjectile(LivingEntity p_40863_, ItemStack p_40864_, ItemStack p_40865_, boolean p_40866_, boolean p_40867_) {
-		if (p_40865_.isEmpty()) {
+	private static boolean loadProjectile(LivingEntity livingEntity, ItemStack itemStack, ItemStack ammoStack, boolean multishot, boolean creativeMode) {
+		if (ammoStack.isEmpty()) {
 			return false;
-		} else {
-			boolean flag = p_40867_ && p_40865_.getItem() instanceof ArrowItem;
-			ItemStack itemstack;
-			if (!flag && !p_40867_ && !p_40866_) {
-				itemstack = p_40865_.split(1);
-				if (p_40865_.isEmpty() && p_40863_ instanceof Player) {
-					((Player)p_40863_).getInventory().removeItem(p_40865_);
-				}
-			} else {
-				itemstack = p_40865_.copy();
-			}
+		}
+		else {
+			boolean flag = creativeMode && ammoStack.getItem() instanceof ArrowItem;
+			ItemStack newAmmoStack;
 
-			addChargedProjectile(p_40864_, itemstack);
+			if (!flag && !creativeMode && !multishot) {
+				newAmmoStack = ammoStack.split(1);
+
+				if (ammoStack.isEmpty() && livingEntity instanceof Player) {
+					((Player) livingEntity).getInventory().removeItem(ammoStack);
+				}
+			}
+			else {
+				newAmmoStack = ammoStack.copy();
+			}
+			addChargedProjectile(itemStack, newAmmoStack);
 			return true;
 		}
 	}
 
-	public static boolean isCharged(ItemStack p_40933_) {
-		CompoundTag compoundtag = p_40933_.getTag();
-		return compoundtag != null && compoundtag.getBoolean("Charged");
+	public static boolean isCharged(ItemStack itemStack) {
+		CompoundTag compoundtag = itemStack.getTag();
+		return compoundtag != null && compoundtag.getBoolean(TAG_CHARGED);
 	}
 
-	public static void setCharged(ItemStack p_40885_, boolean p_40886_) {
-		CompoundTag compoundtag = p_40885_.getOrCreateTag();
-		compoundtag.putBoolean("Charged", p_40886_);
+	public static void setCharged(ItemStack itemStack, boolean charged) {
+		CompoundTag compoundtag = itemStack.getOrCreateTag();
+		compoundtag.putBoolean(TAG_CHARGED, charged);
 	}
 
-	private static void addChargedProjectile(ItemStack p_40929_, ItemStack p_40930_) {
-		CompoundTag compoundtag = p_40929_.getOrCreateTag();
-		ListTag listtag;
-		if (compoundtag.contains("ChargedProjectiles", 9)) {
-			listtag = compoundtag.getList("ChargedProjectiles", 10);
-		} else {
-			listtag = new ListTag();
+	private static void addChargedProjectile(ItemStack itemStack, ItemStack ammoStack) {
+		CompoundTag compoundTag = itemStack.getOrCreateTag();
+		ListTag listTag;
+
+		if (compoundTag.contains(TAG_CHARGED_PROJECTILES, 9)) {
+			listTag = compoundTag.getList(TAG_CHARGED_PROJECTILES, 10);
+		}
+		else {
+			listTag = new ListTag();
 		}
 
+		// Huh
 		CompoundTag compoundtag1 = new CompoundTag();
-		p_40930_.save(compoundtag1);
-		listtag.add(compoundtag1);
-		compoundtag.put("ChargedProjectiles", listtag);
+		ammoStack.save(compoundtag1);
+		listTag.add(compoundtag1);
+		compoundTag.put(TAG_CHARGED_PROJECTILES, listTag);
 	}
 
-	private static List<ItemStack> getChargedProjectiles(ItemStack p_40942_) {
+	private static List<ItemStack> getChargedProjectiles(ItemStack itemStack) {
 		List<ItemStack> list = Lists.newArrayList();
-		CompoundTag compoundtag = p_40942_.getTag();
-		if (compoundtag != null && compoundtag.contains("ChargedProjectiles", 9)) {
-			ListTag listtag = compoundtag.getList("ChargedProjectiles", 10);
-			if (listtag != null) {
-				for(int i = 0; i < listtag.size(); ++i) {
-					CompoundTag compoundtag1 = listtag.getCompound(i);
-					list.add(ItemStack.of(compoundtag1));
+		CompoundTag compoundTag = itemStack.getTag();
+
+		if (compoundTag != null && compoundTag.contains(TAG_CHARGED_PROJECTILES, 9)) {
+			ListTag listTag = compoundTag.getList(TAG_CHARGED_PROJECTILES, 10);
+
+			if (!listTag.isEmpty()) {
+				for(int i = 0; i < listTag.size(); ++i) {
+					CompoundTag compoundTag1 = listTag.getCompound(i);
+					list.add(ItemStack.of(compoundTag1));
 				}
 			}
 		}
-
 		return list;
 	}
 
-	private static void clearChargedProjectiles(ItemStack p_40944_) {
-		CompoundTag compoundtag = p_40944_.getTag();
-		if (compoundtag != null) {
-			ListTag listtag = compoundtag.getList("ChargedProjectiles", 9);
-			listtag.clear();
-			compoundtag.put("ChargedProjectiles", listtag);
+	private static void clearChargedProjectiles(ItemStack itemStack) {
+		CompoundTag compoundTag = itemStack.getTag();
+
+		if (compoundTag != null) {
+			ListTag listTag = compoundTag.getList(TAG_CHARGED_PROJECTILES, 9);
+			listTag.clear();
+			compoundTag.put(TAG_CHARGED_PROJECTILES, listTag);
 		}
-
 	}
 
-	public static boolean containsChargedProjectile(ItemStack p_40872_, Item p_40873_) {
-		return getChargedProjectiles(p_40872_).stream().anyMatch((p_40870_) -> {
-			return p_40870_.is(p_40873_);
-		});
+	public static boolean containsChargedProjectile(ItemStack itemStack, Item item) {
+		return getChargedProjectiles(itemStack).stream().anyMatch((stack) -> stack.is(item));
 	}
 
-	private static void shootProjectile(Level p_40895_, LivingEntity p_40896_, InteractionHand p_40897_, ItemStack p_40898_, ItemStack p_40899_, float p_40900_, boolean p_40901_, float p_40902_, float p_40903_, float p_40904_) {
-		if (!p_40895_.isClientSide) {
-			boolean flag = p_40899_.is(CandyCraftItems.GINGER_BREAD_AMMO.get());
+	private static void shootProjectile(Level level, LivingEntity livingEntity, InteractionHand hand, ItemStack itemStack, ItemStack projectileStack, float shotPitch, boolean creativeMode, float shootingPower, float speedMult, float spread) {
+		if (!level.isClientSide) {
+			boolean flag = projectileStack.is(CandyCraftItems.GINGER_BREAD_AMMO.get());
 			Projectile projectile;
+
 			if (flag) {
-				projectile = new GingerBreadAmmoEntity(p_40896_, p_40895_);
-			} else {
-				projectile = getArrow(p_40895_, p_40896_, p_40898_, p_40899_);
-				if (p_40901_ || p_40904_ != 0.0F) {
-					((AbstractArrow)projectile).pickup = AbstractArrow.Pickup.CREATIVE_ONLY;
+				projectile = new GingerBreadAmmoEntity(livingEntity, level);
+			}
+			else {
+				projectile = getArrow(level, livingEntity, itemStack, projectileStack);
+				if (creativeMode || spread != 0.0F) {
+					((AbstractArrow) projectile).pickup = AbstractArrow.Pickup.CREATIVE_ONLY;
 				}
 			}
 
-			if (p_40896_ instanceof CrossbowAttackMob) {
-				CrossbowAttackMob crossbowattackmob = (CrossbowAttackMob)p_40896_;
-				crossbowattackmob.shootCrossbowProjectile(crossbowattackmob.getTarget(), p_40898_, projectile, p_40904_);
-			} else {
-				Vec3 vec31 = p_40896_.getUpVector(1.0F);
-				Quaternion quaternion = new Quaternion(new Vector3f(vec31), p_40904_, true);
-				Vec3 vec3 = p_40896_.getViewVector(1.0F);
-				Vector3f vector3f = new Vector3f(vec3);
-				vector3f.transform(quaternion);
-				projectile.shoot((double)vector3f.x(), (double)vector3f.y(), (double)vector3f.z(), p_40902_, p_40903_);
+			if (livingEntity instanceof CrossbowAttackMob crossbowMob) {
+				crossbowMob.shootCrossbowProjectile(crossbowMob.getTarget(), itemStack, projectile, spread);
+			}
+			else {
+				Vec3 upVec = livingEntity.getUpVector(1.0F);
+				Quaternion quaternion = new Quaternion(new Vector3f(upVec), spread, true);
+				Vec3 viewVec = livingEntity.getViewVector(1.0F);
+				Vector3f viewVecCopy = new Vector3f(viewVec);
+				viewVecCopy.transform(quaternion);
+				projectile.shoot(viewVecCopy.x(), viewVecCopy.y(), viewVecCopy.z(), shootingPower, speedMult);
 			}
 
-			p_40898_.hurtAndBreak(1, p_40896_, (p_40858_) -> {
-				p_40858_.broadcastBreakEvent(p_40897_);
+			itemStack.hurtAndBreak(1, livingEntity, (entity) -> {
+				entity.broadcastBreakEvent(hand);
 			});
-			p_40895_.addFreshEntity(projectile);
-			p_40895_.playSound((Player)null, p_40896_.getX(), p_40896_.getY(), p_40896_.getZ(), SoundEvents.CROSSBOW_SHOOT, SoundSource.PLAYERS, 1.0F, p_40900_);
+			level.addFreshEntity(projectile);
+			level.playSound(null, livingEntity.getX(), livingEntity.getY(), livingEntity.getZ(), SoundEvents.CROSSBOW_SHOOT, SoundSource.PLAYERS, 1.0F, shotPitch);
 		}
 	}
 
-	private static AbstractArrow getArrow(Level p_40915_, LivingEntity p_40916_, ItemStack p_40917_, ItemStack p_40918_) {
-		ArrowItem arrowitem = (ArrowItem)(p_40918_.getItem() instanceof ArrowItem ? p_40918_.getItem() : Items.ARROW);
-		AbstractArrow abstractarrow = arrowitem.createArrow(p_40915_, p_40918_, p_40916_);
-		if (p_40916_ instanceof Player) {
-			abstractarrow.setCritArrow(true);
-		}
+	// We can always look over this class later and clear out unused things like this
+	private static AbstractArrow getArrow(Level level, LivingEntity livingEntity, ItemStack itemStack, ItemStack projectileStack) {
+		ArrowItem arrowItem = (ArrowItem)(projectileStack.getItem() instanceof ArrowItem ? projectileStack.getItem() : Items.ARROW);
+		AbstractArrow abstractArrow = arrowItem.createArrow(level, projectileStack, livingEntity);
 
-		abstractarrow.setSoundEvent(SoundEvents.CROSSBOW_HIT);
-		abstractarrow.setShotFromCrossbow(true);
-		int i = EnchantmentHelper.getItemEnchantmentLevel(Enchantments.PIERCING, p_40917_);
+		if (livingEntity instanceof Player) {
+			abstractArrow.setCritArrow(true);
+		}
+		abstractArrow.setSoundEvent(SoundEvents.CROSSBOW_HIT);
+		abstractArrow.setShotFromCrossbow(true);
+		int i = EnchantmentHelper.getItemEnchantmentLevel(Enchantments.PIERCING, itemStack);
+
 		if (i > 0) {
-			abstractarrow.setPierceLevel((byte)i);
+			abstractArrow.setPierceLevel((byte)i);
 		}
-
-		return abstractarrow;
+		return abstractArrow;
 	}
 
-	public static void performShooting(Level p_40888_, LivingEntity p_40889_, InteractionHand p_40890_, ItemStack p_40891_, float p_40892_, float p_40893_) {
-		List<ItemStack> list = getChargedProjectiles(p_40891_);
-		float[] afloat = getShotPitches(p_40889_.getRandom());
+	public static void performShooting(Level level, LivingEntity livingEntity, InteractionHand hand, ItemStack itemStack, float shootingPower, float speedMult) {
+		List<ItemStack> list = getChargedProjectiles(itemStack);
+		float[] shotPitches = getShotPitches(livingEntity.getRandom());
 
 		for(int i = 0; i < list.size(); ++i) {
-			ItemStack itemstack = list.get(i);
-			boolean flag = p_40889_ instanceof Player && ((Player)p_40889_).getAbilities().instabuild;
-			if (!itemstack.isEmpty()) {
-				if (i == 0) {
-					shootProjectile(p_40888_, p_40889_, p_40890_, p_40891_, itemstack, afloat[i], flag, p_40892_, p_40893_, 0.0F);
-				} else if (i == 1) {
-					shootProjectile(p_40888_, p_40889_, p_40890_, p_40891_, itemstack, afloat[i], flag, p_40892_, p_40893_, -10.0F);
-				} else if (i == 2) {
-					shootProjectile(p_40888_, p_40889_, p_40890_, p_40891_, itemstack, afloat[i], flag, p_40892_, p_40893_, 10.0F);
+			ItemStack projectileStack = list.get(i);
+			boolean creativeMode = livingEntity instanceof Player && ((Player) livingEntity).getAbilities().instabuild;
+
+			if (!projectileStack.isEmpty()) {
+				float spread;
+
+				switch (i) {
+					default -> spread = 0.0F;
+					case 1 -> spread = -10.0F;
+					case 2 -> spread = 10.0F;
 				}
+				shootProjectile(level, livingEntity, hand, itemStack, projectileStack, shotPitches[i], creativeMode, shootingPower, speedMult, spread);
 			}
 		}
-
-		onCrossbowShot(p_40888_, p_40889_, p_40891_);
+		onCrossbowShot(level, livingEntity, itemStack);
 	}
 
-	private static float[] getShotPitches(Random p_40924_) {
-		boolean flag = p_40924_.nextBoolean();
-		return new float[]{1.0F, getRandomShotPitch(flag, p_40924_), getRandomShotPitch(!flag, p_40924_)};
+	private static float[] getShotPitches(Random random) {
+		boolean flag = random.nextBoolean();
+		return new float[]{1.0F, getRandomShotPitch(flag, random), getRandomShotPitch(!flag, random)};
 	}
 
-	private static float getRandomShotPitch(boolean p_150798_, Random p_150799_) {
-		float f = p_150798_ ? 0.63F : 0.43F;
-		return 1.0F / (p_150799_.nextFloat() * 0.5F + 1.8F) + f;
+	private static float getRandomShotPitch(boolean flag, Random random) {
+		float f = flag ? 0.63F : 0.43F;
+		return 1.0F / (random.nextFloat() * 0.5F + 1.8F) + f;
 	}
 
-	private static void onCrossbowShot(Level p_40906_, LivingEntity p_40907_, ItemStack p_40908_) {
-		if (p_40907_ instanceof ServerPlayer) {
-			ServerPlayer serverplayer = (ServerPlayer)p_40907_;
-			if (!p_40906_.isClientSide) {
-				CriteriaTriggers.SHOT_CROSSBOW.trigger(serverplayer, p_40908_);
+	private static void onCrossbowShot(Level level, LivingEntity livingEntity, ItemStack itemStack) {
+		if (livingEntity instanceof ServerPlayer serverPlayer) {
+			if (!level.isClientSide) {
+				CriteriaTriggers.SHOT_CROSSBOW.trigger(serverPlayer, itemStack);
 			}
-
-			serverplayer.awardStat(Stats.ITEM_USED.get(p_40908_.getItem()));
+			serverPlayer.awardStat(Stats.ITEM_USED.get(itemStack.getItem()));
 		}
-
-		clearChargedProjectiles(p_40908_);
+		clearChargedProjectiles(itemStack);
 	}
 
-	public void onUseTick(Level p_40910_, LivingEntity p_40911_, ItemStack p_40912_, int p_40913_) {
-		if (!p_40910_.isClientSide) {
-			int i = EnchantmentHelper.getItemEnchantmentLevel(Enchantments.QUICK_CHARGE, p_40912_);
-			SoundEvent soundevent = this.getStartSound(i);
-			SoundEvent soundevent1 = i == 0 ? SoundEvents.CROSSBOW_LOADING_MIDDLE : null;
-			float f = (float)(p_40912_.getUseDuration() - p_40913_) / (float)getChargeDuration(p_40912_);
+	@Override
+	public void onUseTick(Level level, LivingEntity livingEntity, ItemStack itemStack, int remainingUseTicks) {
+		if (!level.isClientSide) {
+			int quickChargeLevel = EnchantmentHelper.getItemEnchantmentLevel(Enchantments.QUICK_CHARGE, itemStack);
+			SoundEvent startSound = this.getStartSound(quickChargeLevel);
+			SoundEvent loadingSound = quickChargeLevel == 0 ? SoundEvents.CROSSBOW_LOADING_MIDDLE : null;
+			float f = (float) (itemStack.getUseDuration() - remainingUseTicks) / (float)getChargeDuration(itemStack);
+
 			if (f < 0.2F) {
 				this.startSoundPlayed = false;
 				this.midLoadSoundPlayed = false;
@@ -312,76 +322,81 @@ public class GingerBreadLauncherItem extends ProjectileWeaponItem implements Van
 
 			if (f >= 0.2F && !this.startSoundPlayed) {
 				this.startSoundPlayed = true;
-				p_40910_.playSound((Player)null, p_40911_.getX(), p_40911_.getY(), p_40911_.getZ(), soundevent, SoundSource.PLAYERS, 0.5F, 1.0F);
+				level.playSound(null, livingEntity.getX(), livingEntity.getY(), livingEntity.getZ(), startSound, SoundSource.PLAYERS, 0.5F, 1.0F);
 			}
 
-			if (f >= 0.5F && soundevent1 != null && !this.midLoadSoundPlayed) {
+			if (f >= 0.5F && loadingSound != null && !this.midLoadSoundPlayed) {
 				this.midLoadSoundPlayed = true;
-				p_40910_.playSound((Player)null, p_40911_.getX(), p_40911_.getY(), p_40911_.getZ(), soundevent1, SoundSource.PLAYERS, 0.5F, 1.0F);
+				level.playSound(null, livingEntity.getX(), livingEntity.getY(), livingEntity.getZ(), loadingSound, SoundSource.PLAYERS, 0.5F, 1.0F);
 			}
 		}
-
 	}
 
-	public int getUseDuration(ItemStack p_40938_) {
-		return getChargeDuration(p_40938_) + 3;
+	@Override
+	public int getUseDuration(ItemStack itemStack) {
+		return getChargeDuration(itemStack) + 3;
 	}
 
-	public static int getChargeDuration(ItemStack p_40940_) {
-		int i = EnchantmentHelper.getItemEnchantmentLevel(Enchantments.QUICK_CHARGE, p_40940_);
-		return i == 0 ? 25 : 25 - 5 * i;
+	public static int getChargeDuration(ItemStack itemStack) {
+		int quickChargeLevel = EnchantmentHelper.getItemEnchantmentLevel(Enchantments.QUICK_CHARGE, itemStack);
+
+		return quickChargeLevel == 0
+				? 25
+				: 25 - 5 * quickChargeLevel;
 	}
 
-	public UseAnim getUseAnimation(ItemStack p_40935_) {
+	@Override
+	public UseAnim getUseAnimation(ItemStack itemStack) {
 		return UseAnim.CROSSBOW;
 	}
 
-	private SoundEvent getStartSound(int p_40852_) {
-		switch(p_40852_) {
-			case 1:
-				return SoundEvents.CROSSBOW_QUICK_CHARGE_1;
-			case 2:
-				return SoundEvents.CROSSBOW_QUICK_CHARGE_2;
-			case 3:
-				return SoundEvents.CROSSBOW_QUICK_CHARGE_3;
-			default:
-				return SoundEvents.CROSSBOW_LOADING_START;
-		}
+	private SoundEvent getStartSound(int quickChargeLevel) {
+		return switch (quickChargeLevel) {
+			case 1 -> SoundEvents.CROSSBOW_QUICK_CHARGE_1;
+			case 2 -> SoundEvents.CROSSBOW_QUICK_CHARGE_2;
+			case 3 -> SoundEvents.CROSSBOW_QUICK_CHARGE_3;
+			default -> SoundEvents.CROSSBOW_LOADING_START;
+		};
 	}
 
-	private static float getPowerForTime(int p_40854_, ItemStack p_40855_) {
-		float f = (float)p_40854_ / (float)getChargeDuration(p_40855_);
+	private static float getPowerForTime(int useDuration, ItemStack itemStack) {
+		float f = (float) useDuration / (float) getChargeDuration(itemStack);
+
 		if (f > 1.0F) {
 			f = 1.0F;
 		}
-
 		return f;
 	}
 
-	public void appendHoverText(ItemStack p_40880_, @Nullable Level p_40881_, List<Component> p_40882_, TooltipFlag p_40883_) {
-		List<ItemStack> list = getChargedProjectiles(p_40880_);
-		if (isCharged(p_40880_) && !list.isEmpty()) {
-			ItemStack itemstack = list.get(0);
-			p_40882_.add((new TranslatableComponent("item.minecraft.crossbow.projectile")).append(" ").append(itemstack.getDisplayName()));
-			if (p_40883_.isAdvanced() && itemstack.is(Items.FIREWORK_ROCKET)) {
-				List<Component> list1 = Lists.newArrayList();
-				Items.FIREWORK_ROCKET.appendHoverText(itemstack, p_40881_, list1, p_40883_);
-				if (!list1.isEmpty()) {
-					for(int i = 0; i < list1.size(); ++i) {
-						list1.set(i, (new TextComponent("  ")).append(list1.get(i)).withStyle(ChatFormatting.GRAY));
-					}
+	@Override
+	@OnlyIn(Dist.CLIENT)
+	public void appendHoverText(ItemStack itemStack, @Nullable Level level, List<Component> components, TooltipFlag tooltipFlag) {
+		List<ItemStack> chargedProjectiles = getChargedProjectiles(itemStack);
 
-					p_40882_.addAll(list1);
+		if (isCharged(itemStack) && !chargedProjectiles.isEmpty()) {
+			ItemStack projectile = chargedProjectiles.get(0);
+			components.add((new TranslatableComponent("item.minecraft.crossbow.projectile")).append(" ").append(projectile.getDisplayName()));
+
+			if (tooltipFlag.isAdvanced() && projectile.is(Items.FIREWORK_ROCKET)) {
+				List<Component> list = Lists.newArrayList();
+				Items.FIREWORK_ROCKET.appendHoverText(projectile, level, list, tooltipFlag);
+
+				if (!list.isEmpty()) {
+					for(int i = 0; i < list.size(); ++i) {
+						list.set(i, (new TextComponent("  ")).append(list.get(i)).withStyle(ChatFormatting.GRAY));
+					}
+					components.addAll(list);
 				}
 			}
-
 		}
 	}
 
-	public boolean useOnRelease(ItemStack p_150801_) {
-		return p_150801_.is(this);
+	@Override
+	public boolean useOnRelease(ItemStack itemStack) {
+		return itemStack.is(this);
 	}
 
+	@Override
 	public int getDefaultProjectileRange() {
 		return 8;
 	}
