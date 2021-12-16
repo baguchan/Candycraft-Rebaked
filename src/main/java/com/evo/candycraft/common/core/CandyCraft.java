@@ -61,7 +61,6 @@ public class CandyCraft {
     public void commonSetup(final FMLCommonSetupEvent event) {
         ConfiguredFeatures.register();
         CandyCraftBlocks.registerBlockData();
-        CandyCraftEntities.registerAttributes();
     }
 
     public static ResourceLocation resourceLoc(String path) {

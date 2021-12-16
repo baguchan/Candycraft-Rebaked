@@ -1,5 +1,6 @@
 package com.evo.candycraft.client.renderers.entity;
 
+import com.evo.candycraft.client.ModModelLayers;
 import com.evo.candycraft.client.renderers.entity.model.CroncherModel;
 import com.evo.candycraft.common.core.CandyCraft;
 import com.evo.candycraft.common.entities.CroncherEntity;
@@ -14,7 +15,7 @@ public class CroncherRenderer<T extends CroncherEntity> extends MobRenderer<T, C
     protected final ResourceLocation TEXTURE;
 
     public CroncherRenderer(EntityRendererProvider.Context context, String textureName) {
-        super(context, new CroncherModel<>(), 0.5f);
+        super(context, new CroncherModel<>(context.bakeLayer(ModModelLayers.CRONCHER)), 0.5f);
         this.TEXTURE = CandyCraft.resourceLoc("textures/entity/croncher/" + textureName + ".png");
     }
 

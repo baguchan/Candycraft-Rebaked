@@ -3,10 +3,15 @@ package com.evo.candycraft.client;
 import com.evo.candycraft.client.renderers.entity.CroncherRenderer;
 import com.evo.candycraft.client.renderers.entity.GingerBreadAmmoRenderer;
 import com.evo.candycraft.client.renderers.entity.SweetberryCroncherRenderer;
+import com.evo.candycraft.client.renderers.entity.model.CroncherModel;
+import com.evo.candycraft.client.renderers.entity.model.GingerBabyModel;
 import com.evo.candycraft.common.core.CandyCraft;
 import com.evo.candycraft.common.core.registry.CandyCraftBlocks;
 import com.evo.candycraft.common.core.registry.CandyCraftEntities;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.model.LlamaModel;
+import net.minecraft.client.model.geom.builders.CubeDeformation;
+import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.particle.ParticleEngine;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
@@ -48,7 +53,8 @@ public class ClientRegister {
     // TODO - Find out how this shit works
     @SubscribeEvent
     public static void registerEntityLayerDefinitions(EntityRenderersEvent.RegisterLayerDefinitions event) {
-
+        event.registerLayerDefinition(ModModelLayers.CRONCHER, CroncherModel::createBodyLayer);
+        event.registerLayerDefinition(ModModelLayers.GINGER_BREAD_MAN, GingerBabyModel::createBodyLayer);
     }
 
     @SubscribeEvent

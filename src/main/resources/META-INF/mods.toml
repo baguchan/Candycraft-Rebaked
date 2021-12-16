@@ -16,7 +16,7 @@ issueTrackerURL="https://github.com/Evoslab/Candycraft-Rebaked/issues"
 [[dependencies.candycraft_rebaked]]
     modId="forge"
     mandatory=true
-    versionRange="[35,)"
+    versionRange="[39,)"
     ordering="NONE"
     side="BOTH"
 
@@ -28,7 +28,7 @@ issueTrackerURL="https://github.com/Evoslab/Candycraft-Rebaked/issues"
     side="BOTH"
 
 [[dependencies.candycraft_rebaked]]
-    modId="abnormals_core"
+    modId="blueprint"
     mandatory=true
     versionRange="[x.x.x,)"
     ordering="AFTER"

@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "candycraft_rebaked:red_licorice_log",
+    "candycraft_rebaked:stripped_red_licorice_log",
+    "candycraft_rebaked:red_licorice_wood",
+    "candycraft_rebaked:stripped_red_licorice_wood"
+  ]
+}

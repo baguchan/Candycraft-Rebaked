@@ -1,0 +1,12 @@
+{
+  "replace": false,
+  "values": [
+    "#candycraft_rebaked:red_licorice_logs",
+    "candycraft_rebaked:candy_cane_block",
+    "candycraft_rebaked:candy_cane_wood",
+    "candycraft_rebaked:red_licorice_planks",
+    "candycraft_rebaked:red_licorice_slab",
+    "candycraft_rebaked:red_licorice_stairs",
+    "candycraft_rebaked:red_licorice_vertical_slab"
+  ]
+}

@@ -1,5 +1,6 @@
 package com.evo.candycraft.client.renderers.entity;
 
+import com.evo.candycraft.client.ModModelLayers;
 import com.evo.candycraft.client.renderers.entity.model.GingerBabyModel;
 import com.evo.candycraft.common.core.CandyCraft;
 import com.evo.candycraft.common.entities.GingerBreadAmmoEntity;
@@ -18,11 +19,13 @@ public class GingerBreadAmmoRenderer<T extends GingerBreadAmmoEntity> extends En
 
 	public static final ResourceLocation TEXTURE = new ResourceLocation(CandyCraft.MODID, "textures/entity/baby.png");
 
-	private final GingerBabyModel<T> model = new GingerBabyModel<>();
+	private GingerBabyModel<T> model;
 
 
 	public GingerBreadAmmoRenderer(EntityRendererProvider.Context context) {
 		super(context);
+
+		model = new GingerBabyModel<>(context.bakeLayer(ModModelLayers.GINGER_BREAD_MAN));
 	}
 
 	// TODO - Check if this is actually working as intended
