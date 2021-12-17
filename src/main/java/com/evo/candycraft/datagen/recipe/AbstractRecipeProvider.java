@@ -115,7 +115,7 @@ public abstract class AbstractRecipeProvider extends RecipeProvider {
 
     protected static RecipeBuilder fenceGateBuilder(ItemLike fenceGateResult, Ingredient p_176686_) {
         return ShapedRecipeBuilder.shaped(fenceGateResult)
-                .define('#', Items.STICK)
+                .define('#', Tags.Items.RODS_WOODEN)
                 .define('W', p_176686_)
                 .pattern("#W#")
                 .pattern("#W#");
