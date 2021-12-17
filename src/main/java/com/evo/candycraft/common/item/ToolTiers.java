@@ -13,23 +13,7 @@ public class ToolTiers {
 
     public static final Tier CANDY_CANE = new ItemTier(230, 5.0f, 1.5f, 2, 18, () -> Ingredient.of(CandyCraftItems.CANDY_CANE.get()));
 
-    private static class ItemTier implements Tier {
-
-        private final int maxUses;
-        private final float efficiency;
-        private final float attackDamage;
-        private final int harvestLevel;
-        private final int enchantability;
-        private final Supplier<Ingredient> repairMaterial;
-
-        private ItemTier(int maxUses, float efficiency, float attackDamage, int harvestLevel, int enchantability, Supplier<Ingredient> repairMaterial) {
-            this.maxUses = maxUses;
-            this.efficiency = efficiency;
-            this.attackDamage = attackDamage;
-            this.harvestLevel = harvestLevel;
-            this.enchantability = enchantability;
-            this.repairMaterial = repairMaterial;
-        }
+    private record ItemTier(int maxUses, float efficiency, float attackDamage, int harvestLevel, int enchantability, Supplier<Ingredient> repairMaterial) implements Tier {
 
         @Override
         public int getUses() {
@@ -63,6 +47,8 @@ public class ToolTiers {
 
         @Nullable
         @Override
-        public Tag<Block> getTag() { return null; }
+        public Tag<Block> getTag() {
+            return null;
+        }
     }
 }
