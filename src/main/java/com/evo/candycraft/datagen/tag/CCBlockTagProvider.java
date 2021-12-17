@@ -6,6 +6,7 @@ import com.evo.candycraft.common.tag.CCBlockTags;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.tags.BlockTagsProvider;
 import net.minecraft.tags.BlockTags;
+import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.data.ExistingFileHelper;
 
 import javax.annotation.Nullable;
@@ -35,7 +36,8 @@ public class CCBlockTagProvider extends BlockTagsProvider {
 
         // PLANKS
         this.tag(BlockTags.PLANKS).add(
-                CandyCraftBlocks.RED_LICORICE_PLANKS.get()
+                CandyCraftBlocks.RED_LICORICE_PLANKS.get(),
+                CandyCraftBlocks.RED_LICORICE_VERTICAL_PLANKS.get()
         );
 
         // WOODEN SLABS
@@ -46,6 +48,46 @@ public class CCBlockTagProvider extends BlockTagsProvider {
         // WOODEN STAIRS
         this.tag(BlockTags.WOODEN_STAIRS).add(
                 CandyCraftBlocks.RED_LICORICE_STAIRS.get()
+        );
+
+        // WOODEN FENCES
+        this.tag(Tags.Blocks.FENCES_WOODEN).add(
+                CandyCraftBlocks.RED_LICORICE_FENCE.get()
+        );
+
+        // WOODEN FENCE GATES
+        this.tag(Tags.Blocks.FENCE_GATES_WOODEN).add(
+                CandyCraftBlocks.RED_LICORICE_FENCE_GATE.get()
+        );
+
+        // WOODEN PRESSURE PLATES
+        this.tag(BlockTags.WOODEN_PRESSURE_PLATES).add(
+                CandyCraftBlocks.RED_LICORICE_PRESSURE_PLATE.get()
+        );
+
+        // WOODEN BUTTONS
+        this.tag(BlockTags.WOODEN_BUTTONS).add(
+                CandyCraftBlocks.RED_LICORICE_BUTTON.get()
+        );
+
+        // DOORS
+        this.tag(BlockTags.DOORS).add(
+                CandyCraftBlocks.WAFFLE_CONE_DOOR.get()
+        );
+
+        // WOODEN DOORS
+        this.tag(BlockTags.WOODEN_DOORS).add(
+                CandyCraftBlocks.RED_LICORICE_DOOR.get()
+        );
+
+        // TRAPDOORS
+        this.tag(BlockTags.TRAPDOORS).add(
+                CandyCraftBlocks.WAFFLE_CONE_TRAPDOOR.get()
+        );
+
+        // WOODEN TRAPDOORS
+        this.tag(BlockTags.WOODEN_TRAPDOORS).add(
+                CandyCraftBlocks.RED_LICORICE_TRAPDOOR.get()
         );
 
         // SAPLINGS

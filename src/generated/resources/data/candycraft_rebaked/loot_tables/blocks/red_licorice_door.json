@@ -10,13 +10,13 @@
           "conditions": [
             {
               "condition": "minecraft:block_state_property",
-              "block": "candycraft_rebaked:waffle_cone_door",
+              "block": "candycraft_rebaked:red_licorice_door",
               "properties": {
                 "half": "lower"
               }
             }
           ],
-          "name": "candycraft_rebaked:waffle_cone_door"
+          "name": "candycraft_rebaked:red_licorice_door"
         }
       ],
       "conditions": [

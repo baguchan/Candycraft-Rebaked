@@ -5,7 +5,10 @@ import com.evo.candycraft.common.core.CandyCraft;
 import com.evo.candycraft.common.features.ConfiguredFeatures;
 import com.teamabnormals.blueprint.common.block.VerticalSlabBlock;
 import com.teamabnormals.blueprint.core.util.registry.BlockSubRegistryHelper;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
@@ -38,9 +41,16 @@ public class CandyCraftBlocks {
     public static final RegistryObject<Block> RED_LICORICE_WOOD = HELPER.createBlock("red_licorice_wood", () -> new RotatedPillarBlock(BlockBehaviour.Properties.of(Material.WOOD, pillarProp(MaterialColor.COLOR_BROWN, MaterialColor.COLOR_BROWN)).strength(1.0f).sound(SoundType.WOOD)), CandyCraft.ITEM_GROUP);
     public static final RegistryObject<Block> STRIPPED_RED_LICORICE_WOOD = HELPER.createBlock("stripped_red_licorice_wood", () -> new RotatedPillarBlock(BlockBehaviour.Properties.of(Material.WOOD, pillarProp(MaterialColor.COLOR_RED, MaterialColor.COLOR_RED)).strength(1.0f).sound(SoundType.WOOD)), CandyCraft.ITEM_GROUP);
     public static final RegistryObject<Block> RED_LICORICE_PLANKS = HELPER.createBlock("red_licorice_planks", () -> new Block(BlockBehaviour.Properties.of(Material.WOOD, MaterialColor.COLOR_RED).strength(1.0f).sound(SoundType.WOOD)), CandyCraft.ITEM_GROUP);
+    public static final RegistryObject<Block> RED_LICORICE_VERTICAL_PLANKS = HELPER.createBlock("red_licorice_vertical_planks", () -> new Block(BlockBehaviour.Properties.copy(RED_LICORICE_PLANKS.get())), CandyCraft.ITEM_GROUP);
     public static final RegistryObject<Block> RED_LICORICE_STAIRS = HELPER.createBlock("red_licorice_stairs", () -> new StairBlock(RED_LICORICE_PLANKS.get()::defaultBlockState, BlockBehaviour.Properties.copy(RED_LICORICE_PLANKS.get())), CandyCraft.ITEM_GROUP);
     public static final RegistryObject<Block> RED_LICORICE_SLAB = HELPER.createBlock("red_licorice_slab", () -> new SlabBlock(BlockBehaviour.Properties.copy(RED_LICORICE_PLANKS.get())), CandyCraft.ITEM_GROUP);
     public static final RegistryObject<Block> RED_LICORICE_VERTICAL_SLAB = HELPER.createCompatBlock("quark", "red_licorice_vertical_slab", () -> new VerticalSlabBlock(BlockBehaviour.Properties.copy(RED_LICORICE_PLANKS.get())), CandyCraft.ITEM_GROUP);
+    public static final RegistryObject<Block> RED_LICORICE_FENCE = HELPER.createBlock("red_licorice_fence", () -> new FenceBlock(BlockBehaviour.Properties.copy(RED_LICORICE_PLANKS.get())), CandyCraft.ITEM_GROUP);
+    public static final RegistryObject<Block> RED_LICORICE_FENCE_GATE = HELPER.createBlock("red_licorice_fence_gate", () -> new FenceGateBlock(BlockBehaviour.Properties.copy(RED_LICORICE_PLANKS.get())), CandyCraft.ITEM_GROUP);
+    public static final RegistryObject<Block> RED_LICORICE_PRESSURE_PLATE = HELPER.createBlock("red_licorice_pressure_plate", () -> new PressurePlateBlock(PressurePlateBlock.Sensitivity.MOBS, BlockBehaviour.Properties.copy(RED_LICORICE_PLANKS.get()).noCollission().strength(0.5F)), CandyCraft.ITEM_GROUP);
+    public static final RegistryObject<Block> RED_LICORICE_BUTTON = HELPER.createBlock("red_licorice_button", () -> new WoodButtonBlock(BlockBehaviour.Properties.copy(RED_LICORICE_PLANKS.get()).strength(0.5f)), CandyCraft.ITEM_GROUP);
+    public static final RegistryObject<Block> RED_LICORICE_DOOR = HELPER.createBlock("red_licorice_door", () -> new DoorBlock(BlockBehaviour.Properties.copy(RED_LICORICE_PLANKS.get()).noOcclusion().isValidSpawn(SpawnPredicates::never)), CandyCraft.ITEM_GROUP);
+    public static final RegistryObject<Block> RED_LICORICE_TRAPDOOR = HELPER.createBlock("red_licorice_trapdoor", () -> new TrapDoorBlock(BlockBehaviour.Properties.copy(RED_LICORICE_PLANKS.get()).noOcclusion().isValidSpawn(SpawnPredicates::never)), CandyCraft.ITEM_GROUP);
     public static final RegistryObject<Block> RED_LICORICE_LEAVES = HELPER.createBlock("red_licorice_leaves", () -> new LeavesBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LEAVES)), CandyCraft.ITEM_GROUP);
     public static final RegistryObject<Block> RED_LICORICE_TREE_SAPLING = HELPER.createBlock("red_licorice_tree_sapling", () -> new ModSaplingBlock(() -> ConfiguredFeatures.RED_LICORICE_TREE_FEATURE, BlockBehaviour.Properties.of(Material.PLANT, MaterialColor.TERRACOTTA_WHITE).instabreak().noCollission().randomTicks().sound(SoundType.GRASS)), CandyCraft.ITEM_GROUP);
     public static final RegistryObject<Block> POTTED_RED_LICORICE_TREE_SAPLING = HELPER.createBlockNoItem("potted_red_licorice_tree_sapling", () -> new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, RED_LICORICE_TREE_SAPLING, BlockBehaviour.Properties.of(Material.DECORATION).instabreak().noOcclusion()));
@@ -65,5 +75,16 @@ public class CandyCraftBlocks {
     public static class Properties {
         public static final BlockBehaviour.Properties WAFFLE_CONE_DOOR = BlockBehaviour.Properties.copy(Blocks.OAK_DOOR).sound(SoundType.NETHER_GOLD_ORE);
         public static final BlockBehaviour.Properties WAFFLE_CONE_TRAPDOOR = BlockBehaviour.Properties.copy(Blocks.OAK_TRAPDOOR).sound(SoundType.NETHER_GOLD_ORE);
+    }
+
+    private static class SpawnPredicates {
+
+        /**
+         * For blocks that should never be considered
+         * a valid spawn location for entities.
+         */
+        protected static Boolean never(BlockState state, BlockGetter blockGetter, BlockPos pos, EntityType<?> entityType) {
+            return false;
+        }
     }
 }

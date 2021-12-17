@@ -1,10 +1,10 @@
 {
   "type": "minecraft:crafting_shaped",
-  "group": "wooden_stairs",
+  "group": "wooden_door",
   "pattern": [
-    "#  ",
-    "## ",
-    "###"
+    "##",
+    "##",
+    "##"
   ],
   "key": {
     "#": {
@@ -12,7 +12,7 @@
     }
   },
   "result": {
-    "item": "candycraft_rebaked:red_licorice_stairs",
-    "count": 4
+    "item": "candycraft_rebaked:red_licorice_door",
+    "count": 3
   }
 }

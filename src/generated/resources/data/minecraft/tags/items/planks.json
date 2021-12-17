@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
-    "candycraft_rebaked:red_licorice_planks"
+    "candycraft_rebaked:red_licorice_planks",
+    "candycraft_rebaked:red_licorice_vertical_planks"
   ]
 }
