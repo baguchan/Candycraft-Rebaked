@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "planks",
+  "ingredients": [
+    {
+      "tag": "candycraft_rebaked:red_licorice_logs"
+    }
+  ],
+  "result": {
+    "item": "candycraft_rebaked:red_licorice_planks",
+    "count": 4
+  }
+}

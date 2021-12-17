@@ -1,5 +1,7 @@
 package com.evo.candycraft.datagen;
 
+import com.evo.candycraft.datagen.loot.CCLootTableProvider;
+import com.evo.candycraft.datagen.recipe.CCRecipeProvider;
 import com.evo.candycraft.datagen.tag.CCBlockTagProvider;
 import com.evo.candycraft.datagen.tag.CCItemTagProvider;
 import net.minecraft.data.DataGenerator;
@@ -25,6 +27,8 @@ public class DataGatherer {
             BlockTagsProvider blockTagsProvider = new CCBlockTagProvider(dataGenerator, fileHelper);
             dataGenerator.addProvider(blockTagsProvider);
             dataGenerator.addProvider(new CCItemTagProvider(dataGenerator, blockTagsProvider, fileHelper));
+            dataGenerator.addProvider(new CCRecipeProvider(dataGenerator));
+            dataGenerator.addProvider(new CCLootTableProvider(dataGenerator));
         }
     }
 }
