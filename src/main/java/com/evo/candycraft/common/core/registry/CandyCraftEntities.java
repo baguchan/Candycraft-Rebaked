@@ -5,6 +5,9 @@ import com.evo.candycraft.common.entity.*;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
+import net.minecraft.world.entity.SpawnPlacements;
+import net.minecraft.world.entity.monster.Monster;
+import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -23,12 +26,14 @@ public class CandyCraftEntities {
     public static EntityType<StrawberryCroncherEntity> STRAWBERRY_CRONCHER_TYPE;
     public static EntityType<SweetberryCroncherEntity> SWEETBERRY_CRONCHER_TYPE;
     public static EntityType<OreoCroncherEntity> OREO_CRONCHER_TYPE;
+    public static EntityType<MintolotlEntity> MINTOLOTL_TYPE;
     public static EntityType<GingerBreadAmmoEntity> GINGER_BREAD_AMMO_TYPE;
 
     public static final RegistryObject<EntityType<CroncherEntity>> CRONCHER = register("croncher", () -> CRONCHER_TYPE);
     public static final RegistryObject<EntityType<StrawberryCroncherEntity>> STRAWBERRY_CRONCHER = register("strawberry_croncher", () -> STRAWBERRY_CRONCHER_TYPE);
     public static final RegistryObject<EntityType<SweetberryCroncherEntity>> SWEETBERRY_CRONCHER = register("sweetberry_croncher", () -> SWEETBERRY_CRONCHER_TYPE);
     public static final RegistryObject<EntityType<OreoCroncherEntity>> OREO_CRONCHER = register("oreo_croncher", () -> OREO_CRONCHER_TYPE);
+    public static final RegistryObject<EntityType<MintolotlEntity>> MINTOLOTL = register("mintolotl", () -> MINTOLOTL_TYPE);
     public static final RegistryObject<EntityType<GingerBreadAmmoEntity>> GINGER_BREAD_AMMO = register("ginger_bread_ammo", () -> GINGER_BREAD_AMMO_TYPE);
 
     @SubscribeEvent
@@ -37,6 +42,15 @@ public class CandyCraftEntities {
         event.put(STRAWBERRY_CRONCHER.get(), CroncherEntity.registerAttributes().build());
         event.put(SWEETBERRY_CRONCHER.get(), CroncherEntity.registerAttributes().build());
         event.put(OREO_CRONCHER.get(), CroncherEntity.registerAttributes().build());
+        event.put(MINTOLOTL.get(), MintolotlEntity.registerAttributes().build());
+    }
+
+    public static void initSpawnRules() {
+        SpawnPlacements.register(CRONCHER.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Monster::checkMonsterSpawnRules);
+        SpawnPlacements.register(STRAWBERRY_CRONCHER.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Monster::checkMonsterSpawnRules);
+        SpawnPlacements.register(SWEETBERRY_CRONCHER.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Monster::checkMonsterSpawnRules);
+        SpawnPlacements.register(OREO_CRONCHER.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Monster::checkMonsterSpawnRules);
+        SpawnPlacements.register(MINTOLOTL.get(), SpawnPlacements.Type.IN_WATER, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, MintolotlEntity::checkMintlotlSpawnRules);
     }
 
     public static void initEntityTypes() {
@@ -44,6 +58,7 @@ public class CandyCraftEntities {
         STRAWBERRY_CRONCHER_TYPE = EntityType.Builder.of(StrawberryCroncherEntity::new, MobCategory.MONSTER).sized(0.6F, 1.55F).setTrackingRange(8).build("strawberry_croncher");
         SWEETBERRY_CRONCHER_TYPE = EntityType.Builder.of(SweetberryCroncherEntity::new, MobCategory.MONSTER).sized(0.6F, 1.55F).setTrackingRange(8).build("sweetberry_croncher");
         OREO_CRONCHER_TYPE = EntityType.Builder.of(OreoCroncherEntity::new, MobCategory.MONSTER).sized(0.6F, 1.55F).setTrackingRange(8).build("oreo_croncher");
+        MINTOLOTL_TYPE = EntityType.Builder.of(MintolotlEntity::new, MobCategory.CREATURE).sized(0.45F, 0.35F).setTrackingRange(10).build("mintolotl");
         GINGER_BREAD_AMMO_TYPE = EntityType.Builder.<GingerBreadAmmoEntity>of(GingerBreadAmmoEntity::new, MobCategory.MISC).sized(0.5F, 0.5F).setTrackingRange(12).build("ginger_bread_ammo");
     }
 

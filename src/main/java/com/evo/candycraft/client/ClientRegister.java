@@ -2,16 +2,15 @@ package com.evo.candycraft.client;
 
 import com.evo.candycraft.client.renderers.entity.CroncherRenderer;
 import com.evo.candycraft.client.renderers.entity.GingerBreadAmmoRenderer;
+import com.evo.candycraft.client.renderers.entity.MintolotlRenderer;
 import com.evo.candycraft.client.renderers.entity.SweetberryCroncherRenderer;
 import com.evo.candycraft.client.renderers.entity.model.CroncherModel;
 import com.evo.candycraft.client.renderers.entity.model.GingerBabyModel;
+import com.evo.candycraft.client.renderers.entity.model.MintolotlModel;
 import com.evo.candycraft.common.core.CandyCraft;
 import com.evo.candycraft.common.core.registry.CandyCraftBlocks;
 import com.evo.candycraft.common.core.registry.CandyCraftEntities;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.model.LlamaModel;
-import net.minecraft.client.model.geom.builders.CubeDeformation;
-import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.particle.ParticleEngine;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
@@ -47,6 +46,8 @@ public class ClientRegister {
         event.registerEntityRenderer(CandyCraftEntities.STRAWBERRY_CRONCHER.get(), (rendererManager) -> new CroncherRenderer<>(rendererManager, "strawberry_croncher"));
         event.registerEntityRenderer(CandyCraftEntities.SWEETBERRY_CRONCHER.get(), (rendererManager) -> new SweetberryCroncherRenderer<>(rendererManager, "sweetberry_croncher"));
         event.registerEntityRenderer(CandyCraftEntities.OREO_CRONCHER.get(), (rendererManager) -> new CroncherRenderer<>(rendererManager, "oreo_croncher"));
+        event.registerEntityRenderer(CandyCraftEntities.MINTOLOTL.get(), MintolotlRenderer::new);
+
         event.registerEntityRenderer(CandyCraftEntities.GINGER_BREAD_AMMO.get(), GingerBreadAmmoRenderer::new);
     }
 
@@ -55,6 +56,7 @@ public class ClientRegister {
     public static void registerEntityLayerDefinitions(EntityRenderersEvent.RegisterLayerDefinitions event) {
         event.registerLayerDefinition(ModModelLayers.CRONCHER, CroncherModel::createBodyLayer);
         event.registerLayerDefinition(ModModelLayers.GINGER_BREAD_MAN, GingerBabyModel::createBodyLayer);
+        event.registerLayerDefinition(ModModelLayers.MINTOLOTL, MintolotlModel::createBodyLayer);
     }
 
     @SubscribeEvent

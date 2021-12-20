@@ -33,6 +33,8 @@ public class CandyCraftItems {
     public static final RegistryObject<Item> STRAWBERRY_CRONCHER_SPAWN_EGG = HELPER.createItem("strawberry_croncher_spawn_egg", () -> new SpawnEggItem(CandyCraftEntities.STRAWBERRY_CRONCHER_TYPE, 0xFFD7A1, 0xC52936, properties()));
     public static final RegistryObject<Item> SWEETBERRY_CRONCHER_SPAWN_EGG = HELPER.createItem("sweetberry_croncher_spawn_egg", () -> new SpawnEggItem(CandyCraftEntities.SWEETBERRY_CRONCHER_TYPE, 0xFBAD66, 0xC2263E, properties()));
     public static final RegistryObject<Item> OREO_CRONCHER_SPAWN_EGG = HELPER.createItem("oreo_croncher_spawn_egg", () -> new SpawnEggItem(CandyCraftEntities.OREO_CRONCHER_TYPE, 0x362A26, 0xFFFFFF, properties()));
+    public static final RegistryObject<Item> MINTOLOTL_SPAWN_EGG = HELPER.createItem("mintolotl_spawn_egg", () -> new SpawnEggItem(CandyCraftEntities.MINTOLOTL_TYPE, 0x8DF4AE, 0x65D3A7, properties()));
+
 
     private static RegistryObject<Item> registerSimpleItem(String name) {
         return HELPER.createItem(name, () -> new Item(new Item.Properties().tab(CandyCraft.ITEM_GROUP)));

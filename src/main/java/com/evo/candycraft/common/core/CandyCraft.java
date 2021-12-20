@@ -2,8 +2,8 @@ package com.evo.candycraft.common.core;
 
 import com.evo.candycraft.common.core.registry.*;
 import com.evo.candycraft.common.event.EntitySpawnEvents;
-import com.evo.candycraft.common.tag.CCBlockTags;
 import com.evo.candycraft.common.features.ConfiguredFeatures;
+import com.evo.candycraft.common.tag.CCBlockTags;
 import com.evo.candycraft.datagen.DataGatherer;
 import com.teamabnormals.blueprint.core.util.registry.RegistryHelper;
 import net.minecraft.resources.ResourceLocation;
@@ -56,6 +56,7 @@ public class CandyCraft {
     };
 
     public void commonSetup(final FMLCommonSetupEvent event) {
+        CandyCraftEntities.initSpawnRules();
         ConfiguredFeatures.register();
         CandyCraftBlocks.registerBlockData();
         CandyCraftNoiseGeneratorSettings.init();
