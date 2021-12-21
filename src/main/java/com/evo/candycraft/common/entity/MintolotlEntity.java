@@ -24,7 +24,23 @@ public class MintolotlEntity extends Axolotl {
 	}
 
 	public static AttributeSupplier.Builder registerAttributes() {
-		return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 14.0D).add(Attributes.MOVEMENT_SPEED, 1.0D).add(Attributes.ATTACK_DAMAGE, 1.0D);
+		return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 12.0D).add(Attributes.MOVEMENT_SPEED, 2.0D).add(Attributes.ATTACK_DAMAGE, 1.0D);
+	}
+
+	@Override
+	protected void handleAirSupply(int p_149194_) {
+		this.setAirSupply(this.getMaxAirSupply());
+	}
+
+	@Override
+	public void rehydrate() {
+		int i = this.getAirSupply() + 1800;
+		this.setAirSupply(Math.min(i, this.getMaxAirSupply()));
+	}
+
+	@Override
+	public int getMaxAirSupply() {
+		return 6000;
 	}
 
 	@Nullable
