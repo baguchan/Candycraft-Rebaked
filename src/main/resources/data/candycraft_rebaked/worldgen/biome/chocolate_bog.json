@@ -1,9 +1,8 @@
 {
-  "precipitation": "snow",
-  "temperature_modifier": "frozen",
-  "temperature": 0.25,
+  "precipitation": "rain",
+  "temperature": 0.6,
   "downfall": 0.8,
-  "category": "plains",
+  "category": "forest",
   "effects": {
     "sky_color": 7907327,
     "fog_color": 4630224,
