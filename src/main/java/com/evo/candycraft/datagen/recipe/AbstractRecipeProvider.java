@@ -5,9 +5,8 @@ import net.minecraft.data.BlockFamily;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.recipes.*;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.tags.Tag;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
@@ -48,7 +47,7 @@ public abstract class AbstractRecipeProvider extends RecipeProvider {
     }
 
 
-    protected void planksFromLogRecipe(Tag.Named<Item> logTag, ItemLike planksResult, Consumer<FinishedRecipe> consumer) {
+    protected void planksFromLogRecipe(TagKey<Item> logTag, ItemLike planksResult, Consumer<FinishedRecipe> consumer) {
         Objects.requireNonNull(planksResult.asItem().getRegistryName());
 
         ShapelessRecipeBuilder.shapeless(planksResult, 4)
@@ -209,7 +208,7 @@ public abstract class AbstractRecipeProvider extends RecipeProvider {
      * @param singleRecipePath The custom recipe path of the 1-to-9 recipe.
      * @param singleGroup The crafting group of the 1-to-9 recipe.
      */
-    private static void nineBlockStorageRecipes(Consumer<FinishedRecipe> consumer, ItemLike nine, ItemLike single, String nineRecipePath, @Nullable String nineGroup, String singleRecipePath, @Nullable String singleGroup) {
+    public static void nineBlockStorageRecipes(Consumer<FinishedRecipe> consumer, ItemLike nine, ItemLike single, String nineRecipePath, @Nullable String nineGroup, String singleRecipePath, @Nullable String singleGroup) {
         ShapelessRecipeBuilder.shapeless(nine, 9)
                 .requires(single)
                 .group(singleGroup)
@@ -225,27 +224,27 @@ public abstract class AbstractRecipeProvider extends RecipeProvider {
                 .save(consumer, new ResourceLocation(nineRecipePath));
     }
 
-    private static String getHasName(ItemLike itemLike) {
+    public static String getHasName(ItemLike itemLike) {
         return "has_" + getItemName(itemLike);
     }
 
-    private static String getItemName(ItemLike itemLike) {
+    public static String getItemName(ItemLike itemLike) {
         return Objects.requireNonNull(ForgeRegistries.ITEMS.getKey(itemLike.asItem())).getPath();
     }
 
-    private static String getSimpleRecipeName(ItemLike itemLike) {
+    public static String getSimpleRecipeName(ItemLike itemLike) {
         return getItemName(itemLike);
     }
 
-    private static String getConversionRecipeName(ItemLike converted, ItemLike toConvert) {
+    public static String getConversionRecipeName(ItemLike converted, ItemLike toConvert) {
         return getItemName(converted) + "_from_" + getItemName(toConvert);
     }
 
-    private static String getSmeltingRecipeName(ItemLike itemLike) {
+    public static String getSmeltingRecipeName(ItemLike itemLike) {
         return getItemName(itemLike) + "_from_smelting";
     }
 
-    private static String getBlastingRecipeName(ItemLike itemLike) {
+    public static String getBlastingRecipeName(ItemLike itemLike) {
         return getItemName(itemLike) + "_from_blasting";
     }
 }

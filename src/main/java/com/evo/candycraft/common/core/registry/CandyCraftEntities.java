@@ -22,19 +22,12 @@ public class CandyCraftEntities {
 
     public static final DeferredRegister<EntityType<?>> ENTITIES = DeferredRegister.create(ForgeRegistries.ENTITIES, CandyCraft.MODID);
 
-    public static EntityType<CroncherEntity> CRONCHER_TYPE;
-    public static EntityType<StrawberryCroncherEntity> STRAWBERRY_CRONCHER_TYPE;
-    public static EntityType<SweetberryCroncherEntity> SWEETBERRY_CRONCHER_TYPE;
-    public static EntityType<OreoCroncherEntity> OREO_CRONCHER_TYPE;
-    public static EntityType<MintolotlEntity> MINTOLOTL_TYPE;
-    public static EntityType<GingerBreadAmmoEntity> GINGER_BREAD_AMMO_TYPE;
-
-    public static final RegistryObject<EntityType<CroncherEntity>> CRONCHER = register("croncher", () -> CRONCHER_TYPE);
-    public static final RegistryObject<EntityType<StrawberryCroncherEntity>> STRAWBERRY_CRONCHER = register("strawberry_croncher", () -> STRAWBERRY_CRONCHER_TYPE);
-    public static final RegistryObject<EntityType<SweetberryCroncherEntity>> SWEETBERRY_CRONCHER = register("sweetberry_croncher", () -> SWEETBERRY_CRONCHER_TYPE);
-    public static final RegistryObject<EntityType<OreoCroncherEntity>> OREO_CRONCHER = register("oreo_croncher", () -> OREO_CRONCHER_TYPE);
-    public static final RegistryObject<EntityType<MintolotlEntity>> MINTOLOTL = register("mintolotl", () -> MINTOLOTL_TYPE);
-    public static final RegistryObject<EntityType<GingerBreadAmmoEntity>> GINGER_BREAD_AMMO = register("ginger_bread_ammo", () -> GINGER_BREAD_AMMO_TYPE);
+    public static final RegistryObject<EntityType<CroncherEntity>> CRONCHER = register("croncher", () -> EntityType.Builder.of(CroncherEntity::new, MobCategory.MONSTER).sized(0.6F, 1.55F).setTrackingRange(8).build("croncher"));
+    public static final RegistryObject<EntityType<StrawberryCroncherEntity>> STRAWBERRY_CRONCHER = register("strawberry_croncher", () -> EntityType.Builder.of(StrawberryCroncherEntity::new, MobCategory.MONSTER).sized(0.6F, 1.55F).setTrackingRange(8).build("strawberry_croncher"));
+    public static final RegistryObject<EntityType<SweetberryCroncherEntity>> SWEETBERRY_CRONCHER = register("sweetberry_croncher", () -> EntityType.Builder.of(SweetberryCroncherEntity::new, MobCategory.MONSTER).sized(0.6F, 1.55F).setTrackingRange(8).build("sweetberry_croncher"));
+    public static final RegistryObject<EntityType<OreoCroncherEntity>> OREO_CRONCHER = register("oreo_croncher", () -> EntityType.Builder.of(OreoCroncherEntity::new, MobCategory.MONSTER).sized(0.6F, 1.55F).setTrackingRange(8).build("oreo_croncher"));
+    public static final RegistryObject<EntityType<MintolotlEntity>> MINTOLOTL = register("mintolotl", () -> EntityType.Builder.of(MintolotlEntity::new, MobCategory.CREATURE).sized(0.45F, 0.35F).setTrackingRange(10).build("mintolotl"));
+    public static final RegistryObject<EntityType<GingerBreadAmmoEntity>> GINGER_BREAD_AMMO = register("ginger_bread_ammo", () -> EntityType.Builder.<GingerBreadAmmoEntity>of(GingerBreadAmmoEntity::new, MobCategory.MISC).sized(0.5F, 0.5F).setTrackingRange(12).build("ginger_bread_ammo"));
 
     @SubscribeEvent
     public static void registerAttributes(EntityAttributeCreationEvent event) {
@@ -54,12 +47,6 @@ public class CandyCraftEntities {
     }
 
     public static void initEntityTypes() {
-        CRONCHER_TYPE = EntityType.Builder.of(CroncherEntity::new, MobCategory.MONSTER).sized(0.6F, 1.55F).setTrackingRange(8).build("croncher");
-        STRAWBERRY_CRONCHER_TYPE = EntityType.Builder.of(StrawberryCroncherEntity::new, MobCategory.MONSTER).sized(0.6F, 1.55F).setTrackingRange(8).build("strawberry_croncher");
-        SWEETBERRY_CRONCHER_TYPE = EntityType.Builder.of(SweetberryCroncherEntity::new, MobCategory.MONSTER).sized(0.6F, 1.55F).setTrackingRange(8).build("sweetberry_croncher");
-        OREO_CRONCHER_TYPE = EntityType.Builder.of(OreoCroncherEntity::new, MobCategory.MONSTER).sized(0.6F, 1.55F).setTrackingRange(8).build("oreo_croncher");
-        MINTOLOTL_TYPE = EntityType.Builder.of(MintolotlEntity::new, MobCategory.CREATURE).sized(0.45F, 0.35F).setTrackingRange(10).build("mintolotl");
-        GINGER_BREAD_AMMO_TYPE = EntityType.Builder.<GingerBreadAmmoEntity>of(GingerBreadAmmoEntity::new, MobCategory.MISC).sized(0.5F, 0.5F).setTrackingRange(12).build("ginger_bread_ammo");
     }
 
     private static <T extends Entity> RegistryObject<EntityType<T>> register(String name, Supplier<EntityType<T>> entityTypeSupplier) {

@@ -1,7 +1,7 @@
 package com.evo.candycraft.common.item;
 
 import com.evo.candycraft.common.core.registry.CandyCraftItems;
-import net.minecraft.tags.Tag;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.block.Block;
@@ -47,7 +47,7 @@ public class ToolTiers {
 
         @Nullable
         @Override
-        public Tag<Block> getTag() {
+        public TagKey<Block> getTag() {
             return null;
         }
     }

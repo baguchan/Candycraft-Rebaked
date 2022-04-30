@@ -1,18 +1,18 @@
 package com.evo.candycraft.common.block;
 
+import net.minecraft.core.Holder;
 import net.minecraft.world.level.block.grower.AbstractTreeGrower;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
 
 import javax.annotation.Nullable;
 import java.util.Random;
-import java.util.function.Supplier;
 
 /**
  * Note that this is subject to change.
- *
+ * <p>
  * Feel free to change this up however you'd like,
- * as this only provides a single supplier
+ * as this only provides a single Holder
  * for a never changing result and not
  * taking the random instance or hive
  * boolean into consideration in
@@ -20,17 +20,17 @@ import java.util.function.Supplier;
  */
 public class ModAbstractTreeGrower extends AbstractTreeGrower {
 
-    private final Supplier<ConfiguredFeature<TreeConfiguration, ?>> treeFeatureSupplier;
+    private final Holder<ConfiguredFeature<TreeConfiguration, ?>> treeFeatureHolder;
 
 
-    public ModAbstractTreeGrower(Supplier<ConfiguredFeature<TreeConfiguration, ?>> treeFeatureSupplier) {
+    public ModAbstractTreeGrower(Holder<ConfiguredFeature<TreeConfiguration, ?>> treeFeatureHolder) {
         super();
-        this.treeFeatureSupplier = treeFeatureSupplier;
+        this.treeFeatureHolder = treeFeatureHolder;
     }
 
     @Nullable
     @Override
-    protected ConfiguredFeature<TreeConfiguration, ?> getConfiguredFeature(Random random, boolean largeHive) {
-        return this.treeFeatureSupplier.get();
+    protected Holder<? extends ConfiguredFeature<?, ?>> getConfiguredFeature(Random random, boolean largeHive) {
+        return this.treeFeatureHolder;
     }
 }

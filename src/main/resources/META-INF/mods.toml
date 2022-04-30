@@ -1,6 +1,6 @@
-modLoader="javafml"
-loaderVersion="[39,)"
-license="All rights reserved"
+modLoader = "javafml"
+loaderVersion = "[40,)"
+license = "All rights reserved"
 issueTrackerURL="https://github.com/Evoslab/Candycraft-Rebaked/issues"
 
 [[mods]]
@@ -15,22 +15,22 @@ issueTrackerURL="https://github.com/Evoslab/Candycraft-Rebaked/issues"
 
 [[dependencies.candycraft_rebaked]]
     modId="forge"
-    mandatory=true
-    versionRange="[39,)"
-    ordering="NONE"
+mandatory = true
+versionRange = "[40,)"
+ordering = "NONE"
     side="BOTH"
 
 [[dependencies.candycraft_rebaked]]
     modId="minecraft"
-    mandatory=true
-    versionRange="[1.18.1,)"
-    ordering="NONE"
+mandatory = true
+versionRange = "[1.18.2,)"
+ordering = "NONE"
     side="BOTH"
 
 [[dependencies.candycraft_rebaked]]
     modId="blueprint"
-    mandatory=true
-    versionRange="[x.x.x,)"
-    ordering="AFTER"
+mandatory = true
+versionRange = "[5.3.0,)"
+ordering = "AFTER"
     side="BOTH"
 

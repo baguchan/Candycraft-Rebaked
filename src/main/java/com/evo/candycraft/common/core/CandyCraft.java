@@ -31,8 +31,6 @@ public class CandyCraft {
     public CandyCraft() {
         INSTANCE = this;
 
-        // Spawn egg item has the big stupid
-        CandyCraftEntities.initEntityTypes();
         CCBlockTags.init();
 
         IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();

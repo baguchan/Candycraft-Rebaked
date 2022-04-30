@@ -6,6 +6,7 @@ import com.evo.candycraft.common.item.GingerBreadLauncherItem;
 import com.evo.candycraft.common.item.ToolTiers;
 import com.teamabnormals.blueprint.core.util.registry.ItemSubRegistryHelper;
 import net.minecraft.world.item.*;
+import net.minecraftforge.common.ForgeSpawnEggItem;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.RegistryObject;
 
@@ -29,11 +30,11 @@ public class CandyCraftItems {
     public static final RegistryObject<Item> GINGER_BREAD_AMMO = HELPER.createItem("ginger_bread_ammo", () -> new Item(properties()));
 
 
-    public static final RegistryObject<Item> CRONCHER_SPAWN_EGG = HELPER.createItem("croncher_spawn_egg", () -> new SpawnEggItem(CandyCraftEntities.CRONCHER_TYPE, 0xE9964B, 0x572F1A, properties()));
-    public static final RegistryObject<Item> STRAWBERRY_CRONCHER_SPAWN_EGG = HELPER.createItem("strawberry_croncher_spawn_egg", () -> new SpawnEggItem(CandyCraftEntities.STRAWBERRY_CRONCHER_TYPE, 0xFFD7A1, 0xC52936, properties()));
-    public static final RegistryObject<Item> SWEETBERRY_CRONCHER_SPAWN_EGG = HELPER.createItem("sweetberry_croncher_spawn_egg", () -> new SpawnEggItem(CandyCraftEntities.SWEETBERRY_CRONCHER_TYPE, 0xFBAD66, 0xC2263E, properties()));
-    public static final RegistryObject<Item> OREO_CRONCHER_SPAWN_EGG = HELPER.createItem("oreo_croncher_spawn_egg", () -> new SpawnEggItem(CandyCraftEntities.OREO_CRONCHER_TYPE, 0x362A26, 0xFFFFFF, properties()));
-    public static final RegistryObject<Item> MINTOLOTL_SPAWN_EGG = HELPER.createItem("mintolotl_spawn_egg", () -> new SpawnEggItem(CandyCraftEntities.MINTOLOTL_TYPE, 0x8DF4AE, 0x65D3A7, properties()));
+    public static final RegistryObject<Item> CRONCHER_SPAWN_EGG = HELPER.createItem("croncher_spawn_egg", () -> new ForgeSpawnEggItem(CandyCraftEntities.CRONCHER, 0xE9964B, 0x572F1A, properties()));
+    public static final RegistryObject<Item> STRAWBERRY_CRONCHER_SPAWN_EGG = HELPER.createItem("strawberry_croncher_spawn_egg", () -> new ForgeSpawnEggItem(CandyCraftEntities.STRAWBERRY_CRONCHER, 0xFFD7A1, 0xC52936, properties()));
+    public static final RegistryObject<Item> SWEETBERRY_CRONCHER_SPAWN_EGG = HELPER.createItem("sweetberry_croncher_spawn_egg", () -> new ForgeSpawnEggItem(CandyCraftEntities.SWEETBERRY_CRONCHER, 0xFBAD66, 0xC2263E, properties()));
+    public static final RegistryObject<Item> OREO_CRONCHER_SPAWN_EGG = HELPER.createItem("oreo_croncher_spawn_egg", () -> new ForgeSpawnEggItem(CandyCraftEntities.OREO_CRONCHER, 0x362A26, 0xFFFFFF, properties()));
+    public static final RegistryObject<Item> MINTOLOTL_SPAWN_EGG = HELPER.createItem("mintolotl_spawn_egg", () -> new ForgeSpawnEggItem(CandyCraftEntities.MINTOLOTL, 0x8DF4AE, 0x65D3A7, properties()));
 
 
     private static RegistryObject<Item> registerSimpleItem(String name) {

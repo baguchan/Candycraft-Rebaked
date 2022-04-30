@@ -22,12 +22,12 @@ public class GingerBreadAmmoEntity extends ThrowableProjectile {
 	}
 
 	public GingerBreadAmmoEntity(Player player, double x, double y, double z, Level level) {
-		super(CandyCraftEntities.GINGER_BREAD_AMMO_TYPE, x, y, z, level);
+		super(CandyCraftEntities.GINGER_BREAD_AMMO.get(), x, y, z, level);
 		this.setOwner(player);
 	}
 
 	public GingerBreadAmmoEntity(LivingEntity livingEntity, Level level) {
-		super(CandyCraftEntities.GINGER_BREAD_AMMO_TYPE, livingEntity, level);
+		super(CandyCraftEntities.GINGER_BREAD_AMMO.get(), livingEntity, level);
 	}
 
 	@Override
