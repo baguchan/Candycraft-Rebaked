@@ -3,7 +3,6 @@ package com.evo.candycraft_rebaked.common.entity.goals;
 import com.evo.candycraft_rebaked.common.entity.SweetberryCroncherEntity;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.goal.Goal;
@@ -34,7 +33,7 @@ public class FoxStealCrouperBerriesGoal<T extends Fox> extends Goal {
         if (this.fox.isSleeping() || this.fox.isFaceplanted())
             return false;
 
-        List<SweetberryCroncherEntity> entities = this.fox.getLevel().getEntitiesOfClass(SweetberryCroncherEntity.class, this.fox.getBoundingBox().inflate(10, 4.0D, 10));
+        List<SweetberryCroncherEntity> entities = this.fox.level().getEntitiesOfClass(SweetberryCroncherEntity.class, this.fox.getBoundingBox().inflate(10, 4.0D, 10));
         SweetberryCroncherEntity crouper = null;
 
         if (!entities.isEmpty()) {
@@ -84,10 +83,10 @@ public class FoxStealCrouperBerriesGoal<T extends Fox> extends Goal {
 
         if (this.fox.distanceTo(this.target) <= 4.0D) {
             this.fox.setItemSlot(EquipmentSlot.MAINHAND, new ItemStack(Items.SWEET_BERRIES));
-            this.fox.getLevel().playSound(null, this.fox.blockPosition(), SoundEvents.FOX_BITE, SoundSource.NEUTRAL, 0.9f, 1.0f);
+            this.fox.level().playSound(null, this.fox.blockPosition(), SoundEvents.FOX_BITE, SoundSource.NEUTRAL, 0.9f, 1.0f);
 
             this.target.setBerries(false);
-            this.target.hurt(DamageSource.mobAttack(this.fox), 0.0f);
+            this.target.hurt(this.fox.damageSources().mobAttack(this.fox), 0.0f);
 
             // Do this or else the crouper will blow up
             if (this.target.getTarget() == this.fox) {

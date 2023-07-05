@@ -3,31 +3,33 @@ package com.evo.candycraft_rebaked.datagen.tag;
 import com.evo.candycraft_rebaked.common.core.CandyCraft;
 import com.evo.candycraft_rebaked.common.core.registry.CandyCraftBlocks;
 import com.evo.candycraft_rebaked.common.tag.CCBlockTags;
-import net.minecraft.data.DataGenerator;
-import net.minecraft.data.tags.BlockTagsProvider;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.data.PackOutput;
 import net.minecraft.tags.BlockTags;
 import net.minecraftforge.common.Tags;
+import net.minecraftforge.common.data.BlockTagsProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
 
 import javax.annotation.Nullable;
+import java.util.concurrent.CompletableFuture;
 
 public class CCBlockTagProvider extends BlockTagsProvider {
 
-    public CCBlockTagProvider(DataGenerator generatorIn, @Nullable ExistingFileHelper existingFileHelper) {
-        super(generatorIn, CandyCraft.MODID, existingFileHelper);
+    public CCBlockTagProvider(PackOutput packOutput, CompletableFuture<HolderLookup.Provider> lookupProvider, @Nullable ExistingFileHelper existingFileHelper) {
+        super(packOutput, lookupProvider, CandyCraft.MODID, existingFileHelper);
     }
 
     @Override
     @SuppressWarnings("all")
-    protected void addTags() {
+    protected void addTags(HolderLookup.Provider p_256380_) {
         addBlocksToToolTags();
 
         // LOGS
         this.tag(CCBlockTags.RED_LICORICE_LOGS).add(
-            CandyCraftBlocks.RED_LICORICE_LOG.get(),
-            CandyCraftBlocks.STRIPPED_RED_LICORICE_LOG.get(),
-            CandyCraftBlocks.RED_LICORICE_WOOD.get(),
-            CandyCraftBlocks.STRIPPED_RED_LICORICE_WOOD.get()
+                CandyCraftBlocks.RED_LICORICE_LOG.get(),
+                CandyCraftBlocks.STRIPPED_RED_LICORICE_LOG.get(),
+                CandyCraftBlocks.RED_LICORICE_WOOD.get(),
+                CandyCraftBlocks.STRIPPED_RED_LICORICE_WOOD.get()
         );
 
         this.tag(BlockTags.LOGS_THAT_BURN).addTags(
@@ -91,9 +93,9 @@ public class CCBlockTagProvider extends BlockTagsProvider {
         );
 
         // SAPLINGS
-        this.tag(BlockTags.SAPLINGS).add(
+       /* this.tag(BlockTags.SAPLINGS).add(
                 CandyCraftBlocks.RED_LICORICE_TREE_SAPLING.get()
-        );
+        );*/
     }
 
     @SuppressWarnings("all")
@@ -115,8 +117,8 @@ public class CCBlockTagProvider extends BlockTagsProvider {
                 CandyCraftBlocks.CANDY_CANE_WOOD.get(),
                 CandyCraftBlocks.RED_LICORICE_PLANKS.get(),
                 CandyCraftBlocks.RED_LICORICE_SLAB.get(),
-                CandyCraftBlocks.RED_LICORICE_STAIRS.get(),
-                CandyCraftBlocks.RED_LICORICE_VERTICAL_SLAB.get()
+                CandyCraftBlocks.RED_LICORICE_STAIRS.get()
+                //CandyCraftBlocks.RED_LICORICE_VERTICAL_SLAB.get()
         );
     }
 }

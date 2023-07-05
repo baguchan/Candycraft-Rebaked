@@ -1,0 +1,13 @@
+// 1.20.1	2023-07-05T22:13:18.5230152	Tags for minecraft:item mod id candycraft_rebaked
+2fd1519402940b92744a385caf232c3c089cf0ef data/candycraft_rebaked/tags/items/red_licorice_logs.json
+935919e1947fce06db972808586ae1eba0a01c41 data/forge/tags/items/fences/wooden.json
+a24b1dc618c58e142ca5647e7c41c597faabb3da data/minecraft/tags/items/doors.json
+517032b13fa11e2c9163e63865c46abc4bb96d7c data/minecraft/tags/items/logs_that_burn.json
+173259efed5b650ce4770f93488cbbc01a62a12d data/minecraft/tags/items/planks.json
+77383c4cb3c096f87880f0f86d647006946603e1 data/minecraft/tags/items/trapdoors.json
+a0cbe5ac3ff86f35bdae931780e0552ba9adcfef data/minecraft/tags/items/wooden_buttons.json
+8b7f6f97ca53f553f6f1ef4ca6df54eddb80a3a7 data/minecraft/tags/items/wooden_doors.json
+575dd5fa0cb2166d160e12c23edfe75a10fc8b1b data/minecraft/tags/items/wooden_pressure_plates.json
+2c653982dc857476ee5ed36fd1d844c9bb0807b4 data/minecraft/tags/items/wooden_slabs.json
+0fe27e6a68397b3cb8732ab6326ab34224721c7d data/minecraft/tags/items/wooden_stairs.json
+db0c07ae60b926419b1e856cd4894d8ef5636093 data/minecraft/tags/items/wooden_trapdoors.json

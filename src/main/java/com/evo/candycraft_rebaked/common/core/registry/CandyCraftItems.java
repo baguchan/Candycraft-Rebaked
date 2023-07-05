@@ -23,7 +23,9 @@ public class CandyCraftItems {
 
 
     public static final RegistryObject<Item> WAFFLE_CONE_CRUMBLE = registerSimpleItem("waffle_cone_crumble");
-    //public static final RegistryObject<Item> CANDY_CANE = HELPER.createItem("candy_cane", () -> new ItemNameBlockItem(CandyCraftBlocks.CANDY_CANE_SAPLING.get(), properties().food(CandyCraftFoods.CANDY_CANE)));
+    public static final RegistryObject<Item> CANDY_CANE = HELPER.createItem("candy_cane", () -> new Item(properties().food(CandyCraftFoods.CANDY_CANE)));
+
+    // public static final RegistryObject<Item> CANDY_CANE = HELPER.createItem("candy_cane", () -> new ItemNameBlockItem(CandyCraftBlocks.CANDY_CANE_SAPLING.get(), properties().food(CandyCraftFoods.CANDY_CANE)));
 
     public static final RegistryObject<Item> CANDY_CANE_SWORD = HELPER.createItem("candy_cane_sword", () -> new SwordItem(ToolTiers.CANDY_CANE, 3, -2.0f, properties()));
     public static final RegistryObject<Item> CANDY_CANE_SHOVEL = HELPER.createItem("candy_cane_shovel", () -> new ShovelItem(ToolTiers.CANDY_CANE, 1.5f, -2.4f, properties()));
