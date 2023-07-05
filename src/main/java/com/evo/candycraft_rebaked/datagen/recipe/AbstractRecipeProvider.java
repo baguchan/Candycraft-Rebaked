@@ -28,8 +28,8 @@ public abstract class AbstractRecipeProvider extends RecipeProvider {
 
     private static final Map<BlockFamily.Variant, BiFunction<ItemLike, ItemLike, RecipeBuilder>> SHAPE_BUILDERS = ImmutableMap.<BlockFamily.Variant, BiFunction<ItemLike, ItemLike, RecipeBuilder>>builder()
       .put(BlockFamily.Variant.BUTTON, (result, ingredient) -> buttonBuilder(result, Ingredient.of(ingredient)))
-            .put(BlockFamily.Variant.CHISELED, (result, ingredient) -> chiseledBuilder(result, Ingredient.of(ingredient)))
-            .put(BlockFamily.Variant.CUT, (result, ingredient) -> cutBuilder(result, Ingredient.of(ingredient)))
+            .put(BlockFamily.Variant.CHISELED, (result, ingredient) -> chiseledBuilder(RecipeCategory.BUILDING_BLOCKS, result, Ingredient.of(ingredient)))
+            .put(BlockFamily.Variant.CUT, (result, ingredient) -> cutBuilder(RecipeCategory.BUILDING_BLOCKS, result, Ingredient.of(ingredient)))
             .put(BlockFamily.Variant.DOOR, (result, ingredient) -> doorBuilder(result, Ingredient.of(ingredient)))
             .put(BlockFamily.Variant.FENCE, (result, ingredient) -> woodenFenceBuilder(result, Ingredient.of(ingredient)))
             .put(BlockFamily.Variant.FENCE_GATE, (result, ingredient) -> fenceGateBuilder(result, Ingredient.of(ingredient)))
@@ -37,9 +37,9 @@ public abstract class AbstractRecipeProvider extends RecipeProvider {
             .put(BlockFamily.Variant.SLAB, (result, ingredient) -> slabBuilder(result, Ingredient.of(ingredient)))
             .put(BlockFamily.Variant.STAIRS, (result, ingredient) -> stairBuilder(result, Ingredient.of(ingredient)))
             .put(BlockFamily.Variant.PRESSURE_PLATE, (result, ingredient) -> pressurePlateBuilder(result, Ingredient.of(ingredient)))
-            .put(BlockFamily.Variant.POLISHED, (result, ingredient) -> polishedBuilder(result, Ingredient.of(ingredient)))
+            .put(BlockFamily.Variant.POLISHED, (result, ingredient) -> polishedBuilder(RecipeCategory.BUILDING_BLOCKS, result, Ingredient.of(ingredient)))
             .put(BlockFamily.Variant.TRAPDOOR, (result, ingredient) -> trapdoorBuilder(result, Ingredient.of(ingredient)))
-            .put(BlockFamily.Variant.WALL, (result, ingredient) -> wallBuilder(result, Ingredient.of(ingredient))).build();
+            .put(BlockFamily.Variant.WALL, (result, ingredient) -> wallBuilder(RecipeCategory.BUILDING_BLOCKS, result, Ingredient.of(ingredient))).build();
 
 
     public AbstractRecipeProvider(DataGenerator dataGenerator) {

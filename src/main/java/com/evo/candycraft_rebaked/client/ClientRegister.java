@@ -10,13 +10,10 @@ import com.evo.candycraft_rebaked.client.renderers.entity.model.MintolotlModel;
 import com.evo.candycraft_rebaked.common.core.CandyCraft;
 import com.evo.candycraft_rebaked.common.core.registry.CandyCraftBlocks;
 import com.evo.candycraft_rebaked.common.core.registry.CandyCraftEntities;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.particle.ParticleEngine;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
-import net.minecraftforge.client.event.ParticleFactoryRegisterEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
@@ -30,11 +27,11 @@ public class ClientRegister {
     }
 
     private static void setupRenderLayers() {
-        ItemBlockRenderTypes.setRenderLayer(CandyCraftBlocks.CANDY_CANE_SAPLING.get(), RenderType.cutout());
+        /*ItemBlockRenderTypes.setRenderLayer(CandyCraftBlocks.CANDY_CANE_SAPLING.get(), RenderType.cutout());
         ItemBlockRenderTypes.setRenderLayer(CandyCraftBlocks.POTTED_CANDY_CANE_SAPLING.get(), RenderType.cutout());
         ItemBlockRenderTypes.setRenderLayer(CandyCraftBlocks.RED_LICORICE_TREE_SAPLING.get(), RenderType.cutout());
         ItemBlockRenderTypes.setRenderLayer(CandyCraftBlocks.POTTED_RED_LICORICE_TREE_SAPLING.get(), RenderType.cutout());
-        ItemBlockRenderTypes.setRenderLayer(CandyCraftBlocks.RED_LICORICE_LEAVES.get(), RenderType.cutoutMipped());
+        */ItemBlockRenderTypes.setRenderLayer(CandyCraftBlocks.RED_LICORICE_LEAVES.get(), RenderType.cutoutMipped());
 
         ItemBlockRenderTypes.setRenderLayer(CandyCraftBlocks.WAFFLE_CONE_DOOR.get(), RenderType.cutout());
         ItemBlockRenderTypes.setRenderLayer(CandyCraftBlocks.WAFFLE_CONE_TRAPDOOR.get(), RenderType.cutout());
@@ -57,10 +54,5 @@ public class ClientRegister {
         event.registerLayerDefinition(ModModelLayers.CRONCHER, CroncherModel::createBodyLayer);
         event.registerLayerDefinition(ModModelLayers.GINGER_BREAD_MAN, GingerBabyModel::createBodyLayer);
         event.registerLayerDefinition(ModModelLayers.MINTOLOTL, MintolotlModel::createBodyLayer);
-    }
-
-    @SubscribeEvent
-    public static void onParticleFactoryRegister(ParticleFactoryRegisterEvent event) {
-        ParticleEngine particleEngine = Minecraft.getInstance().particleEngine;
     }
 }

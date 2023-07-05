@@ -3,21 +3,18 @@ package com.evo.candycraft_rebaked.common.item;
 import com.evo.candycraft_rebaked.common.core.registry.CandyCraftItems;
 import com.evo.candycraft_rebaked.common.entity.GingerBreadAmmoEntity;
 import com.google.common.collect.Lists;
-import com.mojang.math.Quaternion;
-import com.mojang.math.Vector3f;
 import net.minecraft.ChatFormatting;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TextComponent;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.LivingEntity;
@@ -31,6 +28,8 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import org.joml.Quaternionf;
+import org.joml.Vector3f;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -220,12 +219,11 @@ public class GingerBreadLauncherItem extends ProjectileWeaponItem implements Van
 				crossbowMob.shootCrossbowProjectile(crossbowMob.getTarget(), itemStack, projectile, spread);
 			}
 			else {
-				Vec3 upVec = livingEntity.getUpVector(1.0F);
-				Quaternion quaternion = new Quaternion(new Vector3f(upVec), spread, true);
-				Vec3 viewVec = livingEntity.getViewVector(1.0F);
-				Vector3f viewVecCopy = new Vector3f(viewVec);
-				viewVecCopy.transform(quaternion);
-				projectile.shoot(viewVecCopy.x(), viewVecCopy.y(), viewVecCopy.z(), shootingPower, speedMult);
+				Vec3 vec31 = livingEntity.getUpVector(1.0F);
+				Quaternionf quaternionf = (new Quaternionf()).setAngleAxis((double)(shotPitch * ((float)Math.PI / 180F)), vec31.x, vec31.y, vec31.z);
+				Vec3 vec3 = livingEntity.getViewVector(1.0F);
+				Vector3f vector3f = vec3.toVector3f().rotate(quaternionf);
+				projectile.shoot((double)vector3f.x(), (double)vector3f.y(), (double)vector3f.z(), shootingPower, speedMult);
 			}
 
 			itemStack.hurtAndBreak(1, livingEntity, (entity) -> {
@@ -259,12 +257,12 @@ public class GingerBreadLauncherItem extends ProjectileWeaponItem implements Van
 		onCrossbowShot(level, livingEntity, itemStack);
 	}
 
-	private static float[] getShotPitches(Random random) {
+	private static float[] getShotPitches(RandomSource random) {
 		boolean flag = random.nextBoolean();
 		return new float[]{1.0F, getRandomShotPitch(flag, random), getRandomShotPitch(!flag, random)};
 	}
 
-	private static float getRandomShotPitch(boolean flag, Random random) {
+	private static float getRandomShotPitch(boolean flag, RandomSource random) {
 		float f = flag ? 0.63F : 0.43F;
 		return 1.0F / (random.nextFloat() * 0.5F + 1.8F) + f;
 	}
@@ -347,7 +345,7 @@ public class GingerBreadLauncherItem extends ProjectileWeaponItem implements Van
 
 		if (isCharged(itemStack) && !chargedProjectiles.isEmpty()) {
 			ItemStack projectile = chargedProjectiles.get(0);
-			components.add((new TranslatableComponent("item.minecraft.crossbow.projectile")).append(" ").append(projectile.getDisplayName()));
+			components.add((Component.translatable("item.minecraft.crossbow.projectile")).append(" ").append(projectile.getDisplayName()));
 
 			if (tooltipFlag.isAdvanced() && projectile.is(Items.FIREWORK_ROCKET)) {
 				List<Component> list = Lists.newArrayList();
@@ -355,7 +353,7 @@ public class GingerBreadLauncherItem extends ProjectileWeaponItem implements Van
 
 				if (!list.isEmpty()) {
 					for(int i = 0; i < list.size(); ++i) {
-						list.set(i, (new TextComponent("  ")).append(list.get(i)).withStyle(ChatFormatting.GRAY));
+						list.set(i, (Component.literal("  ")).append(list.get(i)).withStyle(ChatFormatting.GRAY));
 					}
 					components.addAll(list);
 				}

@@ -20,7 +20,7 @@ import java.util.function.Supplier;
 @Mod.EventBusSubscriber(modid = CandyCraft.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class CandyCraftEntities {
 
-    public static final DeferredRegister<EntityType<?>> ENTITIES = DeferredRegister.create(ForgeRegistries.ENTITIES, CandyCraft.MODID);
+    public static final DeferredRegister<EntityType<?>> ENTITIES = DeferredRegister.create(ForgeRegistries.ENTITY_TYPES, CandyCraft.MODID);
 
     public static final RegistryObject<EntityType<CroncherEntity>> CRONCHER = register("croncher", () -> EntityType.Builder.of(CroncherEntity::new, MobCategory.MONSTER).sized(0.6F, 1.55F).setTrackingRange(8).build("croncher"));
     public static final RegistryObject<EntityType<StrawberryCroncherEntity>> STRAWBERRY_CRONCHER = register("strawberry_croncher", () -> EntityType.Builder.of(StrawberryCroncherEntity::new, MobCategory.MONSTER).sized(0.6F, 1.55F).setTrackingRange(8).build("strawberry_croncher"));

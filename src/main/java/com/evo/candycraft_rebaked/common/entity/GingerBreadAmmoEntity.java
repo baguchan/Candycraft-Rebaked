@@ -2,6 +2,7 @@ package com.evo.candycraft_rebaked.common.entity;
 
 import com.evo.candycraft_rebaked.common.core.registry.CandyCraftEntities;
 import net.minecraft.network.protocol.Packet;
+import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
@@ -39,11 +40,11 @@ public class GingerBreadAmmoEntity extends ThrowableProjectile {
 	protected void onHitEntity(EntityHitResult result) {
 		super.onHitEntity(result);
 
-		if (!this.level.isClientSide) {
+		if (!this.level().isClientSide) {
 			Entity target = result.getEntity();
 			Entity shooter = this.getOwner();
 
-			target.hurt(DamageSource.thrown(this, shooter), 1.0F);
+			target.hurt(target.damageSources().thrown(this, shooter), 1.0F);
 
 			if (shooter instanceof LivingEntity) {
 				this.doEnchantDamageEffects((LivingEntity) shooter, target);
@@ -56,15 +57,17 @@ public class GingerBreadAmmoEntity extends ThrowableProjectile {
 	protected void onHit(HitResult result) {
 		super.onHit(result);
 
-		if (!this.level.isClientSide) {
-			boolean flag = ForgeEventFactory.getMobGriefingEvent(this.level, this.getOwner());
-			this.level.explode(this, this.getX(), this.getY(), this.getZ(), 3.0F, flag ? Explosion.BlockInteraction.BREAK : Explosion.BlockInteraction.NONE);
+		if (!this.level().isClientSide) {
+			boolean flag = ForgeEventFactory.getMobGriefingEvent(this.level(), this.getOwner());
+			this.level().explode(this, this.getX(), this.getY(), this.getZ(), 3.0F, flag ? Level.ExplosionInteraction.BLOCK : Level.ExplosionInteraction.NONE);
 		}
 		this.discard();
 	}
 
+
+
 	@Override
-	public Packet<?> getAddEntityPacket() {
+	public Packet<ClientGamePacketListener> getAddEntityPacket() {
 		return NetworkHooks.getEntitySpawningPacket(this);
 	}
 }

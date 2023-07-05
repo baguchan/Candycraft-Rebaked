@@ -5,13 +5,13 @@ package com.evo.candycraft_rebaked.client.renderers.entity.model;// Made with Bl
 
 import com.evo.candycraft_rebaked.common.entity.MintolotlEntity;
 import com.google.common.collect.ImmutableList;
-import com.mojang.math.Vector3f;
 import net.minecraft.client.model.AgeableListModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.LerpingModel;
+import org.joml.Vector3f;
 
 import java.util.Map;
 
@@ -88,7 +88,7 @@ public class MintolotlModel<T extends MintolotlEntity & LerpingModel> extends Ag
 
 				this.saveAnimationValues(entity);
 			} else {
-				if (entity.isOnGround()) {
+				if (entity.onGround()) {
 					if (flag) {
 						this.setupGroundCrawlingAnimation(ageInTicks, netHeadYaw);
 					} else {

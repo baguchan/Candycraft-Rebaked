@@ -1,14 +1,13 @@
 package com.evo.candycraft_rebaked.common.core;
 
-import com.evo.candycraft_rebaked.common.core.registry.*;
+import com.evo.candycraft_rebaked.common.core.registry.CandyCraftBlocks;
+import com.evo.candycraft_rebaked.common.core.registry.CandyCraftCreativeTabs;
+import com.evo.candycraft_rebaked.common.core.registry.CandyCraftEntities;
 import com.evo.candycraft_rebaked.common.event.EntitySpawnEvents;
-import com.evo.candycraft_rebaked.common.features.ConfiguredFeatures;
 import com.evo.candycraft_rebaked.common.tag.CCBlockTags;
 import com.evo.candycraft_rebaked.datagen.DataGatherer;
 import com.teamabnormals.blueprint.core.util.registry.RegistryHelper;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.CreativeModeTab;
-import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
@@ -39,27 +38,15 @@ public class CandyCraft {
         eventBus.addListener(DataGatherer::onGatherData);
 
         MinecraftForge.EVENT_BUS.register(new EntitySpawnEvents());
-
-        CandyCraftBiomes.BIOMES.register(eventBus);
         REGISTRY_HELPER.register(eventBus);
+        CandyCraftCreativeTabs.CREATIVE_MODE_TABS.register(eventBus);
 
         CandyCraftEntities.ENTITIES.register(eventBus);
-        CandyCraftFeatures.FEATURES.register(eventBus);
     }
 
-    public final static CreativeModeTab ITEM_GROUP = new CreativeModeTab("candycraft_rebaked") {
-        @Override
-        public ItemStack makeIcon() {
-            return new ItemStack(CandyCraftItems.CANDY_CANE.get());
-        }
-    };
-
     public void commonSetup(final FMLCommonSetupEvent event) {
-        CandyCraftBiomes.init();
         CandyCraftEntities.initSpawnRules();
-        ConfiguredFeatures.register();
         CandyCraftBlocks.registerBlockData();
-        CandyCraftNoiseGeneratorSettings.init();
     }
 
     public static ResourceLocation resourceLoc(String path) {

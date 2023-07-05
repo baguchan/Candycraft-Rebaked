@@ -4,6 +4,7 @@ import com.evo.candycraft_rebaked.common.core.CandyCraft;
 import com.evo.candycraft_rebaked.common.item.CandyCraftFoods;
 import com.evo.candycraft_rebaked.common.item.GingerBreadLauncherItem;
 import com.evo.candycraft_rebaked.common.item.ToolTiers;
+import com.mojang.datafixers.util.Pair;
 import com.teamabnormals.blueprint.core.util.registry.ItemSubRegistryHelper;
 import net.minecraft.world.item.*;
 import net.minecraftforge.common.ForgeSpawnEggItem;
@@ -15,10 +16,14 @@ public class CandyCraftItems {
 
     public static final ItemSubRegistryHelper HELPER = CandyCraft.REGISTRY_HELPER.getItemSubHelper();
 
-    public static final RegistryObject<Item> RED_LICORICE_BOAT = HELPER.createBoatItem("red_licorice", CandyCraftBlocks.RED_LICORICE_PLANKS);
+    public static final Pair<RegistryObject<Item>, RegistryObject<Item>> RED_LICORICE_BOATS = HELPER.createBoatAndChestBoatItem("red_licorice", CandyCraftBlocks.RED_LICORICE_PLANKS, false);
+
+    public static final RegistryObject<Item> RED_LICORICE_BOAT = RED_LICORICE_BOATS.getFirst();
+    public static final RegistryObject<Item> RED_LICORICE_CHEST_BOAT = RED_LICORICE_BOATS.getSecond();
+
 
     public static final RegistryObject<Item> WAFFLE_CONE_CRUMBLE = registerSimpleItem("waffle_cone_crumble");
-    public static final RegistryObject<Item> CANDY_CANE = HELPER.createItem("candy_cane", () -> new ItemNameBlockItem(CandyCraftBlocks.CANDY_CANE_SAPLING.get(), properties().food(CandyCraftFoods.CANDY_CANE)));
+    //public static final RegistryObject<Item> CANDY_CANE = HELPER.createItem("candy_cane", () -> new ItemNameBlockItem(CandyCraftBlocks.CANDY_CANE_SAPLING.get(), properties().food(CandyCraftFoods.CANDY_CANE)));
 
     public static final RegistryObject<Item> CANDY_CANE_SWORD = HELPER.createItem("candy_cane_sword", () -> new SwordItem(ToolTiers.CANDY_CANE, 3, -2.0f, properties()));
     public static final RegistryObject<Item> CANDY_CANE_SHOVEL = HELPER.createItem("candy_cane_shovel", () -> new ShovelItem(ToolTiers.CANDY_CANE, 1.5f, -2.4f, properties()));
@@ -38,10 +43,10 @@ public class CandyCraftItems {
 
 
     private static RegistryObject<Item> registerSimpleItem(String name) {
-        return HELPER.createItem(name, () -> new Item(new Item.Properties().tab(CandyCraft.ITEM_GROUP)));
+        return HELPER.createItem(name, () -> new Item(new Item.Properties()));
     }
 
     private static Item.Properties properties() {
-        return new Item.Properties().tab(CandyCraft.ITEM_GROUP);
+        return new Item.Properties();
     }
 }

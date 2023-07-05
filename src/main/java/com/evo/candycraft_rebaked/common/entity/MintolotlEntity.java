@@ -4,6 +4,7 @@ import com.evo.candycraft_rebaked.common.core.registry.CandyCraftBlocks;
 import com.evo.candycraft_rebaked.common.core.registry.CandyCraftEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -19,7 +20,7 @@ public class MintolotlEntity extends Axolotl {
 		super(type, level);
 	}
 
-	public static boolean checkMintlotlSpawnRules(EntityType<? extends LivingEntity> type, ServerLevelAccessor level, MobSpawnType spawnType, BlockPos blockPos, Random random) {
+	public static boolean checkMintlotlSpawnRules(EntityType<? extends LivingEntity> type, ServerLevelAccessor level, MobSpawnType spawnType, BlockPos blockPos, RandomSource random) {
 		return level.getBlockState(blockPos.below()).is(CandyCraftBlocks.WAFFLE_CONE_BLOCK.get());
 	}
 

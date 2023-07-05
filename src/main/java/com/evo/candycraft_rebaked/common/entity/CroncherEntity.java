@@ -158,9 +158,9 @@ public class CroncherEntity extends Monster {
     }
 
     private void explode() {
-        if (!this.level.isClientSide) {
+        if (!this.level().isClientSide) {
             this.dead = true;
-            this.level.explode(this, this.getX(), this.getY(), this.getZ(), this.explosionRadius, Explosion.BlockInteraction.NONE);
+            this.level().explode(this, this.getX(), this.getY(), this.getZ(), this.explosionRadius, Level.ExplosionInteraction.NONE);
             this.discard();
         }
     }
